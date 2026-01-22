@@ -288,6 +288,10 @@ public abstract class Personaje {
      * todo maldision
      */
 
+    public void accEspesial(){
+        System.out.println("Acción especial no implementada.");
+    }
+
     public int realizarTurno() {
         //depue
         int opcion;
@@ -308,7 +312,7 @@ public abstract class Personaje {
                 atacar();
                 break;
             case 2:
-                System.out.println("Acción especial no implementada.");
+                accEspesial();
                 break;
             case 3:
                 System.out.println(nombre + " adopta una postura defensiva.");

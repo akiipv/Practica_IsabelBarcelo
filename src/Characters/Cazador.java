@@ -22,17 +22,30 @@ public class Cazador extends Personaje {
 
     @Override
     public void subirNivel() {
+
+        if (prob(50))
+            setPv(getPv() + 1);
+
+        if (prob(50))
+            setAtq(getAtq() + 1);
+
+        if (prob(50))
+            setArm(getArm() + 1);
+
+        if (prob(50))
+            setRes(getRes() + 1);
+
         if (prob(70)) {
             setVel(getVel() + 2);
         }
 
         setNivel(getNivel() + 1);
+        mascota.subirNivel();
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         String resultado = "Cargando datos del cazador.. ૮ ․ ․ ྀིა " +
                 "\n\t· Nombre: " + getNombre() + "" +
                 "\n\t· Vida: " + getPv() +
@@ -49,11 +62,11 @@ public class Cazador extends Personaje {
         return getAtq() + mascota.atacar();
     }
 
-    class Mascota extends Personaje{
+    class Mascota extends Personaje {
 
         private String raza;
 
-        public Mascota(){
+        public Mascota() {
             super();
             raza = "";
         }
@@ -69,14 +82,14 @@ public class Cazador extends Personaje {
                 case "rapaz":
                     statsMascotita(0.05, 0.15, 0.05, 0.35, 0.25, nivel, raza);
                     break;
-                    default:
-                        System.err.println("ok mañana");
+                default:
+                    System.err.println("ok mañana");
             }
 
             setNombre(nombre);
         }
 
-        public void statsMascotita(double pctPV, double pctATQ, double pctARM, double pctVEL, double pctRES, int nivel, String raza){
+        public void statsMascotita(double pctPV, double pctATQ, double pctARM, double pctVEL, double pctRES, int nivel, String raza) {
             setPv((int) (Cazador.this.getPv() * pctPV));
             setAtq((int) (Cazador.this.getAtq() * pctATQ));
             setArm((int) (Cazador.this.getArm() * pctARM));
@@ -99,8 +112,7 @@ public class Cazador extends Personaje {
         }
 
         @Override
-        public String toString()
-        {
+        public String toString() {
             String resultado = "Cargando datos de la mascotita.. ૮ ․ ․ ྀིა " +
                     "\n\t· Nombre: " + getNombre() + "" +
                     "\n\t· Raza: " + getRaza() +
@@ -112,8 +124,7 @@ public class Cazador extends Personaje {
         }
 
         @Override
-        public void subirNivel()
-        {
+        public void subirNivel() {
             setNivel(getNivel() + 1);
         }
     }

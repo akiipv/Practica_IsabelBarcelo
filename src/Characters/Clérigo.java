@@ -17,24 +17,17 @@ public class Clérigo extends Creyente{
         if (prob(20))
             setPv(getPv() + 1);
 
-
         if (prob(10))
             setAtq(getAtq() + 1);
-
 
         if (prob(20))
             setArm(getArm() + 1);
 
-
         if (prob(80))
             setRes(getRes() + 2);
 
-
-        // preguntarle a ivan jeje
-
         if (prob(50))
             setVel(getVel() + 1);
-
 
         if (prob(80))
             setFe(getFe() + 2);
@@ -73,6 +66,12 @@ public class Clérigo extends Creyente{
                 System.out.println(getNombre() + " lanza Cólera divina.. " + objetivo.getNombre() + " recibe daño de sangrado..");
                 break;
         }
+    }
+
+    @Override
+    public void accEspesial(){
+        System.out.println("Acción especial: Plegaria..");
+        // plegaria();
     }
 
     @Override

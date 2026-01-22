@@ -33,22 +33,27 @@ public class Guerrero extends Personaje {
     }
 
     @Override
+    public void accEspesial(){
+        System.out.println("Acción especial: Furia");
+        modificarFuria();
+    }
+
+    @Override
     public void subirNivel() {
         if (prob(75))
             setPv(getPv() + 1);
 
-
         if (prob(80))
             setAtq(getAtq() + 2);
-
 
         if (prob(75))
             setArm(getArm() + 1);
 
-
         if (prob(20))
             setRes(getRes() + 1);
 
+        if (prob(50))
+            setVel(getVel() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());

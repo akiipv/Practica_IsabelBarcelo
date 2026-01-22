@@ -25,18 +25,14 @@ public class Ladrón extends Personaje{
         if (prob(40))
             setPv(getPv() + 1);
 
-
         if (prob(60))
             setAtq(getAtq() + 2);
-
 
         if (prob(40))
             setArm(getArm() + 1);
 
-
         if (prob(40))
             setRes(getRes() + 1);
-
 
         if (prob(85))
             setVel(getVel() + 2);
@@ -51,6 +47,11 @@ public class Ladrón extends Personaje{
         System.out.println(coquetoL());
         robo++;
         return getVel();
+    }
+
+    public void accEspesial(){
+        System.out.println("Acción especial: Robar..");
+        Robar();
     }
 
     @Override

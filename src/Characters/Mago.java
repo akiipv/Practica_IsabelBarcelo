@@ -30,22 +30,17 @@ public class Mago extends Personaje {
         if (prob(35))
             setPv(getPv() + 1);
 
-
         if (prob(15))
             setAtq(getAtq() + 2);
-
 
         if (prob(35))
             setArm(getArm() + 1);
 
-
         if (prob(80))
             setRes(getRes() + 1);
 
-
         if (prob(65))
             setVel(getVel() + 1);
-
 
         if (prob(85))
             setMag(getMag() + 1);
@@ -92,6 +87,12 @@ public class Mago extends Personaje {
                 System.out.println("La presteza mental de " + getNombre() + " le hace ganar velocidad.. ⋆˙⟡ —");
                 break;
         }
+    }
+
+    @Override
+    public void accEspesial(){
+        System.out.println("Acción especial: Lanzar conjuro..");
+        // lanzarConjuro();
     }
 
     @Override

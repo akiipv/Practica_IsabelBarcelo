@@ -15,29 +15,24 @@ public class Paladin extends Creyente{
 
     @Override
     public void subirNivel() {
-        if (prob(50)) {
+        if (prob(50))
             setPv(getPv() + (int)(getPv() * 0.05));
-        }
 
-        if (prob(60)) {
+        if (prob(60))
             setAtq(getAtq() + 1);
-        }
 
-        if (prob(70)) {
+        if (prob(70))
             setArm(getArm() + 2);
-        }
 
-        if (prob(40)) {
+        if (prob(40))
             setRes(getRes() + 1);
-        }
 
-        if (prob(15)) {
+        if (prob(15))
             setVel(getVel() + 1);
-        }
 
-        if (prob(20)) {
+        if (prob(30))
             setFe(getFe() + 1);
-        }
+
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
@@ -72,6 +67,12 @@ public class Paladin extends Creyente{
                 System.out.println(getNombre() + " lanza Fogonazo sagrado! " + enemigo.getNombre() + " ve reducida su velocidad y resistencia mágica.");
                 break;
         }
+    }
+
+    @Override
+    public void accEspesial(){
+        System.out.println("Acción especial: Plegaria..");
+        // plegaria();
     }
 
     @Override
