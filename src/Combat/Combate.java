@@ -7,13 +7,9 @@ import java.util.Random;
 
 public class Combate {
 
-    /**todo cambiar pq ya no queda aesthetic el round 1 y to esa paranoia*/
-
     public static void combatir(Personaje c1, Personaje c2) {
 
         // Ella jura 💜
-
-        System.out.println("\nEmpieza el combate.. :)");
 
         int ronda = 0;
         Personaje primero;
@@ -29,7 +25,8 @@ public class Combate {
 
         while (!primero.estaMuerto() && !segundo.estaMuerto()) {
             ronda++;
-            System.out.println("\nRound " + ronda + ".. fight!\n");
+            System.out.println(dividerC());
+            System.out.println("\n\t\t  Ronda " + ronda + " ⟢");
 
             bucleCombate(primero, segundo);
 
@@ -42,13 +39,11 @@ public class Combate {
 
     public static void imprimirGanador(Personaje c1, Personaje c2) {
 
-        // He cambiao el texto para que sea más inclusivo jeje
-
         if (c1.estaMuerto() && c2.estaMuerto()) {
-            System.out.println("Empate: ambos jugadores han muerto.");
+            c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..");
         } else if (c1.estaMuerto() && !c2.estaMuerto()) {
-            System.out.println("El jugador ganador es: " + c2.getNombre() + " \uD83C\uDF89"); // he copiao y pegao el emoji de google por favo no m pegue
-        } else System.out.println("El jugador ganador es: " + c1.getNombre() + " \uD83C\uDF89");
+            System.out.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
+        } else System.out.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
     }
 
     public static void trampita(Personaje player){
@@ -82,7 +77,6 @@ public class Combate {
         }
     }
 
-    /** todo tengo q terminar esto tmb pq me pegan en mi casa */
     public static void bucleCombate(Personaje ataca, Personaje recibe){
 
         int ataques = 1;
@@ -90,7 +84,7 @@ public class Combate {
 
         if (ataca.getVel() >= (recibe.getVel() * 2)){
             ataques++;
-            System.out.println(ataca.getNombre() + " es tan veloz que puede atacar doblemente.. ₍^ >ヮ<^₎ .ᐟ.ᐟ");
+            System.out.println("\n" + ataca.getNombre() + " es tan veloz que tiene doble turno.. ₍^ >ヮ<^₎ .ᐟ.ᐟ");
         }
 
         for (int i = 0; i < ataques; i++) {
@@ -99,5 +93,9 @@ public class Combate {
 
         trampita(ataca);
 
+    }
+
+    public static String dividerC(){
+        return "\t────•⋅⊰༻♥༺⊱⋅•────";
     }
 }

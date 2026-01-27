@@ -50,11 +50,12 @@ public class Paladin extends Creyente{
 
         switch (opcion){
             case 1:
-                setAtq(getAtq() + (int)(getFe() * 0.8));
-                System.out.println(getNombre() + " aumenta su ataque con Imbuir arma");
+                this.setAtq(getAtq() + (int)(getFe() * 0.8));
+                System.out.println(getNombre() + " comienza a " + anderlain("imbuir su arma" + " aumentando su ataque a " + this.getAtq()));
                 break;
             case 2:
-                setArm(getArm() + (int)(getFe() * 0.3));
+                /**todo terminar este y el case 3*/
+                this.setArm(getArm() + (int)(getFe() * 0.3));
                 System.out.println(getNombre() + " aumenta su armadura con Baluarte de fe");
                 break;
             case 3:

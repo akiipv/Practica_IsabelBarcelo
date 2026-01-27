@@ -54,7 +54,7 @@ public class Mago extends Personaje {
     public void lanzarConjuro(Personaje enemigo) {
 
         setTipoAtaque("magico");
-        double dañoConjuro = 0;
+        int dañoConjuro = 0;
         int opcion;
         Scanner scan = new Scanner(System.in);
 
@@ -65,24 +65,24 @@ public class Mago extends Personaje {
 
         switch (opcion) {
             case 1:
-                dañoConjuro = (int) (mag * 0.70);
-                enemigo.setPv(enemigo.getPv() - (int)dañoConjuro);
-                System.out.println(this.getNombre() + " lanza Bola de fuego y hace " + dañoConjuro + " de daño a " + enemigo.getNombre() + ". Dejándole a " + enemigo.getPv() + " de vida.." + details(2));
+                dañoConjuro = (int)(mag * 0.70);
+                enemigo.setPv(enemigo.getPv() - dañoConjuro);
+                System.out.println(this.getNombre() + " lanza \033[0;4mbola de fuego\033[0;0m y hace " + dañoConjuro + " de daño a " + enemigo.getNombre() + ". Dejándole a " + enemigo.getPv() + " de vida.." + details(2));
                 break;
             case 2:
                 setArm(getArm() + (int)(mag * 0.5));
                 setRes(getRes() + (int)(mag * 0.5));
-                System.out.println("Escudo Arcano se manifiesta alrededor de " + getNombre() + ".. aumentando su resistencia mágica y su armadura.." + details(5));
+                System.out.println("Un " + anderlain("escudo arcano") + " se manifiesta alrededor de " + this.getNombre() + ".. aumentando su resistencia mágica y su armadura.." + details(5) + "\n\t· Armadura: " + this.getArm() + "\n\t· Resistencia mágica: " + this.getRes() + "\n");
                 break;
             case 3:
-                dañoConjuro = (int) (mag * 0.30);
-                enemigo.setPv(enemigo.getPv() - (int)dañoConjuro);
-                System.out.println(this.getNombre() + " lanza céfiro, que se desata sobre " + enemigo.getNombre() + ".. causándole " + dañoConjuro + " de daño mágico.." + details(4));
+                dañoConjuro = (int)(mag * 0.30);
+                enemigo.setPv(enemigo.getPv() - dañoConjuro);
+                System.out.println(this.getNombre() + " lanza " + anderlain("céfiro") + ", que se desata sobre " + enemigo.getNombre() + ".. causándole " + dañoConjuro + " de daño mágico.." + details(4));
                 printPv(enemigo);
                 break;
             case 4:
                  setVel(super.getVel() + mag);
-                System.out.println("La presteza mental de " + getNombre() + " le hace ganar velocidad.." + details(2));
+                System.out.println("La " + anderlain("presteza mental") + " de " + getNombre() + " le hace ganar velocidad.." + details(2));
                 break;
         }
     }

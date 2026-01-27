@@ -50,16 +50,16 @@ public class Clérigo extends Creyente{
         switch (opcion){
             case 1:
                 objetivo.setPv(getPv() + (int)(getFe() * 0.7));
-                System.out.println(getNombre() + " sana con su fe a " +  objetivo.getNombre() + " dejándolo a " + objetivo.getPv() + " pts de vida.");
+                System.out.println(getNombre() + anderlain("sana") + " con su fe a " +  objetivo.getNombre() + " dejándolo a " + objetivo.getPv() + " pts de vida.");
                 break;
             case 2:
                 objetivo.setPv(getPv() + (int)(getFe() * 0.35));
-                System.out.println(getNombre() + " sana con su fe a todo el equipo..");
+                System.out.println(getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana con su fe a todo el equipo..");
                 break;
             case 3:
-                setTipoAtaque("magico");
+                this.setTipoAtaque("magico");
                 objetivo.setPv(objetivo.getPv() - (int)(getFe() * 0.55));
-                System.out.println(getNombre() + " lanza Cólera divina.. " + objetivo.getNombre() + " recibe daño de sangrado..");
+                System.out.println(getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe daño de sangrado..");
                 break;
         }
     }

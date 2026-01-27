@@ -294,23 +294,21 @@ public abstract class Personaje {
     }
 
     public void printPv(Personaje player){
-        System.out.println("\t·Su vida actual es de: " + player.getPv());
+        System.out.println("\t· Su vida actual es de: " + player.getPv());
     }
 
     public void defensaUppie(){
-        if (def){
-            setArm(getArm() + ((int) (getArm() * 0.2)));
-            setRes(getRes() + ((int) (getRes() * 0.2)));
-            System.out.println(getNombre() + " adopta una postura defensiva.. \nSus stats mejoran" + details(5) + ":\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
-        }
+        setDef(true);
+
+        setArm(getArm() + ((int) (getArm() * 0.2)));
+        setRes(getRes() + ((int) (getRes() * 0.2)));
+        System.out.println(getNombre() + " adopta una postura defensiva.. \nSus stats mejoran" + details(5) + ":\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
     }
 
     public void defensaDown(){
-        if (!def){
             setArm((int) (getArm() * 0.8));
             setRes((int) (getRes() * 0.8));
             System.out.println(getNombre() + " se relaja.. \nSus stats vuelven a la normalidad" + details(4) + ":\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
-        }
     }
 
     public void accEspesial(Personaje enemigo) {
@@ -323,7 +321,11 @@ public abstract class Personaje {
 
     public void realizarTurno(Personaje enemigo) {
         int opcion;
-        this.setDef(false);
+
+        if (def){
+            this.setDef(false);
+            this.defensaDown();
+        }
 
         System.out.println("\nIniciando turno .ᐟ.ᐟ \n\t⤷ Turno de: " + this.getNombre() + details(5) + "\n");
 
@@ -340,11 +342,10 @@ public abstract class Personaje {
                 this.accEspesial(enemigo);
                 break;
             case 3:
-                if (def)
                     this.defensaUppie();
                 break;
             case 4:
-                System.out.println(getNombre() + " decide pasar el turno." + details(4));
+                System.out.println("\n" + getNombre() + " decide pasar el turno.." + details(4));
                 break;
             default:
                 System.out.println("Opción no válida.");
@@ -352,8 +353,9 @@ public abstract class Personaje {
 
     }
 
+    //cambiar esto pq el daño q pone en verda no e el que hace am
     public void ataqueCoquetudo(Personaje enemigo){
-        System.out.println(this.getNombre() + " decide atacar a " + enemigo.getNombre());
+        System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + this.atacar() + " de daño.." + details(5));
         enemigo.defender(this.atacar(), this.getTipoAtaque());
         printPv(enemigo);
     }
@@ -371,7 +373,7 @@ public abstract class Personaje {
 
         for (int i = 0; i < opciones.length; i++) {
             int index = i + 1;
-            System.out.println("\t" + index + "." + opciones[i]);
+            System.out.println("\t" + index + ". " + opciones[i]);
         }
 
         printDetallito();
@@ -398,6 +400,8 @@ public abstract class Personaje {
                 return " ૮ ྀིᴗ͈ . ᴗ͈ ྀིა.ᐟ";
             case 5:
                 return " ദ്ദി◝ ⩊ ◜.ᐟ";
+            case 6:
+                return " ٩(•̤̀ᵕ•̤́๑)ˡᵉᵗ'ˢ ᵍᵒᵎᵎᵎᵎ";
                 default:
                 return "";
         }
@@ -409,6 +413,10 @@ public abstract class Personaje {
 
     public void printPerezita(String acc){
         System.out.println("\t\t" + acc + "\n");
+    }
+
+    public String anderlain(String opcion){
+        return "\033[0;4m" + opcion + "\033[0;0m";
     }
 }
 
