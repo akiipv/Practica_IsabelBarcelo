@@ -10,8 +10,8 @@ public class Main {
         // Que luego dices que no pruebo lo que hago, hater 🥀
 
         Personaje Isa = new Paladin("Isa", 100, 10, 10, 10, 10, 10, 10);
-        Personaje Alejandro = new Cazador("Alejandro", 100, 10, 10, 10, 10, 140, "felino","Isa");
+        Personaje Iván = new Guerrero("Iván", 100, 10, 10, 10, 10, 10, false);
 
-        Combate.combatir(Isa, Alejandro);
+        Combate.combatir(Isa, Iván);
     }
 }

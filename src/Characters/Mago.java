@@ -49,7 +49,9 @@ public class Mago extends Personaje {
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
 
-    /**todo cambiar pq no queda aesthetic*/
+    /**
+     * todo cambiar pq no queda aesthetic
+     */
 
     public void lanzarConjuro(Personaje enemigo) {
 
@@ -66,18 +68,18 @@ public class Mago extends Personaje {
 
             switch (opcion) {
                 case 1:
-                    dañoConjuro = (int)(mag * 0.70);
+                    dañoConjuro = (int) (mag * 0.70);
                     enemigo.defensa(dañoConjuro, this.getTipoAtaque());
                     System.out.println(this.getNombre() + " lanza \033[0;4mbola de fuego\033[0;0m y hace " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + details(2));
                     printPv(enemigo);
                     break;
                 case 2:
-                    setArm(getArm() + (int)(mag * 0.5));
-                    setRes(getRes() + (int)(mag * 0.5));
+                    setArm(getArm() + (int) (mag * 0.5));
+                    setRes(getRes() + (int) (mag * 0.5));
                     System.out.println("Un " + anderlain("escudo arcano") + " se manifiesta alrededor de " + this.getNombre() + ".. aumentando su armadura y resistencia mágica.." + details(5) + "\n\t· Armadura: " + this.getArm() + "\n\t· Resistencia mágica: " + this.getRes() + "\n");
                     break;
                 case 3:
-                    dañoConjuro = (int)(mag * 0.30);
+                    dañoConjuro = (int) (mag * 0.30);
                     enemigo.defensa(dañoConjuro, this.getTipoAtaque());
                     System.out.println(this.getNombre() + " lanza " + anderlain("céfiro") + ", que se desata sobre " + enemigo.getNombre() + ".. causándole " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño mágico.." + details(4));
                     printPv(enemigo);
@@ -111,7 +113,7 @@ public class Mago extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
-    public String coquetoM(){
+    public String coquetoM() {
         return "⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⣸⠤⠖⠛⠉⠉⠉⠉⠉⠻⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⣠⠞⠋⡾⡀⠀⠀⠀⠀⠀⠀⠀⠀⢈⡧⢖⣒⣋⠙⢢⡀⠀⠀\n" +

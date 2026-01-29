@@ -2,7 +2,7 @@ package Characters;
 
 import java.util.Scanner;
 
-public class Clérigo extends Creyente{
+public class Clérigo extends Creyente {
 
     public Clérigo() {
     }
@@ -48,22 +48,22 @@ public class Clérigo extends Creyente{
         menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Sanación", "Rezo sagrado", "Cólera divina"}, 2);
         opcion = scan.nextInt();
 
-        switch (opcion){
+        switch (opcion) {
             case 1:
-                pleg = (int)(getFe() * 0.7);
+                pleg = (int) (getFe() * 0.7);
                 objetivo.setPv(getPv() + pleg);
-                System.out.println(this.getNombre() + anderlain("sana") + " con su fe a " +  objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
+                System.out.println(this.getNombre() + anderlain("sana") + " con su fe a " + objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
                 printPv(objetivo);
                 break;
             case 2:
-                pleg = (int)(getFe() * 0.35);
+                pleg = (int) (getFe() * 0.35);
                 objetivo.setPv(getPv() + pleg);
                 System.out.println(this.getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana " + pleg + " puntos con su fe a todo el equipo..");
                 printPv(objetivo);
                 break;
             case 3:
                 this.setTipoAtaque("magico");
-                pleg = (int)(getFe() * 0.55);
+                pleg = (int) (getFe() * 0.55);
                 objetivo.defensa(pleg, this.getTipoAtaque());
                 System.out.println(this.getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe " + objetivo.defender(pleg, this.getTipoAtaque()) + " puntos de daño de sangrado..");
                 printPv(objetivo);
@@ -72,7 +72,7 @@ public class Clérigo extends Creyente{
     }
 
     @Override
-    public void accEspesial(Personaje enemigo){
+    public void accEspesial(Personaje enemigo) {
         printPerezita("\uD835\uDC00\uD835\uDC1C\uD835\uDC1C\uD835\uDC22ó\uD835\uDC27 \uD835\uDC1E\uD835\uDC2C\uD835\uDC29\uD835\uDC1E\uD835\uDC1C\uD835\uDC22\uD835\uDC1A\uD835\uDC25: \uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..");
         plegaria(enemigo);
     }

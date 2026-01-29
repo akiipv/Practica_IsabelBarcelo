@@ -1,6 +1,6 @@
 package Characters;
 
-public abstract class Creyente extends Personaje{
+public abstract class Creyente extends Personaje {
     private int fe;
 
     public Creyente() {

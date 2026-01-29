@@ -2,7 +2,7 @@ package Characters;
 
 import java.util.Random;
 
-public class Ladrón extends Personaje{
+public class Ladrón extends Personaje {
 
     private int robo;
 
@@ -69,7 +69,7 @@ public class Ladrón extends Personaje{
         return coquetudo() + "\n\n" + resultado;
     }
 
-    public String coquetoL(){
+    public String coquetoL() {
         return "⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⢀⣾⣶⣤⡀⠀⡀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⢐⠁⠁⠀⠄⠀⠀⠀⠀⠀⠸⣿⣿⣿⡇⠀⢁⣑⠀⠀⠀⠀⡀⠤⣄⠄⠀⠆⠀\n" +
                 "⠀⠀⠀⢀⠀⠀⠠⣠⠀⠀⠀⣹⢿⡿⢿⣾⣿⡿⠀⠀⠀⠸⠀⠀⣨⠀⠀⠀⠀\n" +

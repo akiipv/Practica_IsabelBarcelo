@@ -245,15 +245,16 @@ public abstract class Personaje {
 
                 case "Pinchos":
                     setPv(getPv() - perjuicioT);
-                    System.out.println("\n\tEstacas afiladas salen de las superficies cercanas y " + "atraviesan a " + getNombre() + " por " + perjuicioT + " puntos de daño.. ahora su vida es de: " + pv + ".");
+                    System.out.println("\n\t" + anderlain("Estacas afiladas") + " salen de las superficies cercanas y atraviesan a " + getNombre() + " por " + perjuicioT + " puntos de daño..");
+                    printPv(this);
                     break;
                 case "Brea":
                     setArm(getArm() - perjuicioT);
-                    System.out.println("\n\tAceite viscoso cae de pronto sobre " + getNombre() + ", impidiéndole moverse con libertad.. ahora su armadura es de: " + getArm() + ".");
+                    System.out.println("\n\t" + anderlain("Aceite viscoso") + " cae sobre " + getNombre() + ", arruinando su armadura..\n\t· Armadura: " + getArm());
                     break;
                 case "Serpientes":
                     setAtq(getAtq() - perjuicioT);
-                    System.out.println("\n\tUn nido de víboras aparece frente a " + getNombre() + ". La visión es tan terrorífica que pierde las ganas de continuar.. ahora su ataque es de: " + atq + ".");
+                    System.out.println("\n\tUn " + anderlain("nido de víboras") + " aparece frente a " + getNombre() + ". La visión es tan terrorífica que pierde las fuerza para atacar..\n\t· Ataque" + getAtq());
                     break;
             }
         } else {
@@ -288,11 +289,11 @@ public abstract class Personaje {
         this.setPv(this.getPv() - this.defender(dañoHecho, tipoDaño));
     }
 
-    public void printPv(Personaje player){
+    public void printPv(Personaje player) {
         System.out.println("\t· Su vida actual es de: " + player.getPv());
     }
 
-    public void defensaUppie(){
+    public void defensaUppie() {
         setDef(true);
 
         setArm(getArm() + ((int) (getArm() * 0.2)));
@@ -300,10 +301,10 @@ public abstract class Personaje {
         System.out.println(getNombre() + " adopta una postura defensiva.. \nSus stats mejoran" + details(5) + ":\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
     }
 
-    public void defensaDown(){
-            setArm((int) (getArm() * 0.8));
-            setRes((int) (getRes() * 0.8));
-            System.out.println("\n" + getNombre() + " se relaja.. \nSus stats vuelven a la normalidad" + details(4) + ":\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
+    public void defensaDown() {
+        setArm((int) (getArm() * 0.8));
+        setRes((int) (getRes() * 0.8));
+        System.out.println("\n" + getNombre() + " se relaja.. \nSus stats vuelven a la normalidad" + details(4) + ":\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
     }
 
     public void accEspesial(Personaje enemigo) {
@@ -313,7 +314,7 @@ public abstract class Personaje {
     public void realizarTurno(Personaje enemigo) {
         int opcion;
 
-        if (def){
+        if (def) {
             this.setDef(false);
             this.defensaDown();
         }
@@ -343,11 +344,12 @@ public abstract class Personaje {
         } while (opcion > 4);
     }
 
-    public void ataqueCoquetudo(Personaje enemigo){
+    public void ataqueCoquetudo(Personaje enemigo) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
         if (dañito <= 0)
             System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
-        else System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
+        else
+            System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
         enemigo.defensa(this.atacar(), this.getTipoAtaque());
         printPv(enemigo);
     }
@@ -360,7 +362,7 @@ public abstract class Personaje {
         return tipoAtaque;
     }
 
-    public void menusito(String mensaje, String[] opciones, int detail){
+    public void menusito(String mensaje, String[] opciones, int detail) {
         System.out.println(details(1) + "\n" + mensaje + details(detail));
 
         for (int i = 0; i < opciones.length; i++) {
@@ -373,7 +375,7 @@ public abstract class Personaje {
 
     // A partir de aquí, son solo métodos de decoración, am sori
 
-    public  String coquetudo(){
+    public String coquetudo() {
         return "⠀⠀⠀⠀⠀⠀⠀⠀⡤⠤⠤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⣀⣠⡤⠤⢤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⢠⡤⣤⣤⡀⠀⠀⠀⠀⠀⢘⢇⠀⠀⠀⠘⠙⠢⣀⠀⠀⠀⠀⠀⢀⡖⠋⠁⠀⠀⠀⡼⠇⠀⠀⠀⠀⠀⢀⣤⣤⡦⡄⠀⠀⠀⠀\n" +
                 "⣴⢖⣄⠀⠸⣅⢀⣠⠇⠀⣴⢖⣄⠀⠾⠋⠁⠀⠀⠀⠀⠀⠹⣾⠏⠻⠋⢂⠟⠀⠀⠀⠀⠒⠀⠉⡗⠀⢰⣶⣦⠀⠘⢄⡀⣱⠟⠀⢠⣶⣦\n" +
@@ -381,9 +383,9 @@ public abstract class Personaje {
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠤⡶⠋⠙⠁⠀⠀⠙⠁⠀⠈⠉⠙⢲⢴⠟⠙⠁⠀⠀\n";
     }
 
-    public String details(int opcion){
+    public String details(int opcion) {
 
-        switch (opcion){
+        switch (opcion) {
             case 1:
                 return " ₊˚ ‿︵‿୨୧ · · ♡ · · ୨୧‿︵‿ ˚₊";
             case 2:
@@ -396,20 +398,20 @@ public abstract class Personaje {
                 return " ദ്ദി◝ ⩊ ◜.ᐟ";
             case 6:
                 return " ٩(•̤̀ᵕ•̤́๑)ˡᵉᵗ'ˢ ᵍᵒᵎᵎᵎᵎ";
-                default:
+            default:
                 return "";
         }
     }
 
-    public void printDetallito(){
+    public void printDetallito() {
         System.out.printf("› ");
     }
 
-    public void printPerezita(String acc){
+    public void printPerezita(String acc) {
         System.out.println("\t\t" + acc + "\n");
     }
 
-    public String anderlain(String opcion){
+    public String anderlain(String opcion) {
         return "\033[0;4m" + opcion + "\033[0;0m";
     }
 }
