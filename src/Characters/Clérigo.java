@@ -2,14 +2,42 @@ package Characters;
 
 import java.util.Scanner;
 
+/**
+ * Subclase Clérigo.
+ * Representa un tipo de Creyente que combate a distancia y sana a sus aliados,
+ * con habilidades especiales basadas en sus puntos de fe.
+ */
+
 public class Clérigo extends Creyente {
+
+    /**
+     * Constructor por defecto del Clérigo.
+     */
 
     public Clérigo() {
     }
 
+    /**
+     * Constructor por parámetros del Clérigo.
+     *
+     * @param nombre nombre del personaje
+     * @param pv vida
+     * @param atq ataque
+     * @param arm armadura
+     * @param nivel nivel
+     * @param vel velocidad
+     * @param res resistencia mágica
+     * @param fe puntos de fe
+     */
+
     public Clérigo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int fe) {
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
     }
+
+    /**
+     * Incrementa las estadísticas del Clérigo al subir de nivel
+     * de acuerdo a sus ventajas y penalizaciones específicas.
+     */
 
     @Override
     public void subirNivel() {
@@ -35,6 +63,13 @@ public class Clérigo extends Creyente {
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
+
+    /**
+     * Permite al Clérigo realizar milagros durante su turno.
+     * Los milagros disponibles son: Sanación, Rezo sagrado, Cólera divina.
+     *
+     * @param objetivo personaje objetivo de la plegaria
+     */
 
     @Override
     public void plegaria(Personaje objetivo) {
@@ -76,11 +111,24 @@ public class Clérigo extends Creyente {
         } while (opcion > 4);
     }
 
+    /**
+     * Acción especial del Clérigo. Por defecto ejecuta la plegaria.
+     *
+     * @param enemigo personaje objetivo
+     */
+
     @Override
     public void accEspesial(Personaje enemigo) {
         printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..");
         plegaria(enemigo);
     }
+
+    /**
+     * Devuelve una representación textual del Clérigo,
+     * incluyendo estadísticas y puntos de fe.
+     *
+     * @return descripción del Clérigo
+     */
 
     @Override
     public String toString() {
@@ -95,6 +143,12 @@ public class Clérigo extends Creyente {
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una representación ASCII decorativa del personaje.
+     *
+     * @return cadena decorativa
+     */
 
     public String coquetoC() {
         return "⠀⠀⠀⠀⢀⡠⣾⣳⡀⠀⠀⠀⠀⠀\n" +

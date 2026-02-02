@@ -1,27 +1,82 @@
 package Characters;
 
+/**
+ * Clase abstracta Creyente.
+ * Representa un personaje que puede realizar milagros mediante plegarias.
+ * Los tipos de milagros dependen de la subclase específica.
+ */
+
 public abstract class Creyente extends Personaje {
+
+    /**
+     * Puntos de fe del Creyente, determinan su destreza al realizar milagros.
+     */
+
     private int fe;
+
+    /**
+     * Constructor por defecto del Creyente.
+     * Inicializa la fe a 0.
+     */
 
     public Creyente() {
         super();
         fe = 0;
     }
 
+    /**
+     * Constructor por parámetros del Creyente.
+     *
+     * @param nombre nombre del personaje
+     * @param pv vida
+     * @param atq ataque
+     * @param arm armadura
+     * @param nivel nivel
+     * @param vel velocidad
+     * @param res resistencia mágica
+     * @param fe puntos de fe
+     */
+
     public Creyente(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int fe) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         setFe(fe);
     }
 
+    /**
+     * Asigna la cantidad de puntos de fe al Creyente.
+     *
+     * @param fe puntos de fe
+     */
+
     public void setFe(int fe) {
         this.fe = fe;
     }
+
+    /**
+     * Devuelve la cantidad de puntos de fe del Creyente.
+     *
+     * @return puntos de fe
+     */
 
     public int getFe() {
         return fe;
     }
 
+    /**
+     * Método abstracto plegaria.
+     * Permite al Creyente efectuar milagros en su turno.
+     *
+     * @param enemigo personaje objetivo del milagro
+     */
+
     public abstract void plegaria(Personaje enemigo);
+
+    /**
+     * Devuelve una representación textual del Creyente,
+     * incluyendo sus estadísticas y puntos de fe.
+     *
+     * @return descripción del Creyente
+     */
 
     @Override
     public String toString() {

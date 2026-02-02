@@ -2,27 +2,79 @@ package Characters;
 
 import java.util.Scanner;
 
+/**
+ * Subclase Mago.
+ * Representa un tipo de Personaje especializado en el uso de la magia,
+ * con gran afinidad por la resistencia mágica, la velocidad y el lanzamiento
+ * de conjuros, pero con desventajas en vida, armadura y ataque físico.
+ *
+ * El Mago dispone de puntos de magia (mag) que determinan la potencia
+ * de sus hechizos.
+ */
+
 public class Mago extends Personaje {
 
+    /**
+     * Magia del mago
+     */
+
     private int mag;
+
+    /**
+     * Constructor por defecto del Mago.
+     * Inicializa el personaje con los valores por defecto de la superclase
+     * y establece los puntos de magia iniciales en 10.
+     */
 
     public Mago() {
         super();
         mag = 10;
     }
 
+    /**
+     * Constructor por parámetros del Mago.
+     * Inicializa el personaje con los valores indicados y asigna
+     * los puntos de magia especificados.
+     *
+     * @param nombre nombre del mago
+     * @param pv puntos de vida
+     * @param atq ataque
+     * @param arm armadura
+     * @param nivel nivel del personaje
+     * @param vel velocidad
+     * @param res resistencia mágica
+     * @param mag puntos de magia
+     */
+
     public Mago(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int mag) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         setMag(mag);
     }
 
+    /**
+     * Devuelve los puntos de magia actuales del Mago.
+     *
+     * @return puntos de magia
+     */
+
     public int getMag() {
         return mag;
     }
 
+    /**
+     * Establece los puntos de magia del Mago.
+     *
+     * @param mag nuevo valor de puntos de magia
+     */
+
     public void setMag(int mag) {
         this.mag = mag;
     }
+
+    /**
+     * Incrementa el nivel del Mago y mejora sus estadísticas
+     * según las probabilidades y bonificaciones propias de su clase.
+     */
 
     @Override
     public void subirNivel() {
@@ -48,6 +100,14 @@ public class Mago extends Personaje {
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
+
+    /**
+     * Permite al Mago lanzar un conjuro sobre un objetivo.
+     * El tipo de conjuro se selecciona por teclado y su efecto
+     * depende de los puntos de magia del Mago.
+     *
+     * @param enemigo personaje objetivo del conjuro
+     */
 
     public void lanzarConjuro(Personaje enemigo) {
 
@@ -91,12 +151,25 @@ public class Mago extends Personaje {
         } while (opcion > 5);
     }
 
+    /**
+     * Acción especial del Mago.
+     * Permite lanzar conjuros durante el combate.
+     *
+     * @param enemigo personaje objetivo
+     */
 
     @Override
     public void accEspesial(Personaje enemigo) {
         printPerezita("\uD835\uDC73\uD835\uDC82\uD835\uDC8F\uD835\uDC9B\uD835\uDC82\uD835\uDC93 \uD835\uDC84\uD835\uDC90\uD835\uDC8F\uD835\uDC8B\uD835\uDC96\uD835\uDC93\uD835\uDC90..");
         lanzarConjuro(enemigo);
     }
+
+    /**
+     * Devuelve una representación textual del Mago,
+     * mostrando sus estadísticas actuales y puntos de magia.
+     *
+     * @return descripción del Mago
+     */
 
     @Override
     public String toString() {
@@ -111,6 +184,12 @@ public class Mago extends Personaje {
                 "\n\t· Puntos de magia: " + getMag();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una representación ASCII decorativa del personaje.
+     *
+     * @return cadena decorativa
+     */
 
     public String coquetoM() {
         return "⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +

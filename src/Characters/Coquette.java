@@ -109,6 +109,12 @@ public class Coquette extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    /**
+     * Devuelve una representación ASCII decorativa del personaje.
+     *
+     * @return cadena decorativa
+     */
+
     public String coquetoCQ() {
         return "⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⢤⣺⡟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +

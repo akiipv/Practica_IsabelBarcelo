@@ -1,24 +1,61 @@
 package Characters;
 
-import java.util.Random;
+/**
+ * Subclase Ladrón.
+ * Representa un tipo de Personaje especializado en velocidad y ataques
+ * estratégicos, con la habilidad especial de robar.
+ * Al usar la acción especial, golpea con su velocidad en lugar de ataque.
+ */
 
 public class Ladrón extends Personaje {
 
+    /**
+     * Contador de la cantidad de veces que el Ladrón ha robado.
+     */
+
     private int robo;
+
+    /**
+     * Constructor por defecto del Ladrón.
+     * Inicializa el personaje con valores por defecto y contador de robos en 0.
+     */
 
     public Ladrón() {
         super();
         robo = 0;
     }
 
+    /**
+     * Constructor por parámetros del Ladrón.
+     *
+     * @param nombre nombre del Ladrón
+     * @param pv vida
+     * @param atq ataque
+     * @param arm armadura
+     * @param nivel nivel
+     * @param vel velocidad
+     * @param res resistencia mágica
+     */
+
     public Ladrón(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         robo = 0;
     }
 
+    /**
+     * Devuelve la cantidad de robos realizados por el Ladrón.
+     *
+     * @return número de robos
+     */
+
     public int getRobo() {
         return robo;
     }
+
+    /**
+     * Incrementa el nivel del Ladrón y mejora sus estadísticas
+     * según sus ventajas y penalizaciones propias.
+     */
 
     @Override
     public void subirNivel() {
@@ -42,18 +79,40 @@ public class Ladrón extends Personaje {
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
 
-    public int Robar(Personaje enemigo) {
+    /**
+     * Acción especial del Ladrón: Robar.
+     * Por ahora, solo devuelve la velocidad del Ladrón y aumenta
+     * el contador de robos.
+     *
+     * @param enemigo personaje objetivo
+     * @return valor de la velocidad usada como ataque
+     */
+
+    public int robar(Personaje enemigo) {
         System.out.println(coquetoL());
         System.out.println(getNombre() + " le ha robado a " + enemigo.getNombre() + "..");
         robo++;
-        return getVel();
+        return this.getVel();
     }
+
+    /**
+     * Ejecuta la acción especial del Ladrón.
+     *
+     * @param enemigo personaje objetivo
+     */
 
     @Override
     public void accEspesial(Personaje enemigo) {
         printPerezita("\uD835\uDC79\uD835\uDC90\uD835\uDC83\uD835\uDC82\uD835\uDC93..");
-        Robar(enemigo);
+        enemigo.defensa(this.robar(enemigo), this.getTipoAtaque());
     }
+
+    /**
+     * Devuelve una representación textual del Ladrón,
+     * mostrando sus estadísticas actuales y número de robos realizados.
+     *
+     * @return descripción del Ladrón
+     */
 
     @Override
     public String toString() {
@@ -68,6 +127,12 @@ public class Ladrón extends Personaje {
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una representación ASCII decorativa del personaje.
+     *
+     * @return cadena decorativa
+     */
 
     public String coquetoL() {
         return "⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⢀⣾⣶⣤⡀⠀⡀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀\n" +

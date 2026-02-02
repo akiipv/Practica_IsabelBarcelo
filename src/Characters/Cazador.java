@@ -2,23 +2,67 @@ package Characters;
 
 import java.util.Random;
 
+/**
+ * Subclase Cazador.
+ * Representa un tipo de Personaje especializado en velocidad y en el uso
+ * de un Compañero Animal que comparte parcialmente sus estadísticas
+ * y participa en los ataques.
+ */
+
 public class Cazador extends Personaje {
 
+    /**
+     * Compañero animal del Cazador.
+     */
+
     private Mascota mascota;
+
+    /**
+     * Constructor por defecto del Cazador.
+     * Inicializa el Cazador con valores por defecto y crea una mascota vacía.
+     */
 
     public Cazador() {
         super();
         mascota = this.new Mascota("", getNivel(), "");
     }
 
+    /**
+     * Constructor por parámetros del Cazador.
+     * Inicializa el Cazador con los valores indicados y crea una mascota
+     * de la raza y nombre indicados.
+     *
+     * @param nombre nombre del Cazador
+     * @param pv vida
+     * @param atq ataque
+     * @param arm armadura
+     * @param nivel nivel
+     * @param vel velocidad
+     * @param res resistencia mágica
+     * @param raza raza de la mascota
+     * @param nombreMascota nombre de la mascota
+     */
+
     public Cazador(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String raza, String nombreMascota) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         mascota = this.new Mascota(raza, getNivel(), nombreMascota);
     }
 
+    /**
+     * Devuelve la mascota del Cazador.
+     *
+     * @return objeto Mascota
+     */
+
     public Mascota getMascota() {
         return mascota;
     }
+
+    /**
+     * Incrementa el nivel del Cazador y mejora sus estadísticas
+     * según sus ventajas y penalizaciones. La mascota también sube
+     * de nivel (sin modificar estadísticas).
+     */
 
     @Override
     public void subirNivel() {
@@ -44,6 +88,13 @@ public class Cazador extends Personaje {
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
 
+    /**
+     * Representación textual del Cazador, incluyendo la información
+     * de la mascota.
+     *
+     * @return descripción del Cazador
+     */
+
     @Override
     public String toString() {
         String resultado = "Cargando datos del cazador.. ૮ ․ ․ ྀིა " +
@@ -58,10 +109,23 @@ public class Cazador extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    /**
+     * Devuelve el ataque total del Cazador sumando el de la mascota.
+     *
+     * @return valor de ataque combinado
+     */
+
     @Override
     public int atacar() {
         return (getAtq() + mascota.atacar());
     }
+
+    /**
+     * Ataque estilizado que muestra información de la mascota
+     * durante la acción.
+     *
+     * @param enemigo personaje objetivo
+     */
 
     @Override
     public void ataqueCoquetudo(Personaje enemigo) {
@@ -77,14 +141,33 @@ public class Cazador extends Personaje {
         printPv(enemigo);
     }
 
+    /**
+     * Clase anidada Mascota.
+     * Representa al Compañero Animal del Cazador.
+     * Su subida de nivel solo aumenta el nivel, las estadísticas
+     * dependen del Cazador y de la raza.
+     */
+
     class Mascota extends Personaje {
 
         private String raza;
+
+        /**
+         * Constructor por defecto de la Mascota.
+         */
 
         public Mascota() {
             super();
             raza = "";
         }
+
+        /**
+         * Constructor por parámetros de la Mascota.
+         *
+         * @param raza especie de la mascota
+         * @param nivel nivel inicial
+         * @param nombre nombre de la mascota
+         */
 
         public Mascota(String raza, int nivel, String nombre) {
             switch (raza) {
@@ -104,6 +187,19 @@ public class Cazador extends Personaje {
             setNombre(nombre);
         }
 
+        /**
+         * Ajusta las estadísticas de la mascota según el porcentaje
+         * correspondiente a la raza y al Cazador.
+         *
+         * @param pctPV porcentaje de vida
+         * @param pctATQ porcentaje de ataque
+         * @param pctARM porcentaje de armadura
+         * @param pctVEL porcentaje de velocidad
+         * @param pctRES porcentaje de resistencia mágica
+         * @param nivel nivel inicial
+         * @param raza raza de la mascota
+         */
+
         public void statsMascotita(double pctPV, double pctATQ, double pctARM, double pctVEL, double pctRES, int nivel, String raza) {
             setPv((int) (Cazador.this.getPv() * pctPV));
             setAtq((int) (Cazador.this.getAtq() * pctATQ));
@@ -114,9 +210,11 @@ public class Cazador extends Personaje {
             setRaza(raza);
         }
 
-        public String getRaza() {
-            return raza;
-        }
+        /**
+         * Modifica el tipo de raza de la mascota.
+         *
+         * @param raza tipo de raza
+         */
 
         public void setRaza(String raza) {
             if (raza.equalsIgnoreCase("canido") ||
@@ -125,6 +223,22 @@ public class Cazador extends Personaje {
                 this.raza = raza;
             else this.raza = "";
         }
+
+        /**
+         * Devuelve el tipo de raza de la mascota.
+         *
+         * @return tipo de raza
+         */
+
+        public String getRaza() {
+            return raza;
+        }
+
+        /**
+         * Representación textual de la mascota.
+         *
+         * @return descripción de la mascota
+         */
 
         @Override
         public String toString() {
@@ -140,11 +254,22 @@ public class Cazador extends Personaje {
             return coquetudo() + "\n\n" + resultado;
         }
 
+        /**
+         * Incrementa únicamente el nivel de la mascota.
+         */
+
         @Override
         public void subirNivel() {
             setNivel(getNivel() + 1);
         }
     }
+
+    /**
+     * Devuelve una representación ASCII decorativa de la mascota
+     * según su raza.
+     *
+     * @return cadena decorativa
+     */
 
     public String coquetoCM() {
 

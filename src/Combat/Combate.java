@@ -5,7 +5,22 @@ import GameMap.*;
 
 import java.util.Random;
 
+/**
+ * Gestiona el sistema de combate por turnos entre dos personajes.
+ * El orden de actuación se determina por la velocidad (vel) y se
+ * contemplan turnos dobles si un personaje duplica la velocidad del otro.
+ */
+
 public class Combate {
+
+    /**
+     * Inicia y controla un combate completo entre dos personajes.
+     * Determina el orden inicial según la velocidad y ejecuta
+     * las rondas hasta que uno o ambos personajes mueren.
+     *
+     * @param c1 primer personaje participante en el combate
+     * @param c2 segundo personaje participante en el combate
+     */
 
     public static void combatir(Personaje c1, Personaje c2) {
 
@@ -19,8 +34,8 @@ public class Combate {
             primero = c1;
             segundo = c2;
         } else {
-            segundo = c2;
-            primero = c1;
+            segundo = c1;
+            primero = c2;
         }
 
         primero.printPerezita(primero.toString());
@@ -40,14 +55,30 @@ public class Combate {
         imprimirGanador(primero, segundo);
     }
 
+    /**
+     * Imprime el resultado final del combate, mostrando el personaje
+     * ganador o indicando un empate si ambos han muerto.
+     *
+     * @param c1 primer personaje
+     * @param c2 segundo personaje
+     */
+
     public static void imprimirGanador(Personaje c1, Personaje c2) {
 
         if (c1.estaMuerto() && c2.estaMuerto()) {
             c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..");
         } else if (c1.estaMuerto() && !c2.estaMuerto()) {
             System.out.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
-        } else System.out.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
+        } else System.out.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
+
+    /**
+     * Gestiona la activación aleatoria de una trampa sobre un personaje.
+     * La trampa puede causar un perjuicio o, en caso de fallo,
+     * otorgar un beneficio según su tipo.
+     *
+     * @param player personaje que puede activar la trampa
+     */
 
     public static void trampita(Personaje player){
         Random r = new Random();
@@ -80,6 +111,15 @@ public class Combate {
         }
     }
 
+    /**
+     * Ejecuta el turno de ataque de un personaje sobre otro.
+     * Si el atacante duplica la velocidad del objetivo,
+     * podrá realizar un turno adicional.
+     *
+     * @param ataca personaje que realiza la acción
+     * @param recibe personaje que recibe la acción
+     */
+
     public static void bucleCombate(Personaje ataca, Personaje recibe){
 
         int ataques = 1;
@@ -96,6 +136,13 @@ public class Combate {
         trampita(ataca);
 
     }
+
+    /**
+     * Devuelve un separador visual para mostrar entre rondas
+     * del combate por consola.
+     *
+     * @return cadena de texto decorativa usada como separador
+     */
 
     public static String dividerC(){
         return "\n\t────•⋅⊰༻♥༺⊱⋅•────";
