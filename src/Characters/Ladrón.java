@@ -82,18 +82,21 @@ public class Ladrón extends Personaje {
 
     /**
      * Acción especial del Ladrón: Robar.
-     * Por ahora, solo devuelve la velocidad del Ladrón y aumenta
+     * Por ahora, solo ataca con la velocidad del ladrón y aumenta
      * el contador de robos.
      *
      * @param enemigo personaje objetivo
-     * @return valor de la velocidad usada como ataque
      */
 
-    public int robar(Personaje enemigo) {
+    public void robar(Personaje enemigo) {
+        int rob = enemigo.defender(this.getVel(), this.getTipoAtaque());
+        enemigo.defensa(this.getVel(), this.getTipoAtaque());
         System.out.println(coquetoL());
-        System.out.println(getNombre() + " le ha robado a " + enemigo.getNombre() + "..");
+        if (rob > 0)
+            System.out.println(this.getNombre() + " le ha robado a " + enemigo.getNombre() + ".. quitándole " + rob + " de vida con su velocidad..");
+        else System.out.println("\n" + this.getNombre() + " le intenta robar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
+        printPv(enemigo);
         robo++;
-        return this.getVel();
     }
 
     /**
@@ -105,7 +108,7 @@ public class Ladrón extends Personaje {
     @Override
     public void accEspesial(Personaje enemigo) {
         printPerezita("\uD835\uDC79\uD835\uDC90\uD835\uDC83\uD835\uDC82\uD835\uDC93..");
-        enemigo.defensa(this.robar(enemigo), this.getTipoAtaque());
+        this.robar(enemigo);
     }
 
     /**
