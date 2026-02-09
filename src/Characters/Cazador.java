@@ -149,7 +149,7 @@ public class Cazador extends Personaje {
      * dependen del Cazador y de la raza.
      */
 
-    class Mascota extends Personaje {
+    private class Mascota extends Personaje {
 
         private String raza;
 

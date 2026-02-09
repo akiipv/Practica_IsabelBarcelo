@@ -149,7 +149,7 @@ public class Mago extends Personaje {
                     realizarTurno(enemigo);
                     break;
             }
-        } while (opcion > 5);
+        } while (opcion > 5 || opcion < 1);
     }
 
     /**

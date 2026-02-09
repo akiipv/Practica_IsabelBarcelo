@@ -107,7 +107,7 @@ public class Paladin extends Creyente {
                     realizarTurno(enemigo);
                     break;
             }
-        } while (opcion > 4);
+        } while (opcion > 4 || opcion < 1);
 
     }
 

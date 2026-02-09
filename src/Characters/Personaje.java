@@ -525,7 +525,6 @@ public abstract class Personaje {
 
     public void accEspesial(Personaje enemigo) {
         System.out.println("Este personaje no tiene acción especial.." + details(4));
-        this.realizarTurno(enemigo);
     }
 
     /**
@@ -564,7 +563,7 @@ public abstract class Personaje {
                     System.out.println("\n" + getNombre() + " decide pasar el turno.." + details(4));
                     break;
             }
-        } while (opcion > 4);
+        } while (opcion > 4 || opcion < 1);
     }
 
     /**

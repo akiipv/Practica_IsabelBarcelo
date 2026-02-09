@@ -109,7 +109,7 @@ public class Clérigo extends Creyente {
                     realizarTurno(objetivo);
                     break;
             }
-        } while (opcion > 4);
+        } while (opcion > 4 || opcion < 1);
     }
 
     /**
