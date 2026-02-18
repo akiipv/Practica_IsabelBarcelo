@@ -110,6 +110,21 @@ public class Cazador extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    @Override
+    public String toString2() {
+        String resultado = "\n\t· Nombre: " + getNombre() +
+                "\n\t· Nombre: " + getNombre() +
+                "\n\t· Vida: " + getPv() +
+                "\n\t· Ataque: " + getAtq() +
+                "\n\t· Armardura: " + getArm() +
+                "\n\t· Velocidad: " + getVel() +
+                "\n\t· Resistencia mágica: " + getRes() +
+                "\n\t· Nivel: " + getNivel() +
+                "\n\t\t" + mascota.toString2() +
+                "\n\t\t૮ ․ ․ ྀིა";
+        return coquetudo() + "\n\n" + resultado;
+    }
+
     /**
      * Devuelve el ataque total del Cazador sumando el de la mascota.
      *
@@ -252,6 +267,20 @@ public class Cazador extends Personaje {
                     "\n\t· Velocidad: " + getVel() +
                     "\n\t· Resistencia mágica: " + getRes() +
                     "\n\t· Nivel: " + getNivel();
+            return coquetudo() + "\n\n" + resultado;
+        }
+
+        @Override
+        public String toString2() {
+            String resultado = "\n\t· Nombre: " + getNombre() +
+                    "\n\t· Raza: " + getRaza() +
+                    "\n\t· Vida: " + getPv() +
+                    "\n\t· Ataque: " + getAtq() +
+                    "\n\t· Armardura: " + getArm() +
+                    "\n\t· Velocidad: " + getVel() +
+                    "\n\t· Resistencia mágica: " + getRes() +
+                    "\n\t· Nivel: " + getNivel() +
+                    "\n\t\t૮ ․ ․ ྀིა";
             return coquetudo() + "\n\n" + resultado;
         }
 

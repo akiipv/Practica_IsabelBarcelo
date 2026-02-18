@@ -173,11 +173,25 @@ public class Monstruo extends Personaje {
     public String toString() {
         String resultado = "Cargando datos del monstruo.. ૮ ․ ․ ྀིა " +
                 "\n\t· Nombre: " + getNombre() +
+                "\n\t· Raza: " + getRaza() +
                 "\n\t· Vida: " + getPv() +
                 "\n\t· Ataque: " + getAtq() +
                 "\n\t· Armadura: " + getArm() +
-                "\n\t· Raza: " + getRaza() +
                 "\n\t· Nivel: " + getNivel();
+        return coquetudo() + "\n\n" + resultado;
+    }
+
+    @Override
+    public String toString2() {
+        String resultado = "\n\t· Nombre: " + getNombre() +
+                "\n\t· Raza: " + getRaza() +
+                "\n\t· Vida: " + getPv() +
+                "\n\t· Ataque: " + getAtq() +
+                "\n\t· Armardura: " + getArm() +
+                "\n\t· Velocidad: " + getVel() +
+                "\n\t· Resistencia mágica: " + getRes() +
+                "\n\t· Nivel: " + getNivel() +
+                "\n\t\t૮ ․ ․ ྀིა";
         return coquetudo() + "\n\n" + resultado;
     }
 }

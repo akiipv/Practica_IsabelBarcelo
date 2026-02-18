@@ -186,6 +186,20 @@ public class Mago extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    @Override
+    public String toString2() {
+        String resultado = "\n\t· Nombre: " + getNombre() +
+                "\n\t· Vida: " + getPv() +
+                "\n\t· Ataque: " + getAtq() +
+                "\n\t· Armadura: " + getArm() +
+                "\n\t· Velocidad: " + getVel() +
+                "\n\t· Resistencia mágica: " + getRes() +
+                "\n\t· Nivel: " + getNivel() +
+                "\n\t· Puntos de magia: " + getMag() +
+                "\n\t\t૮ ․ ․ ྀིა";
+        return coquetudo() + "\n\n" + resultado;
+    }
+
     /**
      * Devuelve una representación ASCII decorativa del personaje.
      *
