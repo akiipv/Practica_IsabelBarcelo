@@ -1,8 +1,7 @@
 package Characters;
 
-import java.util.Comparator;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 import GameMap.Trampa;
 
@@ -14,7 +13,7 @@ import GameMap.Trampa;
  * @version 200.0
  */
 
-public abstract class Personaje implements Comparable {
+public abstract class Personaje implements Comparable<Personaje> {
 
     private String nombre, tipoAtaque;
     private int pv, atq, arm, nivel, res, vel;
@@ -55,6 +54,18 @@ public abstract class Personaje implements Comparable {
         setRes(res);
         setTipoAtaque("fisico");
         setDef(false);
+    }
+
+    /**todo terminar cuando iván explique más porque realmente no sé qué estoy haciendo jeje*/
+
+    public Personaje(File file) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file.getPath()));
+
+        String linea;
+        while((linea = br.readLine()) != null){
+            System.out.println(linea);
+        }
+        br.close();
     }
 
 
@@ -407,14 +418,14 @@ public abstract class Personaje implements Comparable {
     }
 
     public String toString2() {
-        String resultado = "\n\t· Nombre: " + getNombre() +
-                "\n\t· Vida: " + getPv() +
-                "\n\t· Ataque: " + getAtq() +
-                "\n\t· Armadura: " + getArm() +
-                "\n\t· Velocidad: " + getVel() +
-                "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Nivel: " + getNivel() +
-                "\n\t\t૮ ․ ․ ྀིა";
+        String resultado = "\n· Nombre: " + getNombre() +
+                "\n· Vida: " + getPv() +
+                "\n· Ataque: " + getAtq() +
+                "\n· Armadura: " + getArm() +
+                "\n· Velocidad: " + getVel() +
+                "\n· Resistencia mágica: " + getRes() +
+                "\n· Nivel: " + getNivel() +
+                "\n\t૮ ․ ․ ྀིა";
         return coquetudo() + "\n\n" + resultado;
     }
 
@@ -702,11 +713,9 @@ public abstract class Personaje implements Comparable {
 
     //
 
-    /**todo no entiendo*/
+    @Override
     public int compareTo(Personaje player) {
-        if (this.getVel() < player.getVel())
-            return 1;
-        else return 0;
+        return Integer.compare(this.getVel(), player.getVel());
     }
 }
 
