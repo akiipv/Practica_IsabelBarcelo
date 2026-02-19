@@ -418,14 +418,14 @@ public abstract class Personaje implements Comparable<Personaje> {
     }
 
     public String toString2() {
-        String resultado = "\n· Nombre: " + getNombre() +
-                "\n· Vida: " + getPv() +
-                "\n· Ataque: " + getAtq() +
-                "\n· Armadura: " + getArm() +
-                "\n· Velocidad: " + getVel() +
-                "\n· Resistencia mágica: " + getRes() +
-                "\n· Nivel: " + getNivel() +
-                "\n\t૮ ․ ․ ྀིა";
+        String resultado = "\n\t· Nombre: " + getNombre() +
+                "\n\t· Vida: " + getPv() +
+                "\n\t· Ataque: " + getAtq() +
+                "\n\t· Armadura: " + getArm() +
+                "\n\t· Velocidad: " + getVel() +
+                "\n\t· Resistencia mágica: " + getRes() +
+                "\n\t· Nivel: " + getNivel() +
+                "\n\t\t૮ ․ ․ ྀིა";
         return coquetudo() + "\n\n" + resultado;
     }
 
