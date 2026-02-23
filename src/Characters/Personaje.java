@@ -60,10 +60,6 @@ public abstract class Personaje implements Comparable<Personaje> {
         setRaza("humano");
     }
 
-    /**
-     * todo la clase maldision
-     */
-
     public Personaje(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -91,21 +87,28 @@ public abstract class Personaje implements Comparable<Personaje> {
         br.close();
     }
 
-    /**todo terminar y modularizar esta puta mierda me voy a suicidar y lo voy */
+    // Estoy cansada, jefe
+
     public void updtPJ(File file) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        Personaje playerFicheado = Factory.crear(String.valueOf(this.getClass()), file);
 
-        for (int i = 0; i < 3; i++) {
-            br.readLine();
+        if (!this.getNombre().equals(playerFicheado.getNombre())) {
+            return;
         }
 
-        String linea;
-        while ((linea = br.readLine()) != null){
-            if (!this.equals(Factory.crear(String.valueOf(this.getClass()), file))){
+        if (!this.equals(playerFicheado))
+            this.copyCat(playerFicheado);
+    }
 
-            }
-
-        }
+    protected void copyCat(Personaje player) {
+        this.setPv(player.getPv());
+        this.setAtq(player.getAtq());
+        this.setArm(player.getArm());
+        this.setVel(player.getVel());
+        this.setRes(player.getRes());
+        this.setNivel(player.getNivel());
+        this.setRaza(player.getRaza());
+        this.setOtro(player.getOtro());
     }
 
    /* public Personaje(String nombre) {
@@ -181,6 +184,10 @@ public abstract class Personaje implements Comparable<Personaje> {
 
     public void setOtro(int otro) {
         this.otro = otro;
+    }
+
+    public int getOtro() {
+        return otro;
     }
 
     public void setRaza(String raza) {
