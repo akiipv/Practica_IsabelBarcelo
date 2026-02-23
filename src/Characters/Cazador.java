@@ -1,5 +1,8 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Subclase Cazador.
  * Representa un tipo de Personaje especializado en velocidad y en el uso
@@ -24,6 +27,11 @@ public class Cazador extends Personaje {
     public Cazador() {
         super();
         mascota = this.new Mascota("", getNivel(), "");
+    }
+
+    public Cazador(File file) throws IOException {
+        super(file);
+
     }
 
     /**

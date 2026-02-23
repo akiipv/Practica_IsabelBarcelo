@@ -1,5 +1,7 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -33,6 +35,10 @@ public class Monstruo extends Personaje {
     public Monstruo() {
         super();
         setRaza("");
+    }
+
+    public Monstruo(File file) throws IOException {
+        super(file);
     }
 
     /**

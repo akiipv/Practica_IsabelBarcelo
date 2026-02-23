@@ -1,5 +1,7 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -36,6 +38,10 @@ public class Paladin extends Creyente {
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
     }
 
+    public Paladin(File file) throws IOException {
+        super(file);
+    }
+
     /**
      * Incrementa las estadísticas del Paladín al subir de nivel
      * de acuerdo a sus ventajas y penalizaciones específicas.
@@ -59,7 +65,7 @@ public class Paladin extends Creyente {
             setVel(getVel() + 1);
 
         if (prob(30))
-            setFe(getFe() + 1);
+            setOtro(getFe() + 1);
 
 
         setNivel(getNivel() + 1);

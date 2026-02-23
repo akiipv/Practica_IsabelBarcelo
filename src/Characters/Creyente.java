@@ -1,5 +1,8 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Clase abstracta Creyente.
  * Representa un personaje que puede realizar milagros mediante plegarias.
@@ -40,7 +43,11 @@ public abstract class Creyente extends Personaje {
 
     public Creyente(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int fe) {
         super(nombre, pv, atq, arm, nivel, vel, res);
-        setFe(fe);
+        setOtro(fe);
+    }
+
+    public Creyente(File file) throws IOException {
+        super(file);
     }
 
     /**
@@ -49,7 +56,8 @@ public abstract class Creyente extends Personaje {
      * @param fe puntos de fe
      */
 
-    public void setFe(int fe) {
+    @Override
+    public void setOtro(int fe) {
         this.fe = fe;
     }
 
@@ -87,7 +95,7 @@ public abstract class Creyente extends Personaje {
                 "\n\t· Ataque: " + getAtq() +
                 "\n\t· Armardura: " + getArm() +
                 "\n\t· Nivel: " + getNivel() +
-                "\n\t· Puntos de fe " + getFe();
+                "\n\t· Puntos de fe: " + getFe();
         return coquetudo() + "\n\n" + resultado;
     }
 

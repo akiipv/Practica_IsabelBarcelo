@@ -1,5 +1,8 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Subclase Ladrón.
  * Representa un tipo de Personaje especializado en velocidad y ataques
@@ -26,6 +29,10 @@ public class Ladrón extends Personaje {
         robo = 0;
     }
 
+    public Ladrón(File file) throws IOException {
+        super(file);
+    }
+
     /**
      * Constructor por parámetros del Ladrón.
      *
@@ -41,6 +48,11 @@ public class Ladrón extends Personaje {
     public Ladrón(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         robo = 0;
+    }
+
+    @Override
+    public void setOtro(int robo) {
+        this.robo = robo;
     }
 
     /**

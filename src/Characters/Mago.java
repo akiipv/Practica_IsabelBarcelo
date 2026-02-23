@@ -1,5 +1,7 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -32,6 +34,10 @@ public class Mago extends Personaje {
         mag = 10;
     }
 
+    public Mago(File file) throws IOException {
+        super(file);
+    }
+
     /**
      * Constructor por parámetros del Mago.
      * Inicializa el personaje con los valores indicados y asigna
@@ -49,7 +55,7 @@ public class Mago extends Personaje {
 
     public Mago(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int mag) {
         super(nombre, pv, atq, arm, nivel, vel, res);
-        setMag(mag);
+        setOtro(mag);
     }
 
     /**
@@ -68,7 +74,8 @@ public class Mago extends Personaje {
      * @param mag nuevo valor de puntos de magia
      */
 
-    public void setMag(int mag) {
+    @Override
+    public void setOtro(int mag) {
         this.mag = mag;
     }
 
@@ -95,7 +102,7 @@ public class Mago extends Personaje {
             setVel(getVel() + 1);
 
         if (prob(85))
-            setMag(getMag() + 1);
+            setOtro(getMag() + 1);
 
 
         setNivel(getNivel() + 1);

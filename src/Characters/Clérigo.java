@@ -1,5 +1,7 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -35,6 +37,10 @@ public class Clérigo extends Creyente {
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
     }
 
+    public Clérigo(File file) throws IOException {
+        super(file);
+    }
+
     /**
      * Incrementa las estadísticas del Clérigo al subir de nivel
      * de acuerdo a sus ventajas y penalizaciones específicas.
@@ -58,7 +64,7 @@ public class Clérigo extends Creyente {
             setVel(getVel() + 1);
 
         if (prob(80))
-            setFe(getFe() + 2);
+            setOtro(getFe() + 2);
 
 
         setNivel(getNivel() + 1);

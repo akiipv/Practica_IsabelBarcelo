@@ -1,5 +1,7 @@
 package Characters;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -45,6 +47,10 @@ public class Guerrero extends Personaje {
     public Guerrero(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, boolean furia) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         setFuria(furia);
+    }
+
+    public Guerrero(File file) throws IOException {
+        super(file);
     }
 
     /**

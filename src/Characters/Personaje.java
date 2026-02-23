@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import GameMap.Trampa;
+import Characters.Factory;
 
 
 /**
@@ -16,8 +17,8 @@ import GameMap.Trampa;
 
 public abstract class Personaje implements Comparable<Personaje> {
 
-    private String nombre, tipoAtaque;
-    private int pv, atq, arm, nivel, res, vel;
+    private String nombre, tipoAtaque, raza;
+    private int pv, atq, arm, nivel, res, vel, otro;
     private boolean def;
 
     /**
@@ -31,6 +32,7 @@ public abstract class Personaje implements Comparable<Personaje> {
         nombre = "";
         tipoAtaque = "fisico";
         def = false;
+        raza = "humano";
     }
 
     /**
@@ -55,10 +57,11 @@ public abstract class Personaje implements Comparable<Personaje> {
         setRes(res);
         setTipoAtaque("fisico");
         setDef(false);
+        setRaza("humano");
     }
 
     /**
-     * todo terminar cuando iván explique más porque realmente no sé qué estoy haciendo jeje
+     * todo la clase maldision
      */
 
     public Personaje(File file) throws IOException {
@@ -68,14 +71,42 @@ public abstract class Personaje implements Comparable<Personaje> {
             br.readLine();
         }
 
+        String[] campos = new String[2];
         String linea;
         while ((linea = br.readLine()) != null) {
-            System.out.println(linea);
-            /**todo reflexionar sobre cmo usar el split pa hacer lo que pide ivan*/
+            campos = linea.split(": ");
+
+            switch (campos[0]) {
+                case "· Nombre" -> setNombre(campos[1]);
+                case "   · Vida" -> setPv(Integer.parseInt(campos[1]));
+                case "   · Ataque" -> setAtq(Integer.parseInt(campos[1]));
+                case "   · Armadura" -> setArm(Integer.parseInt(campos[1]));
+                case "   · Velocidad" -> setVel(Integer.parseInt(campos[1]));
+                case "   · Resistencia mágica" -> setRes(Integer.parseInt(campos[1]));
+                case "   · Nivel" -> setNivel(Integer.parseInt(campos[1]));
+                case "   · Raza" -> setRaza(campos[1]);
+                default -> setOtro(Integer.parseInt(campos[1]));
+            }
         }
         br.close();
     }
 
+    /**todo terminar y modularizar esta puta mierda me voy a suicidar y lo voy */
+    public void updtPJ(File file) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        for (int i = 0; i < 3; i++) {
+            br.readLine();
+        }
+
+        String linea;
+        while ((linea = br.readLine()) != null){
+            if (!this.equals(Factory.crear(String.valueOf(this.getClass()), file))){
+
+            }
+
+        }
+    }
 
    /* public Personaje(String nombre) {
         Personaje player = GameTest.randomizaPersonaje(nombre);
@@ -123,6 +154,7 @@ public abstract class Personaje implements Comparable<Personaje> {
         setVel(copia.getVel());
         setRes(copia.getRes());
         setTipoAtaque(copia.getTipoAtaque());
+        setRaza(copia.getRaza());
     }
 
     /**
@@ -145,6 +177,18 @@ public abstract class Personaje implements Comparable<Personaje> {
         if (res <= 0)
             this.res = 0;
         else this.res = res;
+    }
+
+    public void setOtro(int otro) {
+        this.otro = otro;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public String getRaza() {
+        return raza;
     }
 
     /**
@@ -427,7 +471,7 @@ public abstract class Personaje implements Comparable<Personaje> {
 
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
-                "\n· Nombre: "  + getNombre() +
+                "\n· Nombre: " + getNombre() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +
@@ -582,18 +626,10 @@ public abstract class Personaje implements Comparable<Personaje> {
             opcion = scan.nextInt();
 
             switch (opcion) {
-                case 1:
-                    this.ataqueCoquetudo(enemigo);
-                    break;
-                case 2:
-                    this.accEspesial(enemigo);
-                    break;
-                case 3:
-                    this.defensaUppie();
-                    break;
-                case 4:
-                    System.out.println("\n" + getNombre() + " decide pasar el turno.." + details(4));
-                    break;
+                case 1 -> this.ataqueCoquetudo(enemigo);
+                case 2 -> this.accEspesial(enemigo);
+                case 3 -> this.defensaUppie();
+                case 4 -> System.out.println("\n" + getNombre() + " decide pasar el turno.." + details(4));
             }
         } while (opcion > 4 || opcion < 1);
     }
