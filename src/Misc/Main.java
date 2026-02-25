@@ -14,6 +14,6 @@ public class Main {
         Personaje p1 = new Ladrón("Isa", 100, 10, 10, 10, 100, 10);
         Personaje p2 = new Paladin("Ale", 100, 10, 1000, 10, 10, 10, 10);
 
-        GameLogger.cardIB(p1);
+        GameLogger.cardIB(p2);
     }
 }
