@@ -1,6 +1,7 @@
 package Misc;
 
 import Characters.*;
+import Combat.*;
 
 import java.io.*;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class GameLogger {
         Arrays.sort(player);
     }
 
-    public boolean fichitaExists(File[] fichitas, String nombre){
+    public static boolean fichitaExists(File[] fichitas, String nombre){
         boolean resultado = false;
 
         for (File ficha : fichitas) {
@@ -44,7 +45,7 @@ public class GameLogger {
 
     /**todo mirarlo otra ve luego cuando esté ivan presente pq en mi mente tiene sentido pero cmo no lo he probao y encima lo estoy haciendo sin gafas y a destiempo pq ahora mismo tendria que estar preparandome y no haciendo programación pue jejejej*/
 
-    public boolean claseRepetia(File[] fichitas, String nombre) throws IOException {
+    public static boolean claseRepetia(File[] fichitas, String nombre) throws IOException {
         boolean resultado = false;
 
         for (int i = 0; i < fichitas.length; i++) {
@@ -56,7 +57,7 @@ public class GameLogger {
         return resultado;
     }
 
-    public String getClasesita(File ficha) throws IOException {
+    public static String getClasesita(File ficha) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(ficha));
 
         for (int i = 0; i < 3; i++) {
@@ -75,5 +76,12 @@ public class GameLogger {
         br.close();
 
         return clase;
+    }
+
+    /**todo am averiguar cmo aser esto*/
+    public static void writtieCombate() throws IOException {
+        PrintWriter pw = new PrintWriter(new FileWriter("./combate/lusha.txt"));
+
+        pw.close();
     }
 }
