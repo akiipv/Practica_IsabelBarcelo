@@ -90,7 +90,7 @@ public abstract class Personaje implements Comparable<Personaje> {
     // Estoy cansada, jefe
 
     public void updtPJ(File file) throws IOException {
-        Personaje playerFicheado = Factory.crear(String.valueOf(this.getClass()), file);
+        Personaje playerFicheado = Factory.crear(String.valueOf(this.getClass().getSimpleName()), file);
 
         if (!this.getNombre().equals(playerFicheado.getNombre())) {
             return;
@@ -479,6 +479,7 @@ public abstract class Personaje implements Comparable<Personaje> {
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: " + getNombre() +
+                "\n· Clase: " + getClass() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +
