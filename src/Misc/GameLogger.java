@@ -5,13 +5,14 @@ import Combat.*;
 import Manolo.DWritersito;
 
 import java.io.*;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.Arrays;
 
 public class GameLogger {
 
     private static final String directorio = "./fichitas/combate/";
-    private static LocalDateTime fecha = LocalDateTime.now();
+    private static LocalTime hora = LocalTime.now();
+    private static LocalDate fecha = LocalDate.now();
 
     public static void cardIB(Personaje player) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/" + player.getNombre() + ".txt"));
@@ -82,7 +83,7 @@ public class GameLogger {
     }
 
     public static void writtieCombate(Personaje player, Personaje perchonaje, String nombreFichita) throws IOException {
-        File fichita = new File(directorio + fecha + " — " + nombreFichita + ".txt");
+        File fichita = new File(directorio + fecha + "|" + getHorita() + " — " + nombreFichita + ".txt");
         if (!fichita.exists()) fichita.createNewFile();
         PrintWriter ficherito = new PrintWriter(new FileWriter(fichita));
         PrintWriter consolita = new PrintWriter(System.out, true);
@@ -94,7 +95,18 @@ public class GameLogger {
 
     /**todo terminar esto jeje*/
 
-    public static LocalDateTime getFechita(){
-        return fecha;
+    public static String getHorita(){
+        String minuto;
+        String horita;
+
+        if (hora.getMinute() < 10)
+            minuto = "0" + String.valueOf(hora.getMinute());
+        else minuto = String.valueOf(hora.getMinute());
+
+        if (hora.getHour() < 10)
+            horita = "0" + String.valueOf(hora.getHour());
+        else horita = String.valueOf(hora.getHour());
+
+        return horita + ":" + minuto + " ";
     }
 }
