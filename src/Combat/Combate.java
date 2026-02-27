@@ -2,6 +2,7 @@ package Combat;
 
 import Characters.Personaje;
 import GameMap.*;
+import Manolo.DWritersito;
 
 import java.io.PrintWriter;
 import java.util.Random;
@@ -24,7 +25,7 @@ public class Combate {
      * @param c2 segundo personaje participante en el combate
      */
 
-    public static void combatir(Personaje c1, Personaje c2, PrintWriter pw) {
+    public static void combatir(Personaje c1, Personaje c2, DWritersito dw) {
 
         // Ella jura 💜
 
@@ -40,21 +41,21 @@ public class Combate {
             primero = c2;
         }
 
-        primero.printPerezita(primero.toString(), pw);
-        segundo.printPerezita(segundo.toString(), pw);
+        primero.printPerezita(primero.toString(), dw);
+        segundo.printPerezita(segundo.toString(), dw);
 
         while (!primero.estaMuerto() && !segundo.estaMuerto()) {
             ronda++;
-            System.out.println(dividerC());
-            System.out.println("\n\t\t  Ronda " + ronda + " ⟢");
+            dw.println(dividerC());
+            dw.println("\n\t\t  Ronda " + ronda + " ⟢");
 
-            bucleCombate(primero, segundo, pw);
+            bucleCombate(primero, segundo, dw);
 
             if (!segundo.estaMuerto()){
-                bucleCombate(segundo, primero, pw);
+                bucleCombate(segundo, primero, dw);
             }
         }
-        imprimirGanador(primero, segundo, pw);
+        imprimirGanador(primero, segundo, dw);
     }
 
     /**
@@ -65,13 +66,13 @@ public class Combate {
      * @param c2 segundo personaje
      */
 
-    public static void imprimirGanador(Personaje c1, Personaje c2, PrintWriter pw) {
+    public static void imprimirGanador(Personaje c1, Personaje c2, DWritersito dw) {
 
         if (c1.estaMuerto() && c2.estaMuerto()) {
-            c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", pw);
+            c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
         } else if (c1.estaMuerto() && !c2.estaMuerto()) {
-            pw.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
-        } else pw.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
+            dw.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
+        } else dw.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
 
     /**
@@ -82,7 +83,7 @@ public class Combate {
      * @param player personaje que puede activar la trampa
      */
 
-    public static void trampita(Personaje player, PrintWriter pw){
+    public static void trampita(Personaje player, DWritersito dw){
         Random r = new Random();
         Area area = new Area();
 
@@ -96,7 +97,7 @@ public class Combate {
             perjuicio = trampa.activaTrampa();
 
             if (perjuicio > 0)
-                player.caerTrampa(trampa, pw);
+                player.caerTrampa(trampa, dw);
             else {
                 switch (trampa.getTipo()) {
                     case "Brea":
@@ -122,7 +123,7 @@ public class Combate {
      * @param recibe personaje que recibe la acción
      */
 
-    public static void bucleCombate(Personaje ataca, Personaje recibe, PrintWriter pw){
+    public static void bucleCombate(Personaje ataca, Personaje recibe, DWritersito pw){
 
         int ataques = 1;
 
@@ -132,7 +133,7 @@ public class Combate {
         }
 
         for (int i = 0; i < ataques; i++) {
-            ataca.realizarTurno(recibe);
+            ataca.realizarTurno(recibe, pw);
         }
 
         trampita(ataca, pw);

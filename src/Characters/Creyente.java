@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -78,7 +80,7 @@ public abstract class Creyente extends Personaje {
      * @param enemigo personaje objetivo del milagro
      */
 
-    public abstract void plegaria(Personaje enemigo);
+    public abstract void plegaria(Personaje enemigo, DWritersito dw);
 
     /**
      * Devuelve una representación textual del Creyente,

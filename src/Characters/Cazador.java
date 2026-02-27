@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -149,14 +151,14 @@ public class Cazador extends Personaje {
      */
 
     @Override
-    public void ataqueCoquetudo(Personaje enemigo, PrintWriter pw) {
+    public void ataqueCoquetudo(Personaje enemigo, DWritersito pw) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
         if (dañito <= 0)
-            System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque, pero no le hacen ni cosquillas.." + details(4));
+            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque, pero no le hacen ni cosquillas.." + details(4));
         else {
-            System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque" + details(3) + "\n");
+            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque" + details(3) + "\n");
             printPerezita("\uD835\uDC74\uD835\uDC82\uD835\uDC94\uD835\uDC84\uD835\uDC90\uD835\uDC95\uD835\uDC8A\uD835\uDC95\uD835\uDC82 \uD835\uDC82\uD835\uDC8D \uD835\uDC82\uD835\uDC95\uD835\uDC82\uD835\uDC92\uD835\uDC96\uD835\uDC86..", pw);
-            System.out.println(coquetoCM() + "\n" + this.getNombre() + " y " + mascota.getNombre() + " han realizado " + enemigo.defender(this.atacar(), this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + "..");
+            pw.println(coquetoCM() + "\n" + this.getNombre() + " y " + mascota.getNombre() + " han realizado " + enemigo.defender(this.atacar(), this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + "..");
         }
         enemigo.defensa(this.atacar(), this.getTipoAtaque());
         printPv(enemigo, pw);

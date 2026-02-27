@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -101,7 +103,7 @@ public class Ladrón extends Personaje {
      * @param enemigo personaje objetivo
      */
 
-    public void robar(Personaje enemigo, PrintWriter pw) {
+    public void robar(Personaje enemigo, DWritersito pw) {
         int rob = enemigo.defender(this.getVel(), this.getTipoAtaque());
         enemigo.defensa(this.getVel(), this.getTipoAtaque());
         pw.println(coquetoL());
@@ -119,9 +121,9 @@ public class Ladrón extends Personaje {
      */
 
     @Override
-    public void accEspesial(Personaje enemigo) {
-        printPerezita("\uD835\uDC79\uD835\uDC90\uD835\uDC83\uD835\uDC82\uD835\uDC93..");
-        this.robar(enemigo);
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        printPerezita("\uD835\uDC79\uD835\uDC90\uD835\uDC83\uD835\uDC82\uD835\uDC93..", dw);
+        this.robar(enemigo, dw);
     }
 
     /**

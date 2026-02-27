@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -117,43 +119,43 @@ public class Mago extends Personaje {
      * @param enemigo personaje objetivo del conjuro
      */
 
-    public void lanzarConjuro(Personaje enemigo) {
+    public void lanzarConjuro(Personaje enemigo, DWritersito dw) {
 
         this.setTipoAtaque("magico");
         int dañoConjuro = 0;
         int opcion;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println(coquetoM());
+        dw.println(coquetoM());
 
         do {
-            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Bola de fuego", "Escudo arcano", "Céfiro", "Presteza mental", "Volver al menú principal"}, 2);
+            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Bola de fuego", "Escudo arcano", "Céfiro", "Presteza mental", "Volver al menú principal"}, 2, dw);
             opcion = scan.nextInt();
 
             switch (opcion) {
                 case 1:
                     dañoConjuro = (int) (getMag() * 0.70);
                     enemigo.defensa(dañoConjuro, this.getTipoAtaque());
-                    System.out.println(this.getNombre() + " " + anderlain("bola de fuego") + " y hace " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + details(2));
-                    printPv(enemigo);
+                    dw.println(this.getNombre() + " " + anderlain("bola de fuego") + " y hace " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + details(2));
+                    printPv(enemigo, dw);
                     break;
                 case 2:
                     setArm(getArm() + (int) (getMag() * 0.5));
                     setRes(getRes() + (int) (getMag() * 0.5));
-                    System.out.println("Un " + anderlain("escudo arcano") + " se manifiesta alrededor de " + this.getNombre() + ".. aumentando su armadura y resistencia mágica.." + details(5) + "\n\t· Armadura: " + this.getArm() + "\n\t· Resistencia mágica: " + this.getRes());
+                    dw.println("Un " + anderlain("escudo arcano") + " se manifiesta alrededor de " + this.getNombre() + ".. aumentando su armadura y resistencia mágica.." + details(5) + "\n\t· Armadura: " + this.getArm() + "\n\t· Resistencia mágica: " + this.getRes());
                     break;
                 case 3:
                     dañoConjuro = (int) (getMag() * 0.30);
                     enemigo.defensa(dañoConjuro, this.getTipoAtaque());
-                    System.out.println(this.getNombre() + " lanza " + anderlain("céfiro") + ", un fuerte viento se desata sobre " + enemigo.getNombre() + ".. causándole " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño mágico.." + details(4));
-                    printPv(enemigo);
+                    dw.println(this.getNombre() + " lanza " + anderlain("céfiro") + ", un fuerte viento se desata sobre " + enemigo.getNombre() + ".. causándole " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño mágico.." + details(4));
+                    printPv(enemigo, dw);
                     break;
                 case 4:
                     setVel(super.getVel() + getMag());
-                    System.out.println("La " + anderlain("presteza mental") + " de " + getNombre() + " le hace ganar " + mag + " puntos de velocidad.." + details(2) + "\n\t· Velocidad: " + this.getVel());
+                    dw.println("La " + anderlain("presteza mental") + " de " + getNombre() + " le hace ganar " + mag + " puntos de velocidad.." + details(2) + "\n\t· Velocidad: " + this.getVel());
                     break;
                 case 5:
-                    realizarTurno(enemigo);
+                    realizarTurno(enemigo, dw);
                     break;
             }
         } while (opcion > 5 || opcion < 1);
@@ -167,9 +169,9 @@ public class Mago extends Personaje {
      */
 
     @Override
-    public void accEspesial(Personaje enemigo) {
-        printPerezita("\uD835\uDC73\uD835\uDC82\uD835\uDC8F\uD835\uDC9B\uD835\uDC82\uD835\uDC93 \uD835\uDC84\uD835\uDC90\uD835\uDC8F\uD835\uDC8B\uD835\uDC96\uD835\uDC93\uD835\uDC90..");
-        lanzarConjuro(enemigo);
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        printPerezita("\uD835\uDC73\uD835\uDC82\uD835\uDC8F\uD835\uDC9B\uD835\uDC82\uD835\uDC93 \uD835\uDC84\uD835\uDC90\uD835\uDC8F\uD835\uDC8B\uD835\uDC96\uD835\uDC93\uD835\uDC90..", dw);
+        lanzarConjuro(enemigo, dw);
     }
 
     /**

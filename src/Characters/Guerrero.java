@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -78,16 +80,16 @@ public class Guerrero extends Personaje {
      * Al activarse o desactivarse, se muestra un mensaje descriptivo.
      */
 
-    public void modificarFuria() {
+    public void modificarFuria(DWritersito dw) {
 
         if (isFuria()) {
             this.furia = false;
         } else this.furia = true;
 
         if (isFuria())
-            printPerezita("\uD835\uDC6D\uD835\uDC96\uD835\uDC93\uD835\uDC8A\uD835\uDC82 \uD835\uDC82\uD835\uDC84\uD835\uDC95\uD835\uDC8A\uD835\uDC97\uD835\uDC82\uD835\uDC85\uD835\uDC82..");
+            printPerezita("\uD835\uDC6D\uD835\uDC96\uD835\uDC93\uD835\uDC8A\uD835\uDC82 \uD835\uDC82\uD835\uDC84\uD835\uDC95\uD835\uDC8A\uD835\uDC97\uD835\uDC82\uD835\uDC85\uD835\uDC82..", dw);
         else
-            printPerezita("\uD835\uDC6D\uD835\uDC96\uD835\uDC93\uD835\uDC8A\uD835\uDC82 \uD835\uDC85\uD835\uDC86\uD835\uDC94\uD835\uDC82\uD835\uDC84\uD835\uDC95\uD835\uDC8A\uD835\uDC97\uD835\uDC82\uD835\uDC85\uD835\uDC82..");
+            printPerezita("\uD835\uDC6D\uD835\uDC96\uD835\uDC93\uD835\uDC8A\uD835\uDC82 \uD835\uDC85\uD835\uDC86\uD835\uDC94\uD835\uDC82\uD835\uDC84\uD835\uDC95\uD835\uDC8A\uD835\uDC97\uD835\uDC82\uD835\uDC85\uD835\uDC82..", dw);
         System.out.println(coquetoG());
     }
 
@@ -99,8 +101,8 @@ public class Guerrero extends Personaje {
      */
 
     @Override
-    public void accEspesial(Personaje enemigo) {
-        modificarFuria();
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        modificarFuria(dw);
     }
 
     /**

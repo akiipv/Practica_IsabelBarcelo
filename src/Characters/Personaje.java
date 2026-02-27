@@ -5,6 +5,7 @@ import java.util.*;
 
 import GameMap.Trampa;
 import Characters.Factory;
+import Manolo.DWritersito;
 
 
 /**
@@ -494,7 +495,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param t trampa activada
      */
 
-    public void caerTrampa(Trampa t, PrintWriter pw) {
+    public void caerTrampa(Trampa t, DWritersito pw) {
 
         int perjuicioT = t.activaTrampa();
 
@@ -575,7 +576,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param player personaje a mostrar
      */
 
-    public void printPv(Personaje player, PrintWriter pw) {
+    public void printPv(Personaje player, DWritersito pw) {
         pw.println("\t· Su vida actual es de: " + player.getPv());
     }
 
@@ -583,22 +584,22 @@ public abstract class Personaje implements Comparable<Personaje> {
      * Activa la postura defensiva del personaje.
      */
 
-    public void defensaUppie() {
+    public void defensaUppie(DWritersito dw) {
         setDef(true);
 
         setArm(getArm() + ((int) (getArm() * 0.2)));
         setRes(getRes() + ((int) (getRes() * 0.2)));
-        System.out.println(getNombre() + " adopta una postura defensiva.. \nSus stats mejoran" + details(5) + "\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
+        dw.println(getNombre() + " adopta una postura defensiva.. \nSus stats mejoran" + details(5) + "\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
     }
 
     /**
      * Desactiva la postura defensiva del personaje.
      */
 
-    public void defensaDown() {
+    public void defensaDown(DWritersito dw) {
         setArm((int) (getArm() * 0.8));
         setRes((int) (getRes() * 0.8));
-        System.out.println("\n" + getNombre() + " se relaja.. \nSus stats vuelven a la normalidad, pero aumenta su cansancio" + details(4) + "\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
+        dw.println("\n" + getNombre() + " se relaja.. \nSus stats vuelven a la normalidad, pero aumenta su cansancio" + details(4) + "\n\t· Armadura: " + getArm() + "\n\t· Resistencia: " + getRes());
     }
 
     /**
@@ -607,7 +608,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param enemigo personaje enemigo
      */
 
-    public void accEspesial(Personaje enemigo, PrintWriter pw) {
+    public void accEspesial(Personaje enemigo, DWritersito pw) {
         pw.println("Este personaje no tiene acción especial.." + details(4));
     }
 
@@ -617,27 +618,27 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param enemigo personaje enemigo
      */
 
-    public void realizarTurno(Personaje enemigo) {
+    public void realizarTurno(Personaje enemigo, DWritersito dw) {
         int opcion;
 
         if (def) {
             this.setDef(false);
-            this.defensaDown();
+            this.defensaDown(dw);
         }
 
-        System.out.println("\nIniciando turno .ᐟ.ᐟ \n\t⤷ Turno de: " + this.getNombre() + details(5) + "\n");
+        dw.println("\nIniciando turno .ᐟ.ᐟ \n\t⤷ Turno de: " + this.getNombre() + details(5) + "\n");
 
         Scanner scan = new Scanner(System.in);
 
         do {
-            menusito("¿Qué acción quiere realizar?", new String[]{"Atacar", "Acción Especial", "Defender", "Pasar turno"}, 0);
+            menusito("¿Qué acción quiere realizar?", new String[]{"Atacar", "Acción Especial", "Defender", "Pasar turno"}, 0, dw);
             opcion = scan.nextInt();
 
             switch (opcion) {
-                case 1 -> this.ataqueCoquetudo(enemigo);
-                case 2 -> this.accEspesial(enemigo);
-                case 3 -> this.defensaUppie();
-                case 4 -> System.out.println("\n" + getNombre() + " decide pasar el turno.." + details(4));
+                case 1 -> this.ataqueCoquetudo(enemigo, dw);
+                case 2 -> this.accEspesial(enemigo, dw);
+                case 3 -> this.defensaUppie(dw);
+                case 4 -> dw.println("\n" + getNombre() + " decide pasar el turno.." + details(4));
             }
         } while (opcion > 4 || opcion < 1);
     }
@@ -648,14 +649,14 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param enemigo personaje enemigo
      */
 
-    public void ataqueCoquetudo(Personaje enemigo, PrintWriter pw) {
+    public void ataqueCoquetudo(Personaje enemigo, DWritersito dw) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
         if (dañito <= 0)
-            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
+            dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
         else
-            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
+            dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
         enemigo.defensa(this.atacar(), this.getTipoAtaque());
-        printPv(enemigo);
+        printPv(enemigo, dw);
     }
 
     /**
@@ -686,8 +687,10 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param detail   nivel de detalle visual
      */
 
-    public void menusito(String mensaje, String[] opciones, int detail) {
-        System.out.println(details(1) + "\n" + mensaje + details(detail));
+    public void menusito(String mensaje, String[] opciones, int detail, DWritersito dw) {
+        dw.println(details(1));
+        dw.printlnFichita();
+        System.out.println("\n" + mensaje + details(detail));
 
         for (int i = 0; i < opciones.length; i++) {
             int index = i + 1;
@@ -747,8 +750,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param acc mensaje a mostrar
      */
 
-    public void printPerezita(String acc, PrintWriter pw) {
-        System.out.println("\t\t" + acc + "\n");
+    public void printPerezita(String acc, DWritersito dw) {
+        dw.println("\t\t" + acc + "\n");
     }
 
     /**

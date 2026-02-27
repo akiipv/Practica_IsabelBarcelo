@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -80,37 +82,37 @@ public class Paladin extends Creyente {
      */
 
     @Override
-    public void plegaria(Personaje enemigo) {
+    public void plegaria(Personaje enemigo, DWritersito dw) {
 
         int opcion;
         int pleg;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println(coquetoP());
+        dw.println(coquetoP());
 
         do {
-            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Imbuir arma", "Baluarte de fe", "Fogonazo sagrado", "Volver al menú principal"}, 2);
+            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Imbuir arma", "Baluarte de fe", "Fogonazo sagrado", "Volver al menú principal"}, 2, dw);
             opcion = scan.nextInt();
 
             switch (opcion) {
                 case 1:
                     pleg = (int) (getFe() * 0.8);
                     this.setAtq(getAtq() + pleg);
-                    System.out.println(this.getNombre() + " comienza a " + anderlain("imbuir su arma") + " aumentando su ataque " + pleg + " puntos..\n\t· Ataque: " + this.getAtq());
+                    dw.println(this.getNombre() + " comienza a " + anderlain("imbuir su arma") + " aumentando su ataque " + pleg + " puntos..\n\t· Ataque: " + this.getAtq());
                     break;
                 case 2:
                     pleg = (int) (getFe() * 0.3);
                     this.setArm(getArm() + pleg);
-                    System.out.println(this.getNombre() + " empieza a fortalecer su cuerpo con un " + anderlain("baluarte de fe") + " subiendo su armadura " + pleg + " puntos..\n\t· Armadura: " + this.getArm());
+                    dw.println(this.getNombre() + " empieza a fortalecer su cuerpo con un " + anderlain("baluarte de fe") + " subiendo su armadura " + pleg + " puntos..\n\t· Armadura: " + this.getArm());
                     break;
                 case 3:
                     pleg = (int) (getFe() * 0.4);
                     enemigo.setVel(enemigo.getVel() - pleg);
                     enemigo.setRes(enemigo.getRes() - pleg);
-                    System.out.println(this.getNombre() + " lanza un " + anderlain("fogonazo sagrado") + " hacia " + enemigo.getNombre() + " cegándole, reduciendo así su velocidad y resistencia mágica " + pleg + " puntos..\n\t· Velocidad: " + enemigo.getVel() + "\n\t· Resistencia mágica: " + enemigo.getRes());
+                    dw.println(this.getNombre() + " lanza un " + anderlain("fogonazo sagrado") + " hacia " + enemigo.getNombre() + " cegándole, reduciendo así su velocidad y resistencia mágica " + pleg + " puntos..\n\t· Velocidad: " + enemigo.getVel() + "\n\t· Resistencia mágica: " + enemigo.getRes());
                     break;
                 case 4:
-                    realizarTurno(enemigo);
+                    realizarTurno(enemigo, dw);
                     break;
             }
         } while (opcion > 4 || opcion < 1);
@@ -124,9 +126,9 @@ public class Paladin extends Creyente {
      */
 
     @Override
-    public void accEspesial(Personaje enemigo) {
-        printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..");
-        plegaria(enemigo);
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..", dw);
+        plegaria(enemigo, dw);
     }
 
     /**

@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -50,16 +52,16 @@ public class Coquette extends Personaje {
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
     }
 
-    public void Corazon(Personaje enemigo, PrintWriter pw) {
+    public void Corazon(Personaje enemigo, DWritersito dw) {
         this.setTipoAtaque("magico");
         int dañoCoquette = 0;
         int opcion;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println(coquetoCQ());
+        dw.println(coquetoCQ());
 
         do {
-            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Robar corazón", "Mandar besitos", "Admirarse en un espejo", "No, yo más", "Volver al menú principal"}, 2);
+            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Robar corazón", "Mandar besitos", "Admirarse en un espejo", "No, yo más", "Volver al menú principal"}, 2, dw);
             opcion = scan.nextInt();
 
             switch (opcion) {
@@ -67,36 +69,36 @@ public class Coquette extends Personaje {
                     dañoCoquette = Integer.MAX_VALUE;
                     this.setTipoAtaque("fisico");
                     enemigo.defensa(dañoCoquette, this.getTipoAtaque());
-                    pw.println(this.getNombre() + " le ha " + anderlain("robado el corazón") + " a " + enemigo.getNombre() + " matándolo directamente con su coquetería.." + details(2));
-                    printPv(enemigo, pw);
+                    dw.println(this.getNombre() + " le ha " + anderlain("robado el corazón") + " a " + enemigo.getNombre() + " matándolo directamente con su coquetería.." + details(2));
+                    printPv(enemigo, dw);
                     break;
                 case 2:
                     dañoCoquette = (int) (coqueteria * 0.85);
                     enemigo.setRes(getRes() - dañoCoquette);
-                    pw.println(this.getNombre() + " le " + anderlain("manda besitos") + " a " + enemigo.getNombre() + ".. bajándole la resistencia mágica con su coquetería.." + details(5) + "\n\t· Resistencia mágica: " + enemigo.getRes());
+                    dw.println(this.getNombre() + " le " + anderlain("manda besitos") + " a " + enemigo.getNombre() + ".. bajándole la resistencia mágica con su coquetería.." + details(5) + "\n\t· Resistencia mágica: " + enemigo.getRes());
                     break;
                 case 3:
                     dañoCoquette = (int) (coqueteria * 0.90);
                     this.setAtq(getAtq() + dañoCoquette);
-                    pw.println(this.getNombre() + " se " + anderlain("admira en el espejo") + ", reforzando su confianza y aumentando su ataque.. \n\t· Ataque: " + this.getAtq() + details(5));
+                    dw.println(this.getNombre() + " se " + anderlain("admira en el espejo") + ", reforzando su confianza y aumentando su ataque.. \n\t· Ataque: " + this.getAtq() + details(5));
                     break;
                 case 4:
                     dañoCoquette = enemigo.getAtq() * 2;
                     enemigo.defensa(dañoCoquette, this.getTipoAtaque());
-                    pw.println(this.getNombre() + " ama más a " + enemigo.getNombre() + " por lo que hace el doble de daño que él.." + details(2));
-                    printPv(enemigo, pw);
+                    dw.println(this.getNombre() + " ama más a " + enemigo.getNombre() + " por lo que hace el doble de daño que él.." + details(2));
+                    printPv(enemigo, dw);
                     break;
                 case 5:
-                    realizarTurno(enemigo);
+                    realizarTurno(enemigo, dw);
                     break;
             }
         } while (opcion > 5);
     }
 
     @Override
-    public void accEspesial(Personaje enemigo, PrintWriter pw) {
-        printPerezita("\uD835\uDC6A\uD835\uDC90\uD835\uDC93\uD835\uDC82\uD835\uDC9B\uD835\uDC90\uD835\uDC8F \uD835\uDC84\uD835\uDC90\uD835\uDC92\uD835\uDC96\uD835\uDC86\uD835\uDC95\uD835\uDC90..", pw);
-        Corazon(enemigo, pw);
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        printPerezita("\uD835\uDC6A\uD835\uDC90\uD835\uDC93\uD835\uDC82\uD835\uDC9B\uD835\uDC90\uD835\uDC8F \uD835\uDC84\uD835\uDC90\uD835\uDC92\uD835\uDC96\uD835\uDC86\uD835\uDC95\uD835\uDC90..", dw);
+        Corazon(enemigo, dw);
     }
 
     @Override

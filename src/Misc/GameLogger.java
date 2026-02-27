@@ -2,11 +2,16 @@ package Misc;
 
 import Characters.*;
 import Combat.*;
+import Manolo.DWritersito;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class GameLogger {
+
+    private static final String directorio = "./fichitas/combate/";
+    private static LocalDateTime fecha = LocalDateTime.now();
 
     public static void cardIB(Personaje player) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/" + player.getNombre() + ".txt"));
@@ -43,8 +48,6 @@ public class GameLogger {
         return resultado;
     }
 
-    /**todo mirarlo otra ve luego cuando esté ivan presente pq en mi mente tiene sentido pero cmo no lo he probao y encima lo estoy haciendo sin gafas y a destiempo pq ahora mismo tendria que estar preparandome y no haciendo programación pue jejejej*/
-
     public static boolean claseRepetia(File[] fichitas, String nombre) throws IOException {
         boolean resultado = false;
 
@@ -78,11 +81,20 @@ public class GameLogger {
         return clase;
     }
 
-    /**todo am averiguar cmo aser esto*/
-    public static void writtieCombate() throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter("./combate/lusha.txt"));
+    public static void writtieCombate(Personaje player, Personaje perchonaje, String nombreFichita) throws IOException {
+        File fichita = new File(directorio + fecha + " — " + nombreFichita + ".txt");
+        if (!fichita.exists()) fichita.createNewFile();
+        PrintWriter ficherito = new PrintWriter(new FileWriter(fichita));
+        PrintWriter consolita = new PrintWriter(System.out, true);
+        DWritersito dw = new DWritersito(consolita, ficherito);
+        Combate.combatir(player, perchonaje, dw);
+        dw.flush();
+        dw.close();
+    }
 
-        pw.flush();
-        pw.close();
+    /**todo terminar esto jeje*/
+
+    public static LocalDateTime getFechita(){
+        return fecha;
     }
 }

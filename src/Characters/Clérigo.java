@@ -1,5 +1,7 @@
 package Characters;
 
+import Manolo.DWritersito;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -80,40 +82,40 @@ public class Clérigo extends Creyente {
      */
 
     @Override
-    public void plegaria(Personaje objetivo, PrintWriter pw) {
+    public void plegaria(Personaje objetivo, DWritersito dw) {
 
         int opcion;
         int pleg;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println(coquetoC());
+        dw.println(coquetoC());
 
         do {
-            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Sanación", "Rezo sagrado", "Cólera divina", "Volver al menú principal"}, 2);
+            menusito("¿Qué tipo de conjuro quiere hacer?", new String[]{"Sanación", "Rezo sagrado", "Cólera divina", "Volver al menú principal"}, 2, dw);
             opcion = scan.nextInt();
 
             switch (opcion) {
                 case 1:
                     pleg = (int) (getFe() * 0.7);
                     this.setPv(getPv() + pleg);
-                    pw.println(this.getNombre() + " " + anderlain("sana") + " con su fe a " + objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
-                    printPv(this, pw);
+                    dw.println(this.getNombre() + " " + anderlain("sana") + " con su fe a " + objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
+                    printPv(this, dw);
                     break;
                 case 2:
                     pleg = (int) (getFe() * 0.35);
                     this.setPv(getPv() + pleg);
-                    pw.println(this.getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana " + pleg + " puntos con su fe a todo el equipo..");
-                    printPv(this, pw);
+                    dw.println(this.getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana " + pleg + " puntos con su fe a todo el equipo..");
+                    printPv(this, dw);
                     break;
                 case 3:
                     this.setTipoAtaque("magico");
                     pleg = (int) (getFe() * 0.55);
                     objetivo.defensa(pleg, this.getTipoAtaque());
-                    pw.println(this.getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe " + objetivo.defender(pleg, this.getTipoAtaque()) + " puntos de daño de sangrado..");
-                    printPv(objetivo, pw);
+                    dw.println(this.getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe " + objetivo.defender(pleg, this.getTipoAtaque()) + " puntos de daño de sangrado..");
+                    printPv(objetivo, dw);
                     break;
                 case 4:
-                    realizarTurno(objetivo);
+                    realizarTurno(objetivo, dw);
                     break;
             }
         } while (opcion > 4 || opcion < 1);
@@ -126,9 +128,9 @@ public class Clérigo extends Creyente {
      */
 
     @Override
-    public void accEspesial(Personaje enemigo, PrintWriter pw) {
-        printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..", pw);
-        plegaria(enemigo);
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..", dw);
+        plegaria(enemigo, dw);
     }
 
     /**
