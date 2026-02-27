@@ -82,6 +82,7 @@ public class GameLogger {
     public static void writtieCombate() throws IOException {
         PrintWriter pw = new PrintWriter(new FileWriter("./combate/lusha.txt"));
 
+        pw.flush();
         pw.close();
     }
 }

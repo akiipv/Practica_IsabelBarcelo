@@ -494,7 +494,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param t trampa activada
      */
 
-    public void caerTrampa(Trampa t) {
+    public void caerTrampa(Trampa t, PrintWriter pw) {
 
         int perjuicioT = t.activaTrampa();
 
@@ -505,7 +505,7 @@ public abstract class Personaje implements Comparable<Personaje> {
                 case "Pinchos":
                     setPv(getPv() - perjuicioT);
                     System.out.println("\n\t" + anderlain("Estacas afiladas") + " salen de las superficies cercanas y atraviesan a " + getNombre() + " por " + perjuicioT + " puntos de daño..\n");
-                    printPv(this);
+                    printPv(this, pw);
                     break;
                 case "Brea":
                     setArm(getArm() - perjuicioT);
@@ -575,8 +575,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param player personaje a mostrar
      */
 
-    public void printPv(Personaje player) {
-        System.out.println("\t· Su vida actual es de: " + player.getPv());
+    public void printPv(Personaje player, PrintWriter pw) {
+        pw.println("\t· Su vida actual es de: " + player.getPv());
     }
 
     /**
@@ -607,8 +607,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param enemigo personaje enemigo
      */
 
-    public void accEspesial(Personaje enemigo) {
-        System.out.println("Este personaje no tiene acción especial.." + details(4));
+    public void accEspesial(Personaje enemigo, PrintWriter pw) {
+        pw.println("Este personaje no tiene acción especial.." + details(4));
     }
 
     /**
@@ -648,12 +648,12 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param enemigo personaje enemigo
      */
 
-    public void ataqueCoquetudo(Personaje enemigo) {
+    public void ataqueCoquetudo(Personaje enemigo, PrintWriter pw) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
         if (dañito <= 0)
-            System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
+            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
         else
-            System.out.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
+            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
         enemigo.defensa(this.atacar(), this.getTipoAtaque());
         printPv(enemigo);
     }
@@ -747,7 +747,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param acc mensaje a mostrar
      */
 
-    public void printPerezita(String acc) {
+    public void printPerezita(String acc, PrintWriter pw) {
         System.out.println("\t\t" + acc + "\n");
     }
 

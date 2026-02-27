@@ -2,6 +2,7 @@ package Characters;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Subclase Ladrón.
@@ -100,14 +101,14 @@ public class Ladrón extends Personaje {
      * @param enemigo personaje objetivo
      */
 
-    public void robar(Personaje enemigo) {
+    public void robar(Personaje enemigo, PrintWriter pw) {
         int rob = enemigo.defender(this.getVel(), this.getTipoAtaque());
         enemigo.defensa(this.getVel(), this.getTipoAtaque());
-        System.out.println(coquetoL());
+        pw.println(coquetoL());
         if (rob > 0)
-            System.out.println(this.getNombre() + " le ha robado a " + enemigo.getNombre() + ".. quitándole " + rob + " de vida con su velocidad..");
-        else System.out.println("\n" + this.getNombre() + " le intenta robar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
-        printPv(enemigo);
+            pw.println(this.getNombre() + " le ha robado a " + enemigo.getNombre() + ".. quitándole " + rob + " de vida con su velocidad..");
+        else pw.println("\n" + this.getNombre() + " le intenta robar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
+        printPv(enemigo, pw);
         robo++;
     }
 

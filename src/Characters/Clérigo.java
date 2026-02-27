@@ -2,6 +2,7 @@ package Characters;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -79,7 +80,7 @@ public class Clérigo extends Creyente {
      */
 
     @Override
-    public void plegaria(Personaje objetivo) {
+    public void plegaria(Personaje objetivo, PrintWriter pw) {
 
         int opcion;
         int pleg;
@@ -95,21 +96,21 @@ public class Clérigo extends Creyente {
                 case 1:
                     pleg = (int) (getFe() * 0.7);
                     this.setPv(getPv() + pleg);
-                    System.out.println(this.getNombre() + " " + anderlain("sana") + " con su fe a " + objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
-                    printPv(this);
+                    pw.println(this.getNombre() + " " + anderlain("sana") + " con su fe a " + objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
+                    printPv(this, pw);
                     break;
                 case 2:
                     pleg = (int) (getFe() * 0.35);
                     this.setPv(getPv() + pleg);
-                    System.out.println(this.getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana " + pleg + " puntos con su fe a todo el equipo..");
-                    printPv(this);
+                    pw.println(this.getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana " + pleg + " puntos con su fe a todo el equipo..");
+                    printPv(this, pw);
                     break;
                 case 3:
                     this.setTipoAtaque("magico");
                     pleg = (int) (getFe() * 0.55);
                     objetivo.defensa(pleg, this.getTipoAtaque());
-                    System.out.println(this.getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe " + objetivo.defender(pleg, this.getTipoAtaque()) + " puntos de daño de sangrado..");
-                    printPv(objetivo);
+                    pw.println(this.getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe " + objetivo.defender(pleg, this.getTipoAtaque()) + " puntos de daño de sangrado..");
+                    printPv(objetivo, pw);
                     break;
                 case 4:
                     realizarTurno(objetivo);
@@ -125,8 +126,8 @@ public class Clérigo extends Creyente {
      */
 
     @Override
-    public void accEspesial(Personaje enemigo) {
-        printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..");
+    public void accEspesial(Personaje enemigo, PrintWriter pw) {
+        printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..", pw);
         plegaria(enemigo);
     }
 
