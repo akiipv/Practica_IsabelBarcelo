@@ -83,7 +83,7 @@ public class GameLogger {
     }
 
     public static void writtieCombate(Personaje player, Personaje perchonaje, String nombreFichita) throws IOException {
-        File fichita = new File(directorio + fecha + "|" + getHorita() + " — " + nombreFichita + ".txt");
+        File fichita = new File(directorio + fecha + "_" + getHorita() + " — " + nombreFichita + ".txt");
         if (!fichita.exists()) fichita.createNewFile();
         PrintWriter ficherito = new PrintWriter(new FileWriter(fichita));
         PrintWriter consolita = new PrintWriter(System.out, true);
@@ -92,8 +92,6 @@ public class GameLogger {
         dw.flush();
         dw.close();
     }
-
-    /**todo terminar esto jeje*/
 
     public static String getHorita(){
         String minuto;
@@ -107,6 +105,23 @@ public class GameLogger {
             horita = "0" + String.valueOf(hora.getHour());
         else horita = String.valueOf(hora.getHour());
 
-        return horita + ":" + minuto + " ";
+        return horita + "." + minuto + " ";
+    }
+
+    /**todo mirar*/
+    public static void lvlUpGanador(File fichaLusha, Personaje [] players) throws IOException{
+        BufferedReader br = new BufferedReader(new FileReader(fichaLusha));
+
+        String linea;
+        String [] putaVida;
+        while ((linea = br.readLine()) != null){
+            if (linea.contains(players[0].details(6))){
+                putaVida = linea.split(" ");
+                for (Personaje player : players){
+                    if (player.getNombre().equalsIgnoreCase(putaVida[0]))
+                        player.setNivel(player.getNivel() + 1);
+                }
+            }
+        }
     }
 }
