@@ -88,8 +88,6 @@ public abstract class Personaje implements Comparable<Personaje> {
         br.close();
     }
 
-    // Estoy cansada, jefe
-
     public void updtPJ(File file) throws IOException {
         Personaje playerFicheado = Factory.crear(String.valueOf(this.getClass().getSimpleName()), file);
 
@@ -228,10 +226,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setNombre(String nombre) {
-
-        if (nombre.isEmpty() || nombre.contains("GM") || nombre.length() < 2) {
-            System.err.println("Error. El nombre debe tener caracteres válidos.");
-        } else this.nombre = nombre;
+        if (nombre.isEmpty() || nombre.contains("GM") || nombre.length() < 2) System.err.println("Error. El nombre debe tener caracteres válidos.");
+        else this.nombre = nombre;
     }
 
     /**
@@ -241,11 +237,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setPv(int pv) {
-        if (pv < 0) {
-            this.pv = 0;
-        } else {
-            this.pv = pv;
-        }
+        if (pv < 0) this.pv = 0;
+        else this.pv = pv;
     }
 
     /**
@@ -255,12 +248,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setAtq(int atq) {
-        if (atq < 0) {
-            System.err.println("Error. El ataque debe ser mayor o igual a 0.");
-            this.atq = 0;
-        } else {
-            this.atq = atq;
-        }
+        if (atq < 0) this.atq = 0;
+        else this.atq = atq;
     }
 
     /**
@@ -270,12 +259,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setArm(int arm) {
-        if (arm < 0) {
-            System.err.println("Error. La defensa debe ser mayor o igual a 0.");
-            this.arm = 0;
-        } else {
-            this.arm = arm;
-        }
+        if (arm < 0) this.arm = 0;
+        else this.arm = arm;
     }
 
     /**
@@ -285,9 +270,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setNivel(int nivel) {
-        if (nivel < 1 || nivel > 100) {
-            System.err.println("Error. El nivel debe estar entre 1 y 100.");
-        } else this.nivel = nivel;
+        if (nivel < 1 || nivel > 100) this.nivel = 0;
+        else this.nivel = nivel;
     }
 
     /**
@@ -428,9 +412,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public boolean estaMuerto() {
-        if (pv <= 0) {
-            return true;
-        } else return false;
+        if (pv <= 0) return true;
+        else return false;
     }
 
     /* public Personaje clone() {
@@ -517,10 +500,11 @@ public abstract class Personaje implements Comparable<Personaje> {
                     System.out.println("\n\tUn " + anderlain("nido de víboras") + " aparece frente a " + getNombre() + ". La visión es tan terrorífica que pierde las fuerza para atacar..\n\t· Ataque" + getAtq() + "\n");
                     break;
             }
-        } else {
-            System.out.println("\n\tAfortunadamente, ¡" + getNombre() + " escapó de la trampa indemne!");
-        }
+        } else System.out.println("\n\tAfortunadamente, ¡" + getNombre() + " escapó de la trampa indemne!");
+
     }
+
+    /**todo m he quedado por aqui*/
 
     /**
      * Devuelve el daño de ataque del personaje.
