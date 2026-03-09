@@ -463,7 +463,7 @@ public abstract class Personaje implements Comparable<Personaje> {
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: " + getNombre() +
-                "\n· Clase: " + getClass() +
+                "\n· Clase: " + getClass().getSimpleName() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +
@@ -753,7 +753,7 @@ public abstract class Personaje implements Comparable<Personaje> {
 
     @Override
     public int compareTo(Personaje player) {
-        return Integer.compare(this.getVel(), player.getVel());
+        return Integer.compare(player.getVel(), this.getVel());
     }
 }
 

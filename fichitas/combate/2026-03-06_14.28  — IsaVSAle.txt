@@ -1,0 +1,59 @@
+		⠀⠀⠀⠀⠀⠀⠀⠀⡤⠤⠤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⣀⣠⡤⠤⢤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⡤⣤⣤⡀⠀⠀⠀⠀⠀⢘⢇⠀⠀⠀⠘⠙⠢⣀⠀⠀⠀⠀⠀⢀⡖⠋⠁⠀⠀⠀⡼⠇⠀⠀⠀⠀⠀⢀⣤⣤⡦⡄⠀⠀⠀⠀
+⣴⢖⣄⠀⠸⣅⢀⣠⠇⠀⣴⢖⣄⠀⠾⠋⠁⠀⠀⠀⠀⠀⠹⣾⠏⠻⠋⢂⠟⠀⠀⠀⠀⠒⠀⠉⡗⠀⢰⣶⣦⠀⠘⢄⡀⣱⠟⠀⢠⣶⣦
+⠈⠛⠀⠀⠀⠈⠛⠁⠀⠀⠈⠛⠁⠀⠉⢲⠀⠀⠀⠀⠀⠀⣠⠟⢮⣄⡴⠛⣤⡀⠀⠀⠀⠀⠀⡞⠃⠀⠀⠛⠁⠀⠀⠀⠹⠋⠀⠀⠀⠙⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠤⡶⠋⠙⠁⠀⠀⠙⠁⠀⠈⠉⠙⢲⢴⠟⠙⠁⠀⠀
+
+
+Cargando datos del paladín.. ૮ ․ ․ ྀིა 
+	· Nombre: Ale
+	· Vida: 100
+	· Ataque: 100
+	· Armadura: 1000
+	· Velocidad: 10
+	· Resistencia mágica: 10
+	· Puntos de fe: 10
+	· Nivel: 10
+
+		⠀⠀⠀⠀⠀⠀⠀⠀⡤⠤⠤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⣀⣠⡤⠤⢤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⡤⣤⣤⡀⠀⠀⠀⠀⠀⢘⢇⠀⠀⠀⠘⠙⠢⣀⠀⠀⠀⠀⠀⢀⡖⠋⠁⠀⠀⠀⡼⠇⠀⠀⠀⠀⠀⢀⣤⣤⡦⡄⠀⠀⠀⠀
+⣴⢖⣄⠀⠸⣅⢀⣠⠇⠀⣴⢖⣄⠀⠾⠋⠁⠀⠀⠀⠀⠀⠹⣾⠏⠻⠋⢂⠟⠀⠀⠀⠀⠒⠀⠉⡗⠀⢰⣶⣦⠀⠘⢄⡀⣱⠟⠀⢠⣶⣦
+⠈⠛⠀⠀⠀⠈⠛⠁⠀⠀⠈⠛⠁⠀⠉⢲⠀⠀⠀⠀⠀⠀⣠⠟⢮⣄⡴⠛⣤⡀⠀⠀⠀⠀⠀⡞⠃⠀⠀⠛⠁⠀⠀⠀⠹⠋⠀⠀⠀⠙⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠤⡶⠋⠙⠁⠀⠀⠙⠁⠀⠈⠉⠙⢲⢴⠟⠙⠁⠀⠀
+
+
+Cargando datos del ladrón.. ૮ ․ ․ ྀིა 
+	· Nombre: Isa
+	· Vida: 10
+	· Ataque: 10
+	· Armadura: 10
+	· Velocidad: 1
+	· Resistencia mágica: 10
+	· Cantidad de robos realizados: 0
+	· Nivel: 10
+
+
+	────•⋅⊰༻♥༺⊱⋅•────
+
+		  Ronda 1 ⟢
+
+Ale es tan veloz que tiene doble turno.. ₍^ >ヮ<^₎ .ᐟ.ᐟ
+
+Iniciando turno .ᐟ.ᐟ 
+	⤷ Turno de: Ale ദ്ദി◝ ⩊ ◜.ᐟ
+
+ ₊˚ ‿︵‿୨୧ · · ♡ · · ୨୧‿︵‿ ˚₊
+
+
+Ale decide pasar el turno.. ૮ ྀིᴗ͈ . ᴗ͈ ྀིა.ᐟ
+
+Iniciando turno .ᐟ.ᐟ 
+	⤷ Turno de: Ale ദ്ദി◝ ⩊ ◜.ᐟ
+
+ ₊˚ ‿︵‿୨୧ · · ♡ · · ୨୧‿︵‿ ˚₊
+
+
+Ale decide atacar a Isa haciéndole 90 de daño.. ദ്ദി◝ ⩊ ◜.ᐟ
+	· Su vida actual es de: 0
+
+	Ale 𝒉𝒂 𝒈𝒂𝒏𝒂𝒅𝒐.. ٩(•̤̀ᵕ•̤́๑)ˡᵉᵗ'ˢ ᵍᵒᵎᵎᵎᵎ

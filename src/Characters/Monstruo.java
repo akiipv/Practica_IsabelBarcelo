@@ -191,6 +191,7 @@ public class Monstruo extends Personaje {
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: "  + getNombre() +
+                "\n· Clase: " + getClass().getSimpleName() +
                 "\n   · Raza: " + getRaza() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +

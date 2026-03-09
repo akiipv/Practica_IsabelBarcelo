@@ -1,0 +1,46 @@
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Ale
+· Clase: Paladin
+   · Vida: 100
+   · Ataque: 100
+   · Armadura: 1000
+   · Velocidad: 10
+   · Resistencia mágica: 10
+   · Fe: 10
+   · Nivel: 10
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Juan
+· Clase: Cazador
+   · Vida: 100
+   · Ataque: 100
+   · Armadura: 100
+   · Velocidad: 5
+   · Resistencia mágica: 10
+   · Nivel: 10
+	
+── ⟢ ・⸝⸝  𝑴𝒂𝒔𝒄𝒐𝒕𝒊𝒕𝒂 .ᐟ.ᐟ
+
+· Nombre: achu
+· Raza: felino
+   · Vida: 15
+   · Ataque: 30
+   · Armadura: 15
+   · Velocidad: 1
+   · Resistencia mágica: 1
+   · Nivel: 10
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Isa
+· Clase: Ladrón
+   · Vida: 10
+   · Ataque: 10
+   · Armadura: 10
+   · Velocidad: 1
+   · Resistencia mágica: 10
+   · Cantidad de robos realizados: 0
+   · Nivel: 10

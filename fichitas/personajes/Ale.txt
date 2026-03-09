@@ -1,0 +1,12 @@
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Ale
+· Clase: Paladin
+   · Vida: 100
+   · Ataque: 100
+   · Armadura: 1000
+   · Velocidad: 10
+   · Resistencia mágica: 10
+   · Fe: 10
+   · Nivel: 10

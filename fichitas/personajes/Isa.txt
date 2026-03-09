@@ -1,0 +1,12 @@
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Isa
+· Clase: Ladrón
+   · Vida: 10
+   · Ataque: 10
+   · Armadura: 10
+   · Velocidad: 1
+   · Resistencia mágica: 10
+   · Cantidad de robos realizados: 0
+   · Nivel: 10

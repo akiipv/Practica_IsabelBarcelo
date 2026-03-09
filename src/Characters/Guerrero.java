@@ -206,6 +206,7 @@ public class Guerrero extends Personaje {
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: "  + getNombre() +
+                "\n· Clase: " + getClass().getSimpleName() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +

@@ -155,6 +155,7 @@ public class Paladin extends Creyente {
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: "  + getNombre() +
+                "\n· Clase: " + getClass().getSimpleName() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +

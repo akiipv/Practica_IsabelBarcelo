@@ -123,6 +123,7 @@ public class Cazador extends Personaje {
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: "  + getNombre() +
+                "\n· Clase: " + getClass().getSimpleName() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +
@@ -279,9 +280,9 @@ public class Cazador extends Personaje {
 
         @Override
         public String cartita() {
-            return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
+            return "\n── ⟢ ・⸝⸝  \uD835\uDC74\uD835\uDC82\uD835\uDC94\uD835\uDC84\uD835\uDC90\uD835\uDC95\uD835\uDC8A\uD835\uDC95\uD835\uDC82 .ᐟ.ᐟ\n" +
                     "\n· Nombre: "  + getNombre() +
-                    "\n   · Raza: "  + getRaza() +
+                    "\n· Raza: "  + getRaza() +
                     "\n   · Vida: " + getPv() +
                     "\n   · Ataque: " + getAtq() +
                     "\n   · Armadura: " + getArm() +

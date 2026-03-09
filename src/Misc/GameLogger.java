@@ -11,8 +11,8 @@ import java.util.Arrays;
 public class GameLogger {
 
     private static final String directorio = "./fichitas/combate/";
-    private static LocalTime hora = LocalTime.now();
-    private static LocalDate fecha = LocalDate.now();
+    private static final LocalTime hora = LocalTime.now();
+    private static final LocalDate fecha = LocalDate.now();
 
     public static void cardIB(Personaje player) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/" + player.getNombre() + ".txt"));
@@ -24,41 +24,37 @@ public class GameLogger {
 
     public static void cardIB(Personaje[] player) throws IOException {
         // for (Personaje p : player)
-        for (int i = 0; i < player.length; i++) {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/" + player[i].getNombre() + ".txt"));
-
-            bw.newLine();
-            bw.write(player[i].cartita());
-            bw.close();
-        }
-    }
-
-    public static void sortArrayito(Personaje[] player) {
         Arrays.sort(player);
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/partysita" + player[0].getNombre() + ".txt"));
+
+        for (Personaje p : player) {
+            bw.newLine();
+            bw.write(p.cartita());
+            bw.newLine();
+        }
+
+        bw.close();
     }
 
     public static boolean fichitaExists(File[] fichitas, String nombre){
-        boolean resultado = false;
 
         for (File ficha : fichitas) {
           if (ficha.getName().equalsIgnoreCase(nombre))
-              resultado = true;
-          resultado = false;
+              return true;
         }
 
-        return resultado;
+        return false;
     }
 
     public static boolean claseRepetia(File[] fichitas, String nombre) throws IOException {
-        boolean resultado = false;
 
-        for (int i = 0; i < fichitas.length; i++) {
-            if (getClasesita(fichitas[i]).equals(getClasesita(fichitas[i+1])))
-                resultado = true;
-            resultado = false;
+        for (int i = 0; i < fichitas.length - 1; i++) {
+            for (int j = i + 1; j < fichitas.length; j++)
+                if (getClasesita(fichitas[j]).equals(getClasesita(fichitas[i])))
+                    return true;
         }
 
-        return resultado;
+        return false;
     }
 
     public static String getClasesita(File ficha) throws IOException {
@@ -82,12 +78,13 @@ public class GameLogger {
         return clase;
     }
 
-    public static void writtieCombate(Personaje player, Personaje perchonaje, String nombreFichita) throws IOException {
-        File fichita = new File(directorio + fecha + "_" + getHorita() + " — " + nombreFichita + ".txt");
-        if (!fichita.exists()) fichita.createNewFile();
+    public static void writtieCombate(Personaje player, Personaje perchonaje) throws IOException {
+        File fichita = new File(directorio + fecha + "_" + getHorita() + " — " + player.getNombre() + "VS" + perchonaje.getNombre() + ".txt");
+
         PrintWriter ficherito = new PrintWriter(new FileWriter(fichita));
         PrintWriter consolita = new PrintWriter(System.out, true);
         DWritersito dw = new DWritersito(consolita, ficherito);
+
         Combate.combatir(player, perchonaje, dw);
         dw.flush();
         dw.close();
@@ -98,30 +95,30 @@ public class GameLogger {
         String horita;
 
         if (hora.getMinute() < 10)
-            minuto = "0" + String.valueOf(hora.getMinute());
+            minuto = "0" + hora.getMinute();
         else minuto = String.valueOf(hora.getMinute());
 
         if (hora.getHour() < 10)
-            horita = "0" + String.valueOf(hora.getHour());
+            horita = "0" + hora.getHour();
         else horita = String.valueOf(hora.getHour());
 
         return horita + "." + minuto + " ";
     }
 
-    /**todo mirar*/
     public static void lvlUpGanador(File fichaLusha, Personaje [] players) throws IOException{
         BufferedReader br = new BufferedReader(new FileReader(fichaLusha));
 
         String linea;
-        String [] putaVida;
+        String campos;
         while ((linea = br.readLine()) != null){
             if (linea.contains(players[0].details(6))){
-                putaVida = linea.split(" ");
+                campos = linea.split(" ")[0].trim();
                 for (Personaje player : players){
-                    if (player.getNombre().equalsIgnoreCase(putaVida[0]))
-                        player.setNivel(player.getNivel() + 1);
+                    if (player.getNombre().equalsIgnoreCase(campos))
+                        player.subirNivel();
                 }
             }
         }
+        br.close();
     }
 }
