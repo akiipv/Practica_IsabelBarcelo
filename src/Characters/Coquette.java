@@ -115,6 +115,21 @@ public class Coquette extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    @Override
+    public String cartita() {
+        return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
+                "\n· Nombre: " + getNombre() +
+                "\n· Clase: " + getClass().getSimpleName() +
+                "\n   · Raza: " + getRaza() +
+                "\n   · Vida: " + getPv() +
+                "\n   · Ataque: " + getAtq() +
+                "\n   · Armadura: " + getArm() +
+                "\n   · Velocidad: " + getVel() +
+                "\n   · Resistencia mágica: " + getRes() +
+                "\n   · Coquetería: " + getCoqueteria() +
+                "\n   · Nivel: " + getNivel();
+    }
+
     /**
      * Devuelve una representación ASCII decorativa del personaje.
      *

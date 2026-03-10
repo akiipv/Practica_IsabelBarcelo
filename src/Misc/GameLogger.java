@@ -25,7 +25,7 @@ public class GameLogger {
     public static void cardIB(Personaje[] player) throws IOException {
         // for (Personaje p : player)
         Arrays.sort(player);
-        BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/partysita" + player[0].getNombre() + ".txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/party" + player[0].getNombre() + ".txt"));
 
         for (Personaje p : player) {
             bw.newLine();

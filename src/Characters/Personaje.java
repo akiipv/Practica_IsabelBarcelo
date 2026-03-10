@@ -68,20 +68,21 @@ public abstract class Personaje implements Comparable<Personaje> {
             br.readLine();
         }
 
-        String[] campos = new String[2];
+        String[] campos;
         String linea;
         while ((linea = br.readLine()) != null) {
             campos = linea.split(": ");
 
-            switch (campos[0]) {
-                case "· Nombre" -> setNombre(campos[1]);
-                case "   · Vida" -> setPv(Integer.parseInt(campos[1]));
-                case "   · Ataque" -> setAtq(Integer.parseInt(campos[1]));
-                case "   · Armadura" -> setArm(Integer.parseInt(campos[1]));
-                case "   · Velocidad" -> setVel(Integer.parseInt(campos[1]));
-                case "   · Resistencia mágica" -> setRes(Integer.parseInt(campos[1]));
-                case "   · Nivel" -> setNivel(Integer.parseInt(campos[1]));
-                case "   · Raza" -> setRaza(campos[1]);
+            switch (campos[0].replace("·", "").trim()) {
+                case "Nombre" -> setNombre(campos[1]);
+                case "Clase" -> {}
+                case "Vida" -> setPv(Integer.parseInt(campos[1]));
+                case "Ataque" -> setAtq(Integer.parseInt(campos[1]));
+                case "Armadura" -> setArm(Integer.parseInt(campos[1]));
+                case "Velocidad" -> setVel(Integer.parseInt(campos[1]));
+                case "Resistencia mágica" -> setRes(Integer.parseInt(campos[1]));
+                case "Nivel" -> setNivel(Integer.parseInt(campos[1]));
+                case "Raza" -> setRaza(campos[1]);
                 default -> setOtro(Integer.parseInt(campos[1]));
             }
         }
@@ -89,7 +90,7 @@ public abstract class Personaje implements Comparable<Personaje> {
     }
 
     public void updtPJ(File file) throws IOException {
-        Personaje playerFicheado = Factory.crear(String.valueOf(this.getClass().getSimpleName()), file);
+        Personaje playerFicheado = Factory.crear(this.getClass().getSimpleName(), file);
 
         if (!this.getNombre().equals(playerFicheado.getNombre())) {
             return;
@@ -402,7 +403,7 @@ public abstract class Personaje implements Comparable<Personaje> {
             setVel(getVel() + 1);
 
         setNivel(getNivel() + 1);
-        System.out.println(getNombre() + ", ¡ha subido de nivel!\n\n" + toString());
+        System.out.println(getNombre() + ", ¡ha subido de nivel!\n\n" + this);
     }
 
     /**
@@ -412,8 +413,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public boolean estaMuerto() {
-        if (pv <= 0) return true;
-        else return false;
+        return pv <= 0;
     }
 
     /* public Personaje clone() {
@@ -430,15 +430,13 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public boolean equals(Personaje otro) {
-        boolean comparacion = true;
-        if (!this.nombre.equals(otro.nombre) ||
-                this.pv != otro.pv ||
-                this.atq != otro.atq ||
-                this.arm != otro.arm ||
-                this.nivel != otro.nivel ||
-                this.vel != otro.vel ||
-                this.res != otro.res)
-            comparacion = false;
+        boolean comparacion = this.nombre.equals(otro.nombre) &&
+                this.pv == otro.pv &&
+                this.atq == otro.atq &&
+                this.arm == otro.arm &&
+                this.nivel == otro.nivel &&
+                this.vel == otro.vel &&
+                this.res == otro.res;
         return comparacion;
     }
 
@@ -464,6 +462,7 @@ public abstract class Personaje implements Comparable<Personaje> {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: " + getNombre() +
                 "\n· Clase: " + getClass().getSimpleName() +
+                "\n   · Raza: " + getRaza() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +
@@ -503,8 +502,6 @@ public abstract class Personaje implements Comparable<Personaje> {
         } else System.out.println("\n\tAfortunadamente, ¡" + getNombre() + " escapó de la trampa indemne!");
 
     }
-
-    /**todo m he quedado por aqui*/
 
     /**
      * Devuelve el daño de ataque del personaje.
@@ -592,8 +589,8 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param enemigo personaje enemigo
      */
 
-    public void accEspesial(Personaje enemigo, DWritersito pw) {
-        pw.println("Este personaje no tiene acción especial.." + details(4));
+    public void accEspesial(Personaje enemigo, DWritersito dw) {
+        dw.println("Este personaje no tiene acción especial.." + details(4));
     }
 
     /**
@@ -725,7 +722,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void printDetallito() {
-        System.out.printf("› ");
+        System.out.print("› ");
     }
 
     /**

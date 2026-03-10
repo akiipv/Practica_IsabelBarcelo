@@ -3,6 +3,7 @@
 
 · Nombre: Ale
 · Clase: Paladin
+   · Raza: humano
    · Vida: 100
    · Ataque: 100
    · Armadura: 1000

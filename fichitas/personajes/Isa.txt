@@ -3,10 +3,11 @@
 
 · Nombre: Isa
 · Clase: Ladrón
-   · Vida: 10
-   · Ataque: 10
-   · Armadura: 10
+   · Raza: humano
+   · Vida: 20
+   · Ataque: 15
+   · Armadura: 14
    · Velocidad: 1
-   · Resistencia mágica: 10
-   · Cantidad de robos realizados: 0
+   · Resistencia mágica: 14
+   · Cantidad de robos realizados: 4
    · Nivel: 10

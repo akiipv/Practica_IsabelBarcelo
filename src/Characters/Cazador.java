@@ -124,6 +124,7 @@ public class Cazador extends Personaje {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
                 "\n· Nombre: "  + getNombre() +
                 "\n· Clase: " + getClass().getSimpleName() +
+                "\n   · Raza: " + getRaza() +
                 "\n   · Vida: " + getPv() +
                 "\n   · Ataque: " + getAtq() +
                 "\n   · Armadura: " + getArm() +

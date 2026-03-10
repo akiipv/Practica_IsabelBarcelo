@@ -154,20 +154,6 @@ public class Clérigo extends Creyente {
         return coquetudo() + "\n\n" + resultado;
     }
 
-    @Override
-    public String cartita() {
-        return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
-                "\n· Nombre: "  + getNombre() +
-                "\n· Clase: " + getClass().getSimpleName() +
-                "\n   · Vida: " + getPv() +
-                "\n   · Ataque: " + getAtq() +
-                "\n   · Armadura: " + getArm() +
-                "\n   · Velocidad: " + getVel() +
-                "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Fe: " + getFe() +
-                "\n   · Nivel: " + getNivel();
-    }
-
     /**
      * Devuelve una representación ASCII decorativa del personaje.
      *
