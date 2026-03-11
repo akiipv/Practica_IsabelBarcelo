@@ -51,24 +51,12 @@ public class Clérigo extends Creyente {
 
     @Override
     public void subirNivel() {
-        if (prob(20))
-            setPv(getPv() + 1);
-
-        if (prob(10))
-            setAtq(getAtq() + 1);
-
-        if (prob(20))
-            setArm(getArm() + 1);
-
-        if (prob(80))
-            setRes(getRes() + 2);
-
-        if (prob(50))
-            setVel(getVel() + 1);
-
-        if (prob(80))
-            setOtro(getFe() + 2);
-
+        if (prob(20)) setPv(getPv() + 1);
+        if (prob(10)) setAtq(getAtq() + 1);
+        if (prob(20)) setArm(getArm() + 1);
+        if (prob(80)) setRes(getRes() + 2);
+        if (prob(50)) setVel(getVel() + 1);
+        if (prob(80)) setOtro(getFe() + 2);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());

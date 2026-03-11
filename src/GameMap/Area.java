@@ -26,20 +26,14 @@ public class Area {
         this.nivel = copia.nivel;
     }
 
-    public void setNombre(String n) {
-        if (n.isEmpty() || n.contains(" ")) {
-            System.err.println("Error. El nombre no puede dejarse en blanco ni contener espacios.");
-        } else {
-            nombre = n;
-        }
+    public void setNombre(String nombre) {
+        if (nombre.isEmpty() || nombre.contains(" ")) System.err.println("Error. El nombre no puede dejarse en blanco ni contener espacios.");
+        else this.nombre = nombre;
     }
 
-    public void setBioma(String b) {
-        if (b.equals("Pradera") || b.equals("Jungla") || b.equals("Desierto") || b.equals("Montaña") || b.equals("Mazmorra")) {
-            bioma = b;
-        } else {
-            System.err.println("Error. Bioma inválido. Respete las mayúsculas.");
-        }
+    public void setBioma(String bioma) {
+        bioma = bioma.toLowerCase();
+        if (bioma.equals("pradera") || bioma.equals("jungla") || bioma.equals("desierto") || bioma.equals("montaña") || bioma.equals("mazmorra")) this.bioma = bioma;
     }
 
     public void setNivel(int nivel) {
@@ -62,57 +56,29 @@ public class Area {
         Random r = new Random();
 
         switch (bioma) {
-            case "Pradera":
-                nivel = r.nextInt(1, 11);
-                break;
-
-            case "Jungla":
-                nivel = r.nextInt(11, 31);
-                break;
-
-            case "Desierto":
-                nivel = r.nextInt(31, 61);
-                break;
-
-            case "Montaña":
-                nivel = r.nextInt(61, 91);
-                break;
-
-            case "Mazmorra":
-                nivel = r.nextInt(91, 106);
-                break;
+            case "Pradera" -> nivel = r.nextInt(1, 11);
+            case "Jungla" -> nivel = r.nextInt(11, 31);
+            case "Desierto" -> nivel = r.nextInt(31, 61);
+            case "Montaña" -> nivel = r.nextInt(61, 91);
+            case "Mazmorra" -> nivel = r.nextInt(91, 106);
         }
     }
 
     public int generarPocion() {
         Random r = new Random();
-        int pocion = 6767;
+        int pocion = 111;
 
         switch (bioma) {
-            case "Pradera":
-                pocion = 15;
-                break;
-
-            case "Jungla":
-                pocion = r.nextInt(15, 26);
-                break;
-
-            case "Desierto":
-                pocion = r.nextInt(1, 31);
-                break;
-
-            case "Montaña":
-                pocion = 30;
-                break;
-
-            case "Mazmorra":
-                if (r.nextInt(0, 101) <= 20) {
-                    pocion = -10;
-                } else {
-                    pocion = 20;
-                }
-                break;
+            case "Pradera" -> pocion = 15;
+            case "Jungla"-> pocion = r.nextInt(15, 26);
+            case "Desierto" -> pocion = r.nextInt(1, 31);
+            case "Montaña" -> pocion = 30;
+            case "Mazmorra" -> {
+                if (r.nextInt(0, 101) <= 20) pocion = -10;
+                else pocion = 20;
+            }
         }
+
         return pocion;
     }
 
@@ -130,41 +96,29 @@ public class Area {
         String bioma = area.getBioma();
 
         switch (bioma) {
-
-            case "Pradera", "Montaña":
-                break;
-
-            case "Jungla":
-                if (t.equals("Serpientes")) {
-                    trampa.setFracaso(trampa.getFracaso() - 10);
-                }
-                break;
-
-            case "Desierto":
-                if (t.equals("Brea")) {
-                    trampa.setFracaso(trampa.getFracaso() - 15);
-                }
-                break;
-
-            case "Mazmorra":
-                if (t.equals("Pinchos")) {
-                    trampa.setPerjuicio(trampa.getPerjuicio() + 5);
-                }
-                break;
+            case "Pradera", "Montaña" -> {}
+            case "Jungla" -> {
+                if (t.equals("Serpientes")) trampa.setFracaso(trampa.getFracaso() - 10);
+            }
+            case "Desierto" -> {
+                if (t.equals("Brea")) trampa.setFracaso(trampa.getFracaso() - 15);
+            }
+            case "Mazmorra" -> {
+                if (t.equals("Pinchos")) trampa.setPerjuicio(trampa.getPerjuicio() + 5);
+            }
         }
+
         return trampa;
     }
 
     public Area clone() {
-        Area clon = new Area(this.nombre, this.bioma);
-        return clon;
+        return new Area(this.nombre, this.bioma);
     }
 
     public String toString() {
-        String resultado = "Cargando datos del área.. " +
-                "\n\t· Nombre: " + nombre +
-                "\n\t· Bioma: " + bioma +
-                "\n\t· Nivel: " + nivel;
-        return resultado;
+        return "Cargando datos del área.. " +
+                "\n\t· Nombre: " + getNombre() +
+                "\n\t· Bioma: " + getBioma() +
+                "\n\t· Nivel: " + getNivel();
     }
 }

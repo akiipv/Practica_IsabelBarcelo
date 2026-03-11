@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 import GameMap.Trampa;
-import Characters.Factory;
 import Manolo.DWritersito;
 
 
@@ -92,12 +91,8 @@ public abstract class Personaje implements Comparable<Personaje> {
     public void updtPJ(File file) throws IOException {
         Personaje playerFicheado = Factory.crear(this.getClass().getSimpleName(), file);
 
-        if (!this.getNombre().equals(playerFicheado.getNombre())) {
-            return;
-        }
-
-        if (!this.equals(playerFicheado))
-            this.copyCat(playerFicheado);
+        if (!this.getNombre().equals(playerFicheado.getNombre())) return;
+        if (!this.equals(playerFicheado)) this.copyCat(playerFicheado);
     }
 
     protected void copyCat(Personaje player) {
@@ -177,8 +172,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setRes(int res) {
-        if (res <= 0)
-            this.res = 0;
+        if (res <= 0) this.res = 0;
         else this.res = res;
     }
 
@@ -215,8 +209,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setVel(int vel) {
-        if (vel <= 0)
-            this.vel = 0;
+        if (vel <= 0) this.vel = 0;
         else this.vel = vel;
     }
 
@@ -341,10 +334,10 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param pocion cantidad de vida recuperada
      */
 
-    public void beberPocion(int pocion) {
+    public void beberPocion(int pocion, DWritersito dw) {
         if (getPv() <= 30) {
             setPv(getPv() + pocion);
-            System.out.println("\n" + getNombre() + ", se ha bebido una poción.. su vida sube ahora es " + getPv());
+            dw.println("\n" + getNombre() + ", se ha bebido una poción.. su vida sube ahora es " + getPv());
         }
     }
 
@@ -353,9 +346,10 @@ public abstract class Personaje implements Comparable<Personaje> {
      *
      * @param cantidad cantidad a aumentar
      * @param tipo     tipo de estadística
+     * @param dw
      */
 
-    public void inspirar(int cantidad, String tipo) {
+    public void inspirar(int cantidad, String tipo, DWritersito dw) {
         switch (tipo) {
             case "ataque":
                 setAtq(getAtq() + cantidad);
@@ -387,20 +381,11 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void subirNivel() {
-        if (prob(50))
-            setPv(getPv() + 1);
-
-        if (prob(50))
-            setAtq(getAtq() + 1);
-
-        if (prob(50))
-            setArm(getArm() + 1);
-
-        if (prob(50))
-            setRes(getRes() + 1);
-
-        if (prob(50))
-            setVel(getVel() + 1);
+        if (prob(50)) setPv(getPv() + 1);
+        if (prob(50)) setAtq(getAtq() + 1);
+        if (prob(50)) setArm(getArm() + 1);
+        if (prob(50)) setRes(getRes() + 1);
+        if (prob(50)) setVel(getVel() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\n" + this);
@@ -446,6 +431,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @return información del personaje
      */
 
+    @Override
     public String toString() {
         String resultado = "Cargando datos del personaje.. ૮ ․ ․ ྀིა " +
                 "\n\t· Nombre: " + getNombre() +
@@ -484,7 +470,6 @@ public abstract class Personaje implements Comparable<Personaje> {
         if (perjuicioT > 0) {
 
             switch (t.getTipo()) {
-
                 case "Pinchos":
                     setPv(getPv() - perjuicioT);
                     System.out.println("\n\t" + anderlain("Estacas afiladas") + " salen de las superficies cercanas y atraviesan a " + getNombre() + " por " + perjuicioT + " puntos de daño..\n");
@@ -522,19 +507,17 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public int defender(int dañoHecho, String tipoDaño) {
-
         int dañoRecibido = 0;
 
         switch (tipoDaño) {
             case "fisico":
                 dañoRecibido = dañoHecho - getArm();
-                if (dañoRecibido < 0)
-                    dañoRecibido = 0;
+                if (dañoRecibido < 0) dañoRecibido = 0;
                 break;
             case "magico":
                 dañoRecibido = dañoHecho - getRes();
-                if (dañoRecibido < 0)
-                    dañoRecibido = 0;
+                if (dañoRecibido < 0) dañoRecibido = 0;
+                break;
         }
 
         return dañoRecibido;
@@ -632,10 +615,9 @@ public abstract class Personaje implements Comparable<Personaje> {
 
     public void ataqueCoquetudo(Personaje enemigo, DWritersito dw) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
-        if (dañito <= 0)
-            dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
-        else
-            dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
+
+        if (dañito <= 0) dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " pero no le hace ni cosquillas.." + details(4));
+        else dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + " haciéndole " + dañito + " de daño.." + details(5));
         enemigo.defensa(this.atacar(), this.getTipoAtaque());
         printPv(enemigo, dw);
     }
@@ -745,8 +727,6 @@ public abstract class Personaje implements Comparable<Personaje> {
     public String anderlain(String opcion) {
         return "\033[0;4m" + opcion + "\033[0;0m";
     }
-
-    //
 
     @Override
     public int compareTo(Personaje player) {

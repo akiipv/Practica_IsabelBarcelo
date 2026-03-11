@@ -52,12 +52,12 @@ public class Monstruo extends Personaje {
      * @param nivel Nivel del monstruo
      * @param vel Velocidad
      * @param res Resistencia mágica
-     * @param tipo Raza del monstruo ("bestia", "no-muerto", "gigante")
+     * @param raza Raza del monstruo ("bestia", "no-muerto", "gigante")
      */
 
-    public Monstruo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String tipo) {
+    public Monstruo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String raza) {
         super(nombre, pv, atq, arm, nivel, vel, res);
-        setRaza(tipo);
+        setRaza(raza);
     }
 
     /**
@@ -94,17 +94,10 @@ public class Monstruo extends Personaje {
     public void subirNivel() {
 
         switch (raza.toLowerCase()) {
-            case "bestia":
-                statsMonstruo(50, 80, 15, 15, 80);
-                break;
-            case "no-muerto":
-                statsMonstruo(30, 50, 30, 70, 5);
-                break;
-            case "gigante":
-                statsMonstruo(100, 50, 50, 10, 10);
-                break;
-            default:
-                System.err.println("ok mañana");
+            case "bestia" -> statsMonstruo(50, 80, 15, 15, 80);
+            case "no-muerto" -> statsMonstruo(30, 50, 30, 70, 5);
+            case "gigante" -> statsMonstruo(100, 50, 50, 10, 10);
+            default -> System.err.println("Raza inválida");
         }
 
         setNivel(getNivel() + 1);
@@ -122,20 +115,11 @@ public class Monstruo extends Personaje {
      */
 
     public void statsMonstruo(int pctPV, int pctATQ, int pctARM, int pctRES, int pctVEL) {
-        if (prob(pctPV))
-            setPv(getPv() + cantidad("pv"));
-
-        if (prob(pctATQ))
-            setAtq(getAtq() + cantidad("atq"));
-
-        if (prob(pctARM))
-            setArm(getArm() + cantidad("arm"));
-
-        if (prob(pctRES))
-            setRes(getRes() + cantidad("res"));
-
-        if (prob(pctVEL))
-            setVel(getVel() + cantidad("vel"));
+        if (prob(pctPV)) setPv(getPv() + cantidad("pv"));
+        if (prob(pctATQ)) setAtq(getAtq() + cantidad("atq"));
+        if (prob(pctARM)) setArm(getArm() + cantidad("arm"));
+        if (prob(pctRES)) setRes(getRes() + cantidad("res"));
+        if (prob(pctVEL)) setVel(getVel() + cantidad("vel"));
     }
 
     /**
@@ -151,18 +135,15 @@ public class Monstruo extends Personaje {
         Random r = new Random();
 
         switch (raza.toLowerCase()) {
-            case "bestia":
-                if (stat.equalsIgnoreCase("atq") || stat.equalsIgnoreCase("vel"))
-                    cantidad = 2;
-                break;
-            case "no-muerto":
-                if (stat.equalsIgnoreCase("res"))
-                    cantidad = 4;
-                break;
-            case "gigante":
-                if (stat.equalsIgnoreCase("pv"))
-                    cantidad = r.nextInt(2, 4);
-                break;
+            case "bestia" -> {
+                if (stat.equalsIgnoreCase("atq") || stat.equalsIgnoreCase("vel")) cantidad = 2;
+            }
+            case "no-muerto" -> {
+                if (stat.equalsIgnoreCase("res")) cantidad = 4;
+            }
+            case "gigante" -> {
+                if (stat.equalsIgnoreCase("pv")) cantidad = r.nextInt(2, 4);
+            }
         }
 
         return cantidad;

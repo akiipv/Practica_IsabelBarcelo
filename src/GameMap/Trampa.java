@@ -36,28 +36,19 @@ public class Trampa {
         this.perjuicio = copia.perjuicio;
     }
 
-    public void setTipo(String t) {
-        if (t.equals("Pinchos") || t.equals("Brea") || t.equals("Serpientes")) {
-            tipo = t;
-        } else {
-            System.err.println("Tipo inválido.");
-        }
+    public void setTipo(String tipo) {
+        if (tipo.equals("Pinchos") || tipo.equals("Brea") || tipo.equals("Serpientes")) this.tipo = tipo;
+        else System.err.println("Tipo inválido.");
     }
 
-    public void setPerjuicio(int p) {
-        if (p >= 5 && p <= 20) {
-            perjuicio = p;
-        } else {
-            System.err.println("Perjuicio fuera del rango permitido.");
-        }
+    public void setPerjuicio(int perjuicio) {
+        if (perjuicio >= 5 && perjuicio <= 20) this.perjuicio = perjuicio;
+        else System.err.println("Perjuicio fuera del rango permitido.");
     }
 
-    public void setFracaso(double f) {
-        if (f >= 0.0 && f <= 75.0) {
-            fracaso = f;
-        } else {
-            System.err.println("Probabilidad de fracaso no válida.");
-        }
+    public void setFracaso(double fracaso) {
+        if (fracaso >= 0.0 && fracaso <= 75.0) this.fracaso = fracaso;
+        else System.err.println("Probabilidad de fracaso no válida.");
     }
 
     public String getTipo() {
@@ -74,27 +65,22 @@ public class Trampa {
 
     public int activaTrampa() {
         Random r = new Random();
-        if (r.nextInt(0, 101) > fracaso) {
-            return perjuicio;
-        } else {
-            return 0;
-        }
+        if (r.nextInt(0, 101) > fracaso) return perjuicio;
+        else return 0;
     }
 
     public boolean equals(Trampa otro) {
-        boolean comparacion = true;
         if (!this.tipo.equals(otro.tipo) ||
                 this.perjuicio != otro.perjuicio ||
                 this.fracaso != otro.fracaso)
-            comparacion = false;
-        return comparacion;
+            return false;
+        else return true;
     }
 
     public String toString() {
-        String resultado = "Una trampa se ha activado.. " +
-                "\n\t· Tipo de trampa: " + tipo +
-                "\n\t· Probabilidad de fracaso: " + fracaso + "%" +
-                "\n\t· Perjuicio: " + perjuicio;
-        return resultado;
+        return "Una trampa se ha activado.. " +
+                "\n\t· Tipo de trampa: " + getTipo() +
+                "\n\t· Probabilidad de fracaso: " + getFracaso() + "%" +
+                "\n\t· Perjuicio: " + getPerjuicio();
     }
 }

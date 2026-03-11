@@ -101,13 +101,13 @@ public class Combate {
             else {
                 switch (trampa.getTipo()) {
                     case "Brea":
-                        player.inspirar(trampa.getPerjuicio(), "defensa");
+                        player.inspirar(trampa.getPerjuicio(), "defensa", dw);
                         break;
                     case "Pinchos":
-                        player.beberPocion(trampa.getPerjuicio());
+                        player.beberPocion(trampa.getPerjuicio(), dw);
                         break;
                     case "Serpientes":
-                        player.inspirar(trampa.getPerjuicio(), "ataque");
+                        player.inspirar(trampa.getPerjuicio(), "ataque", dw);
                         break;
                 }
             }

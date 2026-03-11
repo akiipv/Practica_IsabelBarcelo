@@ -88,24 +88,12 @@ public class Mago extends Personaje {
 
     @Override
     public void subirNivel() {
-        if (prob(35))
-            setPv(getPv() + 1);
-
-        if (prob(15))
-            setAtq(getAtq() + 2);
-
-        if (prob(35))
-            setArm(getArm() + 1);
-
-        if (prob(80))
-            setRes(getRes() + 1);
-
-        if (prob(65))
-            setVel(getVel() + 1);
-
-        if (prob(85))
-            setOtro(getMag() + 1);
-
+        if (prob(35)) setPv(getPv() + 1);
+        if (prob(15)) setAtq(getAtq() + 2);
+        if (prob(35)) setArm(getArm() + 1);
+        if (prob(80)) setRes(getRes() + 1);
+        if (prob(65)) setVel(getVel() + 1);
+        if (prob(85)) setOtro(getMag() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());

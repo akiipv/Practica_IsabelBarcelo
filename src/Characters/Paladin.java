@@ -51,24 +51,12 @@ public class Paladin extends Creyente {
 
     @Override
     public void subirNivel() {
-        if (prob(50))
-            setPv(getPv() + (int) (getPv() * 0.05));
-
-        if (prob(60))
-            setAtq(getAtq() + 1);
-
-        if (prob(70))
-            setArm(getArm() + 2);
-
-        if (prob(40))
-            setRes(getRes() + 1);
-
-        if (prob(15))
-            setVel(getVel() + 1);
-
-        if (prob(30))
-            setOtro(getFe() + 1);
-
+        if (prob(50)) setPv(getPv() + (int) (getPv() * 0.05));
+        if (prob(60)) setAtq(getAtq() + 1);
+        if (prob(70)) setArm(getArm() + 2);
+        if (prob(40)) setRes(getRes() + 1);
+        if (prob(15)) setVel(getVel() + 1);
+        if (prob(30)) setOtro(getFe() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
@@ -116,7 +104,6 @@ public class Paladin extends Creyente {
                     break;
             }
         } while (opcion > 4 || opcion < 1);
-
     }
 
     /**

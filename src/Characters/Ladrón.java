@@ -75,21 +75,11 @@ public class Ladrón extends Personaje {
 
     @Override
     public void subirNivel() {
-        if (prob(40))
-            setPv(getPv() + 1);
-
-        if (prob(60))
-            setAtq(getAtq() + 2);
-
-        if (prob(40))
-            setArm(getArm() + 1);
-
-        if (prob(40))
-            setRes(getRes() + 1);
-
-        if (prob(85))
-            setVel(getVel() + 2);
-
+        if (prob(40)) setPv(getPv() + 1);
+        if (prob(60)) setAtq(getAtq() + 2);
+        if (prob(40)) setArm(getArm() + 1);
+        if (prob(40)) setRes(getRes() + 1);
+        if (prob(85)) setVel(getVel() + 2);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());

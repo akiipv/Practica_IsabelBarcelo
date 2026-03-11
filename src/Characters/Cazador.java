@@ -155,8 +155,8 @@ public class Cazador extends Personaje {
     @Override
     public void ataqueCoquetudo(Personaje enemigo, DWritersito pw) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
-        if (dañito <= 0)
-            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque, pero no le hacen ni cosquillas.." + details(4));
+
+        if (dañito <= 0) pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque, pero no le hacen ni cosquillas.." + details(4));
         else {
             pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque" + details(3) + "\n");
             printPerezita("\uD835\uDC74\uD835\uDC82\uD835\uDC94\uD835\uDC84\uD835\uDC90\uD835\uDC95\uD835\uDC8A\uD835\uDC95\uD835\uDC82 \uD835\uDC82\uD835\uDC8D \uD835\uDC82\uD835\uDC95\uD835\uDC82\uD835\uDC92\uD835\uDC96\uD835\uDC86..", pw);
@@ -196,19 +196,11 @@ public class Cazador extends Personaje {
 
         public Mascota(String raza, int nivel, String nombre) {
             switch (raza) {
-                case "canido":
-                    statsMascotita(0.20, 0.20, 0.20, 0.20, 0.20, nivel, raza);
-                    break;
-                case "felino":
-                    statsMascotita(0.15, 0.30, 0.15, 0.30, 0.15, nivel, raza);
-                    break;
-                case "rapaz":
-                    statsMascotita(0.05, 0.15, 0.05, 0.35, 0.25, nivel, raza);
-                    break;
-                default:
-                    System.err.println("ok mañana");
+                case "canido" -> statsMascotita(0.20, 0.20, 0.20, 0.20, 0.20, nivel, raza);
+                case "felino" -> statsMascotita(0.15, 0.30, 0.15, 0.30, 0.15, nivel, raza);
+                case "rapaz" -> statsMascotita(0.05, 0.15, 0.05, 0.35, 0.25, nivel, raza);
+                default -> System.err.println("Raza no disponible");
             }
-
             setNombre(nombre);
         }
 
@@ -311,10 +303,9 @@ public class Cazador extends Personaje {
 
     public String coquetoCM() {
 
-        switch (mascota.getRaza()) {
+        return switch (mascota.getRaza()) {
 
-            case "canido":
-                return "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⣀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+            case "canido" ->  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⣀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⢀⣤⣄⣀⠀⡀⢀⣴⣾⠿⠿⠛⠛⠛⠛⠳⢶⣄⡀⠀⠀⠀⢀⠀⠀⠀\n" +
                         "⢀⣾⠛⠙⠻⠶⠷⠞⠛⠉⠀⠀⠀⠀⠀⠀⠀⠈⠙⠳⣤⠴⠶⠺⣦⠀⠀\n" +
                         "⢸⡏⠀⢀⡀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⣤⡀⠈⠃⠀\n" +
@@ -325,8 +316,7 @@ public class Cazador extends Personaje {
                         "⠼⠻⡄⣦⡈⠳⣾⡅⠀⠀⠀⠀⠀⠈⣹⡏⠀⠀⠀⠀⢨⡇⠀⣰⡄⠹⠀\n" +
                         "⠀⠀⠻⠿⠟⠛⠋⠻⣦⣄⣀⣠⣠⣴⠟⢷⣤⣀⣠⡤⠿⠵⠶⠟⠷⠞⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠋⠛⠿⠒⠚⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀\n";
-            case "felino":
-                return "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+            case "felino" ->  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡯⢙⢍⣛⣶⣤⠴⠶⠦⢤⣤⣀⡀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⣨⡾⠋⠁⠀⠀⠀⠀⠀⠀⠉⠙⠷⠛⣫⠍⣻⢍⠹⡆⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠢⡄⠀⢸⠀⣷⠀⠀⠀⠀⠀⠀\n" +
@@ -339,8 +329,7 @@ public class Cazador extends Personaje {
                         "⠀⠀⠀⠀⠀⠸⣇⠀⠀⠀⠀⠀⠻⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠛⠉⠉⠙⢷⣾⠋⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⣀⣀⣀⣀⣠⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣸⡇⣶⠀⣆⢀⣶⣿⣀⣀⣀⣀⣀⣀⡀⠀\n" +
                         "⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠛⠛⠻⠛⠋⠉⠉⠉⠉⠉⠉⠉⠉⠁\n";
-            case "rapaz":
-                return "⠀⠀⠀⠀⠀⠀⢀⣠⠴⠒⠒⠒⠒⠒⠶⠦⠤⠴⠒⠚⠉⣰⠟⠁⠀⠀⠀⠀⠀⠀\n" +
+            case "rapaz" ->  "⠀⠀⠀⠀⠀⠀⢀⣠⠴⠒⠒⠒⠒⠒⠶⠦⠤⠴⠒⠚⠉⣰⠟⠁⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⢀⡞⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠒⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⢠⡿⣤⣄⠀⠀⠀⠀⠀⢀⣤⣄⠀⠀⠀⣰⠞⠁⠀⠀⠀⢠⣤⠀⠀⠀⠀\n" +
                         "⠀⠀⢠⡟⠸⣿⡿⢀⠤⢄⠀⠐⣷⣿⣿⡷⠀⠀⢻⠀⠀⠀⢀⡴⠋⠘⡇⠀⠀⠀\n" +
@@ -357,8 +346,7 @@ public class Cazador extends Personaje {
                         "⠀⠀⠘⢧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⠁⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠈⠻⢦⣀⠀⠀⠀⠀⠀⠀⣠⣎⡀⡀⠀⠀⣀⣰⢶⠶⠚⠁⠀⠀⠀⠀⠀\n" +
                         "⠀⠀⠀⠀⣰⠛⠉⡙⠛⢛⣷⠖⠒⢖⣾⠟⢛⠛⠺⣿⣏⠁⠀⠀⠀⠀⠀⠀⠀⠀\n";
-            default:
-                return "";
-        }
+            default -> "";
+        };
     }
 }

@@ -94,12 +94,10 @@ public class GameLogger {
         String minuto;
         String horita;
 
-        if (hora.getMinute() < 10)
-            minuto = "0" + hora.getMinute();
+        if (hora.getMinute() < 10) minuto = "0" + hora.getMinute();
         else minuto = String.valueOf(hora.getMinute());
 
-        if (hora.getHour() < 10)
-            horita = "0" + hora.getHour();
+        if (hora.getHour() < 10) horita = "0" + hora.getHour();
         else horita = String.valueOf(hora.getHour());
 
         return horita + "." + minuto + " ";

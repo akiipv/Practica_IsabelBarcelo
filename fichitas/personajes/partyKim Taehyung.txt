@@ -1,0 +1,100 @@
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Kim Taehyung
+· Clase: Monstruo
+   · Raza: bestia
+   · Vida: 93
+   · Ataque: 83
+   · Armadura: 56
+   · Velocidad: 78
+   · Resistencia mágica: 54
+   · Nivel: 25
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Min Yoongi
+· Clase: Guerrero
+   · Raza: humano
+   · Vida: 45
+   · Ataque: 27
+   · Armadura: 84
+   · Velocidad: 73
+   · Resistencia mágica: 24
+   · Furia: Activa
+   · Nivel: 24
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Park Jimin
+· Clase: Mago
+   · Raza: humano
+   · Vida: 23
+   · Ataque: 54
+   · Armadura: 56
+   · Velocidad: 68
+   · Resistencia mágica: 45
+   · Puntos de magia: 79
+   · Nivel: 12
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Jeon Jungkook
+· Clase: Paladin
+   · Raza: humano
+   · Vida: 74
+   · Ataque: 53
+   · Armadura: 79
+   · Velocidad: 65
+   · Resistencia mágica: 31
+   · Fe: 73
+   · Nivel: 23
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Jung Hoseok
+· Clase: Ladrón
+   · Raza: humano
+   · Vida: 7
+   · Ataque: 32
+   · Armadura: 96
+   · Velocidad: 64
+   · Resistencia mágica: 74
+   · Cantidad de robos realizados: 0
+   · Nivel: 74
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Kim Namjoon
+· Clase: Cazador
+   · Raza: humano
+   · Vida: 23
+   · Ataque: 45
+   · Armadura: 67
+   · Velocidad: 23
+   · Resistencia mágica: 34
+   · Nivel: 12
+	
+── ⟢ ・⸝⸝  𝑴𝒂𝒔𝒄𝒐𝒕𝒊𝒕𝒂 .ᐟ.ᐟ
+
+· Nombre: Irina
+· Raza: rapaz
+   · Vida: 1
+   · Ataque: 6
+   · Armadura: 3
+   · Velocidad: 8
+   · Resistencia mágica: 8
+   · Nivel: 12
+
+₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊
+
+· Nombre: Kim Seokjin
+· Clase: Clérigo
+   · Raza: humano
+   · Vida: 43
+   · Ataque: 6
+   · Armadura: 24
+   · Velocidad: 12
+   · Resistencia mágica: 45
+   · Fe: 8
+   · Nivel: 87

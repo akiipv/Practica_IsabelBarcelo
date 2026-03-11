@@ -4,7 +4,6 @@ import Manolo.DWritersito;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 /**
  * Subclase Guerrero.
@@ -48,7 +47,7 @@ public class Guerrero extends Personaje {
 
     public Guerrero(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, boolean furia) {
         super(nombre, pv, atq, arm, nivel, vel, res);
-        setFuria(furia);
+        setOtro(furia);
     }
 
     public Guerrero(File file) throws IOException {
@@ -71,8 +70,8 @@ public class Guerrero extends Personaje {
      * @param furia nuevo estado de la furia
      */
 
-    public void setFuria(boolean furia) {
-        this.furia = furia;
+    public void setOtro(boolean furia) {
+        this.furia = Boolean.parseBoolean(String.valueOf(furia));
     }
 
     /**
@@ -82,9 +81,7 @@ public class Guerrero extends Personaje {
 
     public void modificarFuria(DWritersito dw) {
 
-        if (isFuria()) {
-            this.furia = false;
-        } else this.furia = true;
+        this.furia = !isFuria();
 
         if (isFuria())
             printPerezita("\uD835\uDC6D\uD835\uDC96\uD835\uDC93\uD835\uDC8A\uD835\uDC82 \uD835\uDC82\uD835\uDC84\uD835\uDC95\uD835\uDC8A\uD835\uDC97\uD835\uDC82\uD835\uDC85\uD835\uDC82..", dw);
@@ -112,20 +109,11 @@ public class Guerrero extends Personaje {
 
     @Override
     public void subirNivel() {
-        if (prob(75))
-            setPv(getPv() + 1);
-
-        if (prob(80))
-            setAtq(getAtq() + 2);
-
-        if (prob(75))
-            setArm(getArm() + 1);
-
-        if (prob(20))
-            setRes(getRes() + 1);
-
-        if (prob(50))
-            setVel(getVel() + 1);
+        if (prob(75)) setPv(getPv() + 1);
+        if (prob(80)) setAtq(getAtq() + 2);
+        if (prob(75)) setArm(getArm() + 1);
+        if (prob(20)) setRes(getRes() + 1);
+        if (prob(50)) setVel(getVel() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
@@ -156,25 +144,18 @@ public class Guerrero extends Personaje {
 
     @Override
     public int defender(int dañoHecho, String tipoDaño) {
-
         int dañoRecibido = 0;
 
         switch (tipoDaño) {
             case "fisico":
                 dañoRecibido = dañoHecho - getArm();
-                if (dañoRecibido < 0)
-                    dañoRecibido = 0;
-
-                if (isFuria())
-                    dañoRecibido *= 2;
+                if (dañoRecibido < 0) dañoRecibido = 0;
+                if (isFuria()) dañoRecibido *= 2;
                 break;
             case "magico":
                 dañoRecibido = dañoHecho - getRes();
-                if (dañoRecibido < 0)
-                    dañoRecibido = 0;
-
-                if (isFuria())
-                    dañoRecibido *= 2;
+                if (dañoRecibido < 0) dañoRecibido = 0;
+                if (isFuria()) dañoRecibido *= 2;
                 break;
         }
 
@@ -213,8 +194,12 @@ public class Guerrero extends Personaje {
                 "\n   · Armadura: " + getArm() +
                 "\n   · Velocidad: " + getVel() +
                 "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Furia: " + isFuria() +
+                "\n   · Furia: " + tradusirFuria(isFuria()) +
                 "\n   · Nivel: " + getNivel();
+    }
+
+    public String tradusirFuria(boolean furia){
+        return furia ? "Activa" : "Inactiva";
     }
 
     /**
