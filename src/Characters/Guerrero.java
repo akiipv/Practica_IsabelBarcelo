@@ -2,7 +2,9 @@ package Characters;
 
 import Manolo.DWritersito;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -47,11 +49,38 @@ public class Guerrero extends Personaje {
 
     public Guerrero(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, boolean furia) {
         super(nombre, pv, atq, arm, nivel, vel, res);
-        setOtro(furia);
+        setFuria(furia);
     }
 
     public Guerrero(File file) throws IOException {
         super(file);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        for (int i = 0; i < 3; i++) {
+            br.readLine();
+        }
+
+        String[] campos;
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            campos = linea.split(": ");
+
+            if ((campos[0].replace("·", "").trim()).equals("Furia")) {
+                setFuria(campos[1].equalsIgnoreCase("Activa"));
+            }
+        }
+        br.close();
+    }
+
+    @Override
+    public void updtPJ(File file) throws IOException {
+        Personaje playerFicheado = Factory.crear(this.getClass().getSimpleName(), file);
+
+        if (!this.getNombre().equals(playerFicheado.getNombre())) return;
+        if (!this.equals(playerFicheado)){
+            this.copyCat(playerFicheado);
+        }
     }
 
     /**
@@ -70,7 +99,7 @@ public class Guerrero extends Personaje {
      * @param furia nuevo estado de la furia
      */
 
-    public void setOtro(boolean furia) {
+    public void setFuria(boolean furia) {
         this.furia = Boolean.parseBoolean(String.valueOf(furia));
     }
 

@@ -112,7 +112,19 @@ public abstract class Creyente extends Personaje {
                 "\n   · Armadura: " + getArm() +
                 "\n   · Velocidad: " + getVel() +
                 "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Fe: " + getFe() +
+                "\n   · Puntos de fe: " + getFe() +
                 "\n   · Nivel: " + getNivel();
+    }
+
+    @Override
+    public boolean equals(Personaje otro) {
+        return(this.getNombre().equals(otro.getNombre()) &&
+                this.getPv() == otro.getPv() &&
+                this.getAtq() == otro.getAtq() &&
+                this.getArm() == otro.getArm() &&
+                this.getNivel() == otro.getNivel() &&
+                this.getVel() == otro.getVel() &&
+                this.getRes() == otro.getRes()) &&
+                this.getFe() == otro.getOtro();
     }
 }

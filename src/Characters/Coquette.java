@@ -2,7 +2,6 @@ package Characters;
 
 import Manolo.DWritersito;
 
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Coquette extends Personaje {
@@ -18,7 +17,7 @@ public class Coquette extends Personaje {
 
     public Coquette(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int coqueteria) {
         super(nombre, pv, atq, arm, nivel, vel, res);
-        setCoqueteria(coqueteria);
+        setOtro(coqueteria);
 
     }
 
@@ -26,27 +25,18 @@ public class Coquette extends Personaje {
         return coqueteria;
     }
 
-    public void setCoqueteria(int coqueteria) {
+    @Override
+    public void setOtro(int coqueteria) {
         this.coqueteria = coqueteria;
     }
 
     @Override
     public void subirNivel() {
-        if (prob(50))
-            setPv(getPv() + 1);
-
-        if (prob(85))
-            setAtq(getAtq() + 2);
-
-        if (prob(50))
-            setArm(getArm() + 1);
-
-        if (prob(85))
-            setRes(getRes() + 2);
-
-        if (prob(50))
-            setVel(getVel() + 2);
-
+        if (prob(50)) setPv(getPv() + 1);
+        if (prob(85)) setAtq(getAtq() + 2);
+        if (prob(50)) setArm(getArm() + 1);
+        if (prob(85)) setRes(getRes() + 2);
+        if (prob(50)) setVel(getVel() + 2);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());

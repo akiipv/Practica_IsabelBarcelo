@@ -2,9 +2,7 @@ package Characters;
 
 import Manolo.DWritersito;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 /**
  * Subclase Cazador.
@@ -33,8 +31,42 @@ public class Cazador extends Personaje {
     }
 
     public Cazador(File file) throws IOException {
-        super(file);
+        BufferedReader br = new BufferedReader(new FileReader(file));
 
+        for (int i = 0; i < 3; i++) {
+            br.readLine();
+        }
+
+        String[] campos;
+        String linea;
+        while (!(linea = br.readLine()).equals("── ⟢ ・⸝⸝  \uD835\uDC74\uD835\uDC82\uD835\uDC94\uD835\uDC84\uD835\uDC90\uD835\uDC95\uD835\uDC8A\uD835\uDC95\uD835\uDC82 .ᐟ.ᐟ")) {
+            campos = linea.split(": ");
+
+            switch (campos[0].replace("·", "").trim()) {
+                case "Nombre" -> setNombre(campos[1]);
+                case "Vida" -> setPv(Integer.parseInt(campos[1]));
+                case "Ataque" -> setAtq(Integer.parseInt(campos[1]));
+                case "Armadura" -> setArm(Integer.parseInt(campos[1]));
+                case "Velocidad" -> setVel(Integer.parseInt(campos[1]));
+                case "Resistencia mágica" -> setRes(Integer.parseInt(campos[1]));
+                case "Nivel" -> setNivel(Integer.parseInt(campos[1]));
+                case "Raza" -> setRaza(campos[1]);
+            }
+        }
+
+        mascota = new Mascota(file);
+        br.close();
+    }
+
+    @Override
+    public void updtPJ(File file) throws IOException {
+        Personaje playerFicheado = Factory.crear(this.getClass().getSimpleName(), file);
+
+        if (!this.getNombre().equals(playerFicheado.getNombre())) return;
+        if (!this.equals(playerFicheado)){
+            this.copyCat(playerFicheado);
+            mascota = new Mascota(file);
+        }
     }
 
     /**
@@ -77,21 +109,11 @@ public class Cazador extends Personaje {
     @Override
     public void subirNivel() {
 
-        if (prob(50))
-            setPv(getPv() + 1);
-
-        if (prob(50))
-            setAtq(getAtq() + 1);
-
-        if (prob(50))
-            setArm(getArm() + 1);
-
-        if (prob(50))
-            setRes(getRes() + 1);
-
-        if (prob(70)) {
-            setVel(getVel() + 2);
-        }
+        if (prob(50)) setPv(getPv() + 1);
+        if (prob(50)) setAtq(getAtq() + 1);
+        if (prob(50)) setArm(getArm() + 1);
+        if (prob(50)) setRes(getRes() + 1);
+        if (prob(70)) setVel(getVel() + 2);
 
         setNivel(getNivel() + 1);
         mascota.subirNivel();
@@ -184,6 +206,32 @@ public class Cazador extends Personaje {
         public Mascota() {
             super();
             raza = "";
+        }
+
+        public Mascota(File file) throws IOException {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            for (int i = 0; i < 15; i++) {
+                br.readLine();
+            }
+
+            String[] campos;
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                campos = linea.split(": ");
+
+                switch (campos[0].replace("·", "").trim()) {
+                    case "Nombre" -> setNombre(campos[1]);
+                    case "Vida" -> setPv(Integer.parseInt(campos[1]));
+                    case "Ataque" -> setAtq(Integer.parseInt(campos[1]));
+                    case "Armadura" -> setArm(Integer.parseInt(campos[1]));
+                    case "Velocidad" -> setVel(Integer.parseInt(campos[1]));
+                    case "Resistencia mágica" -> setRes(Integer.parseInt(campos[1]));
+                    case "Nivel" -> setNivel(Integer.parseInt(campos[1]));
+                    case "Raza" -> setRaza(campos[1]);
+                }
+            }
+            br.close();
         }
 
         /**

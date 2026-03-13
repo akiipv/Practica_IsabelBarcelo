@@ -74,7 +74,6 @@ public abstract class Personaje implements Comparable<Personaje> {
 
             switch (campos[0].replace("·", "").trim()) {
                 case "Nombre" -> setNombre(campos[1]);
-                case "Clase" -> {}
                 case "Vida" -> setPv(Integer.parseInt(campos[1]));
                 case "Ataque" -> setAtq(Integer.parseInt(campos[1]));
                 case "Armadura" -> setArm(Integer.parseInt(campos[1]));
@@ -82,7 +81,7 @@ public abstract class Personaje implements Comparable<Personaje> {
                 case "Resistencia mágica" -> setRes(Integer.parseInt(campos[1]));
                 case "Nivel" -> setNivel(Integer.parseInt(campos[1]));
                 case "Raza" -> setRaza(campos[1]);
-                default -> setOtro(Integer.parseInt(campos[1]));
+                case "Puntos de fe", "Puntos de magia", "Cantidad de robos realizados", "Coquetería" -> setOtro(Integer.parseInt(campos[1]));
             }
         }
         br.close();
@@ -415,14 +414,13 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public boolean equals(Personaje otro) {
-        boolean comparacion = this.nombre.equals(otro.nombre) &&
+        return(this.nombre.equals(otro.nombre) &&
                 this.pv == otro.pv &&
                 this.atq == otro.atq &&
                 this.arm == otro.arm &&
                 this.nivel == otro.nivel &&
                 this.vel == otro.vel &&
-                this.res == otro.res;
-        return comparacion;
+                this.res == otro.res);
     }
 
     /**
