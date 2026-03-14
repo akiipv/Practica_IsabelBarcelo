@@ -4,7 +4,6 @@ import Manolo.DWritersito;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -56,7 +55,7 @@ public class Clérigo extends Creyente {
         if (prob(20)) setArm(getArm() + 1);
         if (prob(80)) setRes(getRes() + 2);
         if (prob(50)) setVel(getVel() + 1);
-        if (prob(80)) setOtro(getFe() + 2);
+        if (prob(80)) setOtro(getOtro() + 2);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
@@ -84,20 +83,20 @@ public class Clérigo extends Creyente {
 
             switch (opcion) {
                 case 1:
-                    pleg = (int) (getFe() * 0.7);
+                    pleg = (int) (getOtro() * 0.7);
                     this.setPv(getPv() + pleg);
                     dw.println(this.getNombre() + " " + anderlain("sana") + " con su fe a " + objetivo.getNombre() + " subiéndole la vida " + pleg + " puntos..");
                     printPv(this, dw);
                     break;
                 case 2:
-                    pleg = (int) (getFe() * 0.35);
+                    pleg = (int) (getOtro() * 0.35);
                     this.setPv(getPv() + pleg);
                     dw.println(this.getNombre() + " hace un " + anderlain("rezo sagrado") + " y sana " + pleg + " puntos con su fe a todo el equipo..");
                     printPv(this, dw);
                     break;
                 case 3:
                     this.setTipoAtaque("magico");
-                    pleg = (int) (getFe() * 0.55);
+                    pleg = (int) (getOtro() * 0.55);
                     objetivo.defensa(pleg, this.getTipoAtaque());
                     dw.println(this.getNombre() + " lanza " + anderlain("cólera divina") + ".. " + objetivo.getNombre() + " recibe " + objetivo.defender(pleg, this.getTipoAtaque()) + " puntos de daño de sangrado..");
                     printPv(objetivo, dw);
@@ -137,7 +136,7 @@ public class Clérigo extends Creyente {
                 "\n\t· Armadura: " + getArm() +
                 "\n\t· Velocidad: " + getVel() +
                 "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Puntos de fe: " + getFe() +
+                "\n\t· Puntos de fe: " + getOtro() +
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }

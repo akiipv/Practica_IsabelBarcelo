@@ -66,7 +66,8 @@ public class Mago extends Personaje {
      * @return puntos de magia
      */
 
-    public int getMag() {
+    @Override
+    public int getOtro() {
         return mag;
     }
 
@@ -93,7 +94,7 @@ public class Mago extends Personaje {
         if (prob(35)) setArm(getArm() + 1);
         if (prob(80)) setRes(getRes() + 1);
         if (prob(65)) setVel(getVel() + 1);
-        if (prob(85)) setOtro(getMag() + 1);
+        if (prob(85)) setOtro(getOtro() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
@@ -122,24 +123,24 @@ public class Mago extends Personaje {
 
             switch (opcion) {
                 case 1:
-                    dañoConjuro = (int) (getMag() * 0.70);
+                    dañoConjuro = (int) (getOtro() * 0.70);
                     enemigo.defensa(dañoConjuro, this.getTipoAtaque());
                     dw.println(this.getNombre() + " " + anderlain("bola de fuego") + " y hace " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + details(2));
                     printPv(enemigo, dw);
                     break;
                 case 2:
-                    setArm(getArm() + (int) (getMag() * 0.5));
-                    setRes(getRes() + (int) (getMag() * 0.5));
+                    setArm(getArm() + (int) (getOtro() * 0.5));
+                    setRes(getRes() + (int) (getOtro() * 0.5));
                     dw.println("Un " + anderlain("escudo arcano") + " se manifiesta alrededor de " + this.getNombre() + ".. aumentando su armadura y resistencia mágica.." + details(5) + "\n\t· Armadura: " + this.getArm() + "\n\t· Resistencia mágica: " + this.getRes());
                     break;
                 case 3:
-                    dañoConjuro = (int) (getMag() * 0.30);
+                    dañoConjuro = (int) (getOtro() * 0.30);
                     enemigo.defensa(dañoConjuro, this.getTipoAtaque());
                     dw.println(this.getNombre() + " lanza " + anderlain("céfiro") + ", un fuerte viento se desata sobre " + enemigo.getNombre() + ".. causándole " + enemigo.defender(dañoConjuro, this.getTipoAtaque()) + " de daño mágico.." + details(4));
                     printPv(enemigo, dw);
                     break;
                 case 4:
-                    setVel(super.getVel() + getMag());
+                    setVel(super.getVel() + getOtro());
                     dw.println("La " + anderlain("presteza mental") + " de " + getNombre() + " le hace ganar " + mag + " puntos de velocidad.." + details(2) + "\n\t· Velocidad: " + this.getVel());
                     break;
                 case 5:
@@ -179,7 +180,7 @@ public class Mago extends Personaje {
                 "\n\t· Velocidad: " + getVel() +
                 "\n\t· Resistencia mágica: " + getRes() +
                 "\n\t· Nivel: " + getNivel() +
-                "\n\t· Puntos de magia: " + getMag();
+                "\n\t· Puntos de magia: " + getOtro();
         return coquetudo() + "\n\n" + resultado;
     }
 
@@ -193,7 +194,7 @@ public class Mago extends Personaje {
                 "\n   · Armadura: " + getArm() +
                 "\n   · Velocidad: " + getVel() +
                 "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Puntos de magia: " + getMag() +
+                "\n   · Puntos de magia: " + getOtro() +
                 "\n   · Nivel: " + getNivel();
     }
 

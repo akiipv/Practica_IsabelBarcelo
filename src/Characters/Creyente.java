@@ -69,7 +69,8 @@ public abstract class Creyente extends Personaje {
      * @return puntos de fe
      */
 
-    public int getFe() {
+    @Override
+    public int getOtro() {
         return fe;
     }
 
@@ -97,7 +98,7 @@ public abstract class Creyente extends Personaje {
                 "\n\t· Ataque: " + getAtq() +
                 "\n\t· Armardura: " + getArm() +
                 "\n\t· Nivel: " + getNivel() +
-                "\n\t· Puntos de fe: " + getFe();
+                "\n\t· Puntos de fe: " + getOtro();
         return coquetudo() + "\n\n" + resultado;
     }
 
@@ -112,19 +113,7 @@ public abstract class Creyente extends Personaje {
                 "\n   · Armadura: " + getArm() +
                 "\n   · Velocidad: " + getVel() +
                 "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Puntos de fe: " + getFe() +
+                "\n   · Puntos de fe: " + getOtro() +
                 "\n   · Nivel: " + getNivel();
-    }
-
-    @Override
-    public boolean equals(Personaje otro) {
-        return(this.getNombre().equals(otro.getNombre()) &&
-                this.getPv() == otro.getPv() &&
-                this.getAtq() == otro.getAtq() &&
-                this.getArm() == otro.getArm() &&
-                this.getNivel() == otro.getNivel() &&
-                this.getVel() == otro.getVel() &&
-                this.getRes() == otro.getRes()) &&
-                this.getFe() == otro.getOtro();
     }
 }

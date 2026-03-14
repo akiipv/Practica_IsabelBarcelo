@@ -56,7 +56,7 @@ public class Paladin extends Creyente {
         if (prob(70)) setArm(getArm() + 2);
         if (prob(40)) setRes(getRes() + 1);
         if (prob(15)) setVel(getVel() + 1);
-        if (prob(30)) setOtro(getFe() + 1);
+        if (prob(30)) setOtro(getOtro() + 1);
 
         setNivel(getNivel() + 1);
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
@@ -84,17 +84,17 @@ public class Paladin extends Creyente {
 
             switch (opcion) {
                 case 1:
-                    pleg = (int) (getFe() * 0.8);
+                    pleg = (int) (getOtro() * 0.8);
                     this.setAtq(getAtq() + pleg);
                     dw.println(this.getNombre() + " comienza a " + anderlain("imbuir su arma") + " aumentando su ataque " + pleg + " puntos..\n\t· Ataque: " + this.getAtq());
                     break;
                 case 2:
-                    pleg = (int) (getFe() * 0.3);
+                    pleg = (int) (getOtro() * 0.3);
                     this.setArm(getArm() + pleg);
                     dw.println(this.getNombre() + " empieza a fortalecer su cuerpo con un " + anderlain("baluarte de fe") + " subiendo su armadura " + pleg + " puntos..\n\t· Armadura: " + this.getArm());
                     break;
                 case 3:
-                    pleg = (int) (getFe() * 0.4);
+                    pleg = (int) (getOtro() * 0.4);
                     enemigo.setVel(enemigo.getVel() - pleg);
                     enemigo.setRes(enemigo.getRes() - pleg);
                     dw.println(this.getNombre() + " lanza un " + anderlain("fogonazo sagrado") + " hacia " + enemigo.getNombre() + " cegándole, reduciendo así su velocidad y resistencia mágica " + pleg + " puntos..\n\t· Velocidad: " + enemigo.getVel() + "\n\t· Resistencia mágica: " + enemigo.getRes());
@@ -134,7 +134,7 @@ public class Paladin extends Creyente {
                 "\n\t· Armadura: " + getArm() +
                 "\n\t· Velocidad: " + getVel() +
                 "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Puntos de fe: " + getFe() +
+                "\n\t· Puntos de fe: " + getOtro() +
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }

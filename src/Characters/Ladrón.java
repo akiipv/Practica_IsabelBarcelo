@@ -4,7 +4,6 @@ import Manolo.DWritersito;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Subclase Ladrón.
@@ -64,7 +63,8 @@ public class Ladrón extends Personaje {
      * @return número de robos
      */
 
-    public int getRobo() {
+    @Override
+    public int getOtro() {
         return robo;
     }
 
@@ -132,7 +132,7 @@ public class Ladrón extends Personaje {
                 "\n\t· Armadura: " + getArm() +
                 "\n\t· Velocidad: " + getVel() +
                 "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Cantidad de robos realizados: " + getRobo() +
+                "\n\t· Cantidad de robos realizados: " + getOtro() +
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }
@@ -147,7 +147,7 @@ public class Ladrón extends Personaje {
                 "\n   · Armadura: " + getArm() +
                 "\n   · Velocidad: " + getVel() +
                 "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Cantidad de robos realizados: " + getRobo() +
+                "\n   · Cantidad de robos realizados: " + getOtro() +
                 "\n   · Nivel: " + getNivel();
     }
 

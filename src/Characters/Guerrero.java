@@ -73,15 +73,7 @@ public class Guerrero extends Personaje {
         br.close();
     }
 
-    @Override
-    public void updtPJ(File file) throws IOException {
-        Personaje playerFicheado = Factory.crear(this.getClass().getSimpleName(), file);
 
-        if (!this.getNombre().equals(playerFicheado.getNombre())) return;
-        if (!this.equals(playerFicheado)){
-            this.copyCat(playerFicheado);
-        }
-    }
 
     /**
      * Devuelve el estado actual de la furia.
@@ -101,6 +93,16 @@ public class Guerrero extends Personaje {
 
     public void setFuria(boolean furia) {
         this.furia = Boolean.parseBoolean(String.valueOf(furia));
+    }
+
+    @Override
+    public void setOtro(int otro) {
+        this.furia = (otro == 1);
+    }
+
+    @Override
+    public int getOtro(){
+        return isFuria() ? 1 : 0;
     }
 
     /**

@@ -18,7 +18,7 @@ import Manolo.DWritersito;
 public abstract class Personaje implements Comparable<Personaje> {
 
     private String nombre, tipoAtaque, raza;
-    private int pv, atq, arm, nivel, res, vel, otro;
+    private int pv, atq, arm, nivel, res, vel;
     private boolean def;
 
     /**
@@ -32,7 +32,7 @@ public abstract class Personaje implements Comparable<Personaje> {
         nombre = "";
         tipoAtaque = "fisico";
         def = false;
-        raza = "humano";
+        raza = "Humano";
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class Personaje implements Comparable<Personaje> {
         setRes(res);
         setTipoAtaque("fisico");
         setDef(false);
-        setRaza("humano");
+        setRaza("Humano");
     }
 
     public Personaje(File file) throws IOException {
@@ -176,11 +176,10 @@ public abstract class Personaje implements Comparable<Personaje> {
     }
 
     public void setOtro(int otro) {
-        this.otro = otro;
     }
 
     public int getOtro() {
-        return otro;
+        return 0;
     }
 
     public void setRaza(String raza) {
@@ -420,7 +419,8 @@ public abstract class Personaje implements Comparable<Personaje> {
                 this.arm == otro.arm &&
                 this.nivel == otro.nivel &&
                 this.vel == otro.vel &&
-                this.res == otro.res);
+                this.res == otro.res &&
+                this.getOtro() == otro.getOtro());
     }
 
     /**
