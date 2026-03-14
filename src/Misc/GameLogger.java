@@ -8,11 +8,41 @@ import java.io.*;
 import java.time.*;
 import java.util.Arrays;
 
+/**
+ * Clase GameLogger.
+ * Se encarga de guardar, leer y gestionar archivos relacionados con personajes
+ * y combates del juego.
+ *
+ * Funcionalidades principales:
+ * - Crear "cartitas" de personajes individuales o de grupos.
+ * - Verificar existencia de fichas de personajes.
+ * - Comprobar clases repetidas en un grupo.
+ * - Registrar combates en archivos.
+ * - Gestionar subida de nivel tras victorias.
+ *
+ * @author Isa Barceló
+ */
+
 public class GameLogger {
 
+    /**Directorio*/
+
     private static final String directorio = "./fichitas/combate/";
+
+    /**Hora actual*/
+
     private static final LocalTime hora = LocalTime.now();
+
+    /**Fecha actual*/
+
     private static final LocalDate fecha = LocalDate.now();
+
+    /**
+     * Crea un archivo con la tarjeta de un personaje.
+     *
+     * @param player personaje del cual se generará la cartita
+     * @throws IOException si ocurre un error al escribir el archivo
+     */
 
     public static void cardIB(Personaje player) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("./fichitas/personajes/" + player.getNombre() + ".txt"));
@@ -21,6 +51,13 @@ public class GameLogger {
         bw.write(player.cartita());
         bw.close();
     }
+
+    /**
+     * Crea un archivo con las tarjetas de un grupo de personajes.
+     *
+     * @param player array de personajes
+     * @throws IOException si ocurre un error al escribir el archivo
+     */
 
     public static void cardIB(Personaje[] player) throws IOException {
         // for (Personaje p : player)
@@ -36,6 +73,14 @@ public class GameLogger {
         bw.close();
     }
 
+    /**
+     * Comprueba si existe un archivo de personaje con un nombre específico.
+     *
+     * @param fichitas array de archivos
+     * @param nombre nombre del personaje
+     * @return true si existe, false si no
+     */
+
     public static boolean fichitaExists(File[] fichitas, String nombre){
 
         for (File ficha : fichitas) {
@@ -45,6 +90,15 @@ public class GameLogger {
 
         return false;
     }
+
+    /**
+     * Comprueba si hay personajes con la misma clase en un array de fichas.
+     *
+     * @param fichitas array de archivos de personajes
+     * @param nombre nombre del personaje principal (no se usa directamente)
+     * @return true si hay clases repetidas, false si no
+     * @throws IOException si ocurre un error al leer los archivos
+     */
 
     public static boolean claseRepetia(File[] fichitas, String nombre) throws IOException {
 
@@ -56,6 +110,14 @@ public class GameLogger {
 
         return false;
     }
+
+    /**
+     * Extrae la clase de un personaje a partir de su archivo.
+     *
+     * @param ficha archivo del personaje
+     * @return nombre de la clase como String
+     * @throws IOException si ocurre un error al leer el archivo
+     */
 
     public static String getClasesita(File ficha) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(ficha));
@@ -78,6 +140,15 @@ public class GameLogger {
         return clase;
     }
 
+    /**
+     * Registra un combate entre dos personajes en un archivo
+     * y simultáneamente en consola.
+     *
+     * @param player personaje principal
+     * @param perchonaje personaje enemigo
+     * @throws IOException si ocurre un error al crear el archivo
+     */
+
     public static void writtieCombate(Personaje player, Personaje perchonaje) throws IOException {
         File fichita = new File(directorio + fecha + "_" + getHorita() + " — " + player.getNombre() + "VS" + perchonaje.getNombre() + ".txt");
 
@@ -89,6 +160,12 @@ public class GameLogger {
         dw.flush();
         dw.close();
     }
+
+    /**
+     * Obtiene la hora actual en formato HH.mm.
+     *
+     * @return cadena con la hora actual
+     */
 
     public static String getHorita(){
         String minuto;
@@ -102,6 +179,14 @@ public class GameLogger {
 
         return horita + "." + minuto + " ";
     }
+
+    /**
+     * Sube de nivel al ganador de un combate leyendo su ficha.
+     *
+     * @param fichaLusha archivo de ficha del ganador
+     * @param players array de personajes del grupo
+     * @throws IOException si ocurre un error al leer el archivo
+     */
 
     public static void lvlUpGanador(File fichaLusha, Personaje [] players) throws IOException{
         BufferedReader br = new BufferedReader(new FileReader(fichaLusha));

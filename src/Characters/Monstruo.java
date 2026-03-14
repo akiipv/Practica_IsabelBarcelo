@@ -23,10 +23,6 @@ import java.util.Random;
 
 public class Monstruo extends Personaje {
 
-    /** Raza del monstruo: "bestia", "no-muerto" o "gigante". */
-
-    private String raza;
-
     /**
      * Constructor por defecto.
      * Inicializa los atributos heredados con los valores por defecto y la raza como cadena vacía.
@@ -36,6 +32,15 @@ public class Monstruo extends Personaje {
         super();
         setRaza("");
     }
+
+    /**
+     * Constructor que crea un Monstruo a partir de un archivo.
+     * Inicializa todas las estadísticas y la raza del monstruo
+     * leyendo el fichero proporcionado.
+     *
+     * @param file archivo que contiene los datos del Monstruo
+     * @throws IOException si ocurre un error al leer el fichero
+     */
 
     public Monstruo(File file) throws IOException {
         super(file);
@@ -61,28 +66,19 @@ public class Monstruo extends Personaje {
     }
 
     /**
-     * Devuelve la raza del monstruo.
-     *
-     * @return La raza como String
-     */
-
-    public String getRaza() {
-        return raza;
-    }
-
-    /**
      * Asigna la raza del monstruo.
      * Solo se permite "bestia", "no-muerto" o "gigante".
      *
      * @param raza La raza a asignar
      */
 
+    @Override
     public void setRaza(String raza) {
         if (raza.equalsIgnoreCase("bestia") ||
                 raza.equalsIgnoreCase("no-muerto") ||
                 raza.equalsIgnoreCase("gigante"))
-            this.raza = raza;
-        else this.raza = "";
+            super.settearRaza(raza);
+        else super.settearRaza("");;
     }
 
     /**
@@ -93,7 +89,7 @@ public class Monstruo extends Personaje {
     @Override
     public void subirNivel() {
 
-        switch (raza.toLowerCase()) {
+        switch (getRaza().toLowerCase()) {
             case "bestia" -> statsMonstruo(50, 80, 15, 15, 80);
             case "no-muerto" -> statsMonstruo(30, 50, 30, 70, 5);
             case "gigante" -> statsMonstruo(100, 50, 50, 10, 10);
@@ -134,7 +130,7 @@ public class Monstruo extends Personaje {
         int cantidad = 1;
         Random r = new Random();
 
-        switch (raza.toLowerCase()) {
+        switch (getRaza().toLowerCase()) {
             case "bestia" -> {
                 if (stat.equalsIgnoreCase("atq") || stat.equalsIgnoreCase("vel")) cantidad = 2;
             }
@@ -167,6 +163,12 @@ public class Monstruo extends Personaje {
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
 
     @Override
     public String cartita() {

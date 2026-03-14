@@ -19,6 +19,11 @@ import java.io.IOException;
  */
 
 public class Guerrero extends Personaje {
+
+    /**
+     * Furia del guerrero
+     */
+
     private boolean furia;
 
     /**
@@ -52,6 +57,13 @@ public class Guerrero extends Personaje {
         setFuria(furia);
     }
 
+    /**
+     * Constructor que carga un Guerrero desde un archivo.
+     *
+     * @param file archivo que contiene los datos del guerrero
+     * @throws IOException si ocurre un error al leer el archivo
+     */
+
     public Guerrero(File file) throws IOException {
         super(file);
 
@@ -73,8 +85,6 @@ public class Guerrero extends Personaje {
         br.close();
     }
 
-
-
     /**
      * Devuelve el estado actual de la furia.
      *
@@ -95,10 +105,23 @@ public class Guerrero extends Personaje {
         this.furia = Boolean.parseBoolean(String.valueOf(furia));
     }
 
+    /**
+     * Método genérico heredado para usar con atributos adicionales.
+     * Aquí representa la furia como 0 (inactiva) o 1 (activa).
+     *
+     * @param otro valor 0 o 1 que representa la furia
+     */
+
     @Override
     public void setOtro(int otro) {
         this.furia = (otro == 1);
     }
+
+    /**
+     * Devuelve la representación numérica del atributo adicional.
+     *
+     * @return 1 si la furia está activa, 0 si está inactiva
+     */
 
     @Override
     public int getOtro(){
@@ -106,8 +129,10 @@ public class Guerrero extends Personaje {
     }
 
     /**
-     * Activa o desactiva la furia según su estado actual.
-     * Al activarse o desactivarse, se muestra un mensaje descriptivo.
+     * Activa o desactiva la furia del Guerrero.
+     * Muestra un mensaje descriptivo en pantalla y fichero usando DWritersito.
+     *
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void modificarFuria(DWritersito dw) {
@@ -123,9 +148,10 @@ public class Guerrero extends Personaje {
 
     /**
      * Acción especial del Guerrero.
-     * Permite alternar el estado de la furia durante el combate.
+     * Alterna el estado de la furia durante el combate utilizando DWritersito.
      *
      * @param enemigo personaje objetivo (no se utiliza directamente)
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
@@ -214,6 +240,12 @@ public class Guerrero extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
+
     @Override
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
@@ -228,6 +260,13 @@ public class Guerrero extends Personaje {
                 "\n   · Furia: " + tradusirFuria(isFuria()) +
                 "\n   · Nivel: " + getNivel();
     }
+
+    /**
+     * Traduce el estado de la furia a texto legible.
+     *
+     * @param furia true si está activa, false si está inactiva
+     * @return "Activa" o "Inactiva"
+     */
 
     public String tradusirFuria(boolean furia){
         return furia ? "Activa" : "Inactiva";

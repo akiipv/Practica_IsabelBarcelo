@@ -30,6 +30,13 @@ public class Cazador extends Personaje {
         mascota = this.new Mascota("", getNivel(), "");
     }
 
+    /**
+     * Constructor que inicializa un Cazador a partir de un archivo.
+     *
+     * @param file archivo con la información del Cazador
+     * @throws IOException si ocurre un error al leer el archivo
+     */
+
     public Cazador(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -57,6 +64,14 @@ public class Cazador extends Personaje {
         mascota = new Mascota(file);
         br.close();
     }
+
+    /**
+     * Actualiza los atributos del Cazador a partir de un archivo.
+     * Si los atributos cambian, también se actualiza la mascota.
+     *
+     * @param file archivo con la información actualizada del Cazador
+     * @throws IOException si ocurre un error al leer el archivo
+     */
 
     @Override
     public void updtPJ(File file) throws IOException {
@@ -101,9 +116,9 @@ public class Cazador extends Personaje {
     }
 
     /**
-     * Incrementa el nivel del Cazador y mejora sus estadísticas
-     * según sus ventajas y penalizaciones. La mascota también sube
-     * de nivel (sin modificar estadísticas).
+     * Incrementa el nivel del Cazador y ajusta sus estadísticas
+     * según ventajas y penalizaciones de su clase.
+     * La mascota también sube de nivel, pero sus estadísticas permanecen dependientes del Cazador.
      */
 
     @Override
@@ -141,6 +156,12 @@ public class Cazador extends Personaje {
         return coquetudo() + "\n\n" + resultado;
     }
 
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
+
     @Override
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
@@ -168,24 +189,25 @@ public class Cazador extends Personaje {
     }
 
     /**
-     * Ataque estilizado que muestra información de la mascota
-     * durante la acción.
+     * Representación estilizada del ataque del Cazador.
+     * Incluye la contribución de la mascota al ataque y mensajes descriptivos.
      *
      * @param enemigo personaje objetivo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
-    public void ataqueCoquetudo(Personaje enemigo, DWritersito pw) {
+    public void ataqueCoquetudo(Personaje enemigo, DWritersito dw) {
         int dañito = enemigo.defender(this.atacar(), this.getTipoAtaque());
 
-        if (dañito <= 0) pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque, pero no le hacen ni cosquillas.." + details(4));
+        if (dañito <= 0) dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque, pero no le hacen ni cosquillas.." + details(4));
         else {
-            pw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque" + details(3) + "\n");
-            printPerezita("\uD835\uDC74\uD835\uDC82\uD835\uDC94\uD835\uDC84\uD835\uDC90\uD835\uDC95\uD835\uDC8A\uD835\uDC95\uD835\uDC82 \uD835\uDC82\uD835\uDC8D \uD835\uDC82\uD835\uDC95\uD835\uDC82\uD835\uDC92\uD835\uDC96\uD835\uDC86..", pw);
-            pw.println(coquetoCM() + "\n" + this.getNombre() + " y " + mascota.getNombre() + " han realizado " + enemigo.defender(this.atacar(), this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + "..");
+            dw.println("\n" + this.getNombre() + " decide atacar a " + enemigo.getNombre() + ", y " + mascota.getNombre() + " se suma al ataque" + details(3) + "\n");
+            printPerezita("\uD835\uDC74\uD835\uDC82\uD835\uDC94\uD835\uDC84\uD835\uDC90\uD835\uDC95\uD835\uDC8A\uD835\uDC95\uD835\uDC82 \uD835\uDC82\uD835\uDC8D \uD835\uDC82\uD835\uDC95\uD835\uDC82\uD835\uDC92\uD835\uDC96\uD835\uDC86..", dw);
+            dw.println(coquetoCM() + "\n" + this.getNombre() + " y " + mascota.getNombre() + " han realizado " + enemigo.defender(this.atacar(), this.getTipoAtaque()) + " de daño a " + enemigo.getNombre() + "..");
         }
         enemigo.defensa(this.atacar(), this.getTipoAtaque());
-        printPv(enemigo, pw);
+        printPv(enemigo, dw);
     }
 
     /**
@@ -197,16 +219,20 @@ public class Cazador extends Personaje {
 
     private class Mascota extends Personaje {
 
-        private String raza;
-
         /**
          * Constructor por defecto de la Mascota.
          */
 
         public Mascota() {
             super();
-            raza = "";
         }
+
+        /**
+         * Constructor de la Mascota a partir de un archivo.
+         *
+         * @param file archivo con la información de la mascota
+         * @throws IOException si ocurre un error al leer el archivo
+         */
 
         public Mascota(File file) throws IOException {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -281,22 +307,13 @@ public class Cazador extends Personaje {
          * @param raza tipo de raza
          */
 
+        @Override
         public void setRaza(String raza) {
             if (raza.equalsIgnoreCase("canido") ||
                     raza.equalsIgnoreCase("felino") ||
                     raza.equalsIgnoreCase("rapaz"))
-                this.raza = raza;
-            else this.raza = "";
-        }
-
-        /**
-         * Devuelve el tipo de raza de la mascota.
-         *
-         * @return tipo de raza
-         */
-
-        public String getRaza() {
-            return raza;
+                super.settearRaza(raza);
+            else super.settearRaza("");
         }
 
         /**
@@ -318,6 +335,13 @@ public class Cazador extends Personaje {
                     "\n\t· Nivel: " + getNivel();
             return coquetudo() + "\n\n" + resultado;
         }
+
+        /**
+         * Devuelve una “tarjeta” con la información principal de la mascota.
+         *
+         * @return cadena con los atributos y estadísticas de la mascota.
+         */
+
 
         @Override
         public String cartita() {

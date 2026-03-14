@@ -39,6 +39,13 @@ public class Clérigo extends Creyente {
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
     }
 
+    /**
+     * Constructor que inicializa un Clérigo a partir de un archivo.
+     *
+     * @param file archivo con la información del Clérigo
+     * @throws IOException si ocurre un error al leer el archivo
+     */
+
     public Clérigo(File file) throws IOException {
         super(file);
     }
@@ -63,9 +70,13 @@ public class Clérigo extends Creyente {
 
     /**
      * Permite al Clérigo realizar milagros durante su turno.
-     * Los milagros disponibles son: Sanación, Rezo sagrado, Cólera divina.
+     * Los milagros disponibles son:
+     * 1. Sanación: recupera vida de un objetivo según puntos de fe.
+     * 2. Rezo sagrado: cura a todo el equipo.
+     * 3. Cólera divina: inflige daño mágico a un enemigo.
      *
      * @param objetivo personaje objetivo de la plegaria
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
@@ -109,9 +120,11 @@ public class Clérigo extends Creyente {
     }
 
     /**
-     * Acción especial del Clérigo. Por defecto ejecuta la plegaria.
+     * Acción especial del Clérigo.
+     * Por defecto, ejecuta la plegaria sobre un enemigo.
      *
      * @param enemigo personaje objetivo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
