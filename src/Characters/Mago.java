@@ -36,6 +36,15 @@ public class Mago extends Personaje {
         mag = 10;
     }
 
+    /**
+     * Constructor que crea un Mago a partir de un archivo.
+     * Inicializa todas las estadísticas del personaje leyendo el fichero
+     * proporcionado, incluyendo los atributos heredados y los puntos de magia.
+     *
+     * @param file archivo que contiene los datos del Mago
+     * @throws IOException si ocurre un error al leer el fichero
+     */
+
     public Mago(File file) throws IOException {
         super(file);
     }
@@ -106,6 +115,7 @@ public class Mago extends Personaje {
      * depende de los puntos de magia del Mago.
      *
      * @param enemigo personaje objetivo del conjuro
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void lanzarConjuro(Personaje enemigo, DWritersito dw) {
@@ -155,6 +165,7 @@ public class Mago extends Personaje {
      * Permite lanzar conjuros durante el combate.
      *
      * @param enemigo personaje objetivo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
@@ -183,6 +194,12 @@ public class Mago extends Personaje {
                 "\n\t· Puntos de magia: " + getOtro();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
 
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +

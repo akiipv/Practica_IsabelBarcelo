@@ -31,6 +31,15 @@ public class Ladrón extends Personaje {
         robo = 0;
     }
 
+    /**
+     * Constructor que crea un Ladrón a partir de un archivo.
+     * Inicializa todas las estadísticas del personaje leyendo el fichero
+     * proporcionado, incluyendo los atributos heredados y el contador de robos.
+     *
+     * @param file archivo que contiene los datos del Ladrón
+     * @throws IOException si ocurre un error al leer el fichero
+     */
+
     public Ladrón(File file) throws IOException {
         super(file);
     }
@@ -87,10 +96,12 @@ public class Ladrón extends Personaje {
 
     /**
      * Acción especial del Ladrón: Robar.
-     * Por ahora, solo ataca con la velocidad del ladrón y aumenta
-     * el contador de robos.
+     * Ataca con la velocidad del Ladrón en lugar del ataque normal y
+     * aumenta el contador de robos realizados.
+     * Los resultados se muestran mediante DWritersito.
      *
-     * @param enemigo personaje objetivo
+     * @param enemigo personaje objetivo del robo
+     * @param pw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void robar(Personaje enemigo, DWritersito pw) {
@@ -108,6 +119,7 @@ public class Ladrón extends Personaje {
      * Ejecuta la acción especial del Ladrón.
      *
      * @param enemigo personaje objetivo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
@@ -136,6 +148,12 @@ public class Ladrón extends Personaje {
                 "\n\t· Nivel: " + getNivel();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
 
     public String cartita() {
         return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +

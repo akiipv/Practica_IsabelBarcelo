@@ -48,6 +48,13 @@ public abstract class Creyente extends Personaje {
         setOtro(fe);
     }
 
+    /**
+     * Constructor que inicializa un Creyente a partir de un archivo.
+     *
+     * @param file archivo con la información del personaje
+     * @throws IOException si ocurre un error al leer el archivo
+     */
+
     public Creyente(File file) throws IOException {
         super(file);
     }
@@ -79,6 +86,7 @@ public abstract class Creyente extends Personaje {
      * Permite al Creyente efectuar milagros en su turno.
      *
      * @param enemigo personaje objetivo del milagro
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public abstract void plegaria(Personaje enemigo, DWritersito dw);
@@ -101,6 +109,12 @@ public abstract class Creyente extends Personaje {
                 "\n\t· Puntos de fe: " + getOtro();
         return coquetudo() + "\n\n" + resultado;
     }
+
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
 
     @Override
     public String cartita() {

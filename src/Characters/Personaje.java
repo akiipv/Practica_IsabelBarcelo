@@ -17,8 +17,11 @@ import Manolo.DWritersito;
 
 public abstract class Personaje implements Comparable<Personaje> {
 
+    /** Nombre, tipo de ataque y raza del personaje. */
     private String nombre, tipoAtaque, raza;
+    /** Vida, ataque, armadura, nivel, resistencia y velocidad del personaje. */
     private int pv, atq, arm, nivel, res, vel;
+    /** ¿Está defendiendo? */
     private boolean def;
 
     /**
@@ -60,6 +63,13 @@ public abstract class Personaje implements Comparable<Personaje> {
         setRaza("Humano");
     }
 
+    /**
+     * Constructor que inicializa un personaje a partir de un archivo.
+     *
+     * @param file archivo con la información del personaje
+     * @throws IOException si ocurre un error al leer el archivo
+     */
+
     public Personaje(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -87,12 +97,25 @@ public abstract class Personaje implements Comparable<Personaje> {
         br.close();
     }
 
+    /**
+     * Actualiza los atributos del personaje a partir de un archivo.
+     *
+     * @param file archivo con la información actualizada del personaje
+     * @throws IOException si ocurre un error al leer el archivo
+     */
+
     public void updtPJ(File file) throws IOException {
         Personaje playerFicheado = Factory.crear(this.getClass().getSimpleName(), file);
 
         if (!this.getNombre().equals(playerFicheado.getNombre())) return;
         if (!this.equals(playerFicheado)) this.copyCat(playerFicheado);
     }
+
+    /**
+     * Copia todos los atributos de otro personaje a este.
+     *
+     * @param player personaje a copiar
+     */
 
     protected void copyCat(Personaje player) {
         this.setPv(player.getPv());
@@ -175,16 +198,48 @@ public abstract class Personaje implements Comparable<Personaje> {
         else this.res = res;
     }
 
+    /**
+     * Establece un valor extra (no usado en esta clase base).
+     *
+     * @param otro valor a establecer
+     */
+
     public void setOtro(int otro) {
     }
+
+    /**
+     * Devuelve el valor extra (no usado en esta clase base).
+     *
+     * @return valor extra
+     */
 
     public int getOtro() {
         return 0;
     }
 
+    /**
+     * Establece la raza del personaje.
+     *
+     * @param raza nueva raza
+     */
+
     public void setRaza(String raza) {
         this.raza = raza;
     }
+
+    /**
+     * Establece la raza del personaje directamente.
+     *
+     * @param raza nueva raza
+     */
+
+    protected void settearRaza(String raza) { this.raza = raza; }
+
+    /**
+     * Devuelve la raza del personaje.
+     *
+     * @return raza
+     */
 
     public String getRaza() {
         return raza;
@@ -330,6 +385,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * Permite al personaje beber una poción.
      *
      * @param pocion cantidad de vida recuperada
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void beberPocion(int pocion, DWritersito dw) {
@@ -344,7 +400,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      *
      * @param cantidad cantidad a aumentar
      * @param tipo     tipo de estadística
-     * @param dw
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void inspirar(int cantidad, String tipo, DWritersito dw) {
@@ -442,26 +498,23 @@ public abstract class Personaje implements Comparable<Personaje> {
         return coquetudo() + "\n\n" + resultado;
     }
 
-    public String cartita() {
-        return "₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊\n" +
-                "\n· Nombre: " + getNombre() +
-                "\n· Clase: " + getClass().getSimpleName() +
-                "\n   · Raza: " + getRaza() +
-                "\n   · Vida: " + getPv() +
-                "\n   · Ataque: " + getAtq() +
-                "\n   · Armadura: " + getArm() +
-                "\n   · Velocidad: " + getVel() +
-                "\n   · Resistencia mágica: " + getRes() +
-                "\n   · Nivel: " + getNivel();
-    }
+    /**
+     * Devuelve una “tarjeta” con la información principal del personaje.
+     *
+     * @return cadena con los atributos y estadísticas del personaje
+     */
+
+
+    public abstract String cartita();
 
     /**
      * Aplica los efectos de una trampa.
      *
      * @param t trampa activada
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
-    public void caerTrampa(Trampa t, DWritersito pw) {
+    public void caerTrampa(Trampa t, DWritersito dw) {
 
         int perjuicioT = t.activaTrampa();
 
@@ -471,7 +524,7 @@ public abstract class Personaje implements Comparable<Personaje> {
                 case "Pinchos":
                     setPv(getPv() - perjuicioT);
                     System.out.println("\n\t" + anderlain("Estacas afiladas") + " salen de las superficies cercanas y atraviesan a " + getNombre() + " por " + perjuicioT + " puntos de daño..\n");
-                    printPv(this, pw);
+                    printPv(this, dw);
                     break;
                 case "Brea":
                     setArm(getArm() - perjuicioT);
@@ -536,14 +589,17 @@ public abstract class Personaje implements Comparable<Personaje> {
      * Muestra los puntos de vida de un personaje.
      *
      * @param player personaje a mostrar
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
-    public void printPv(Personaje player, DWritersito pw) {
-        pw.println("\t· Su vida actual es de: " + player.getPv());
+    public void printPv(Personaje player, DWritersito dw) {
+        dw.println("\t· Su vida actual es de: " + player.getPv());
     }
 
     /**
      * Activa la postura defensiva del personaje.
+     *
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void defensaUppie(DWritersito dw) {
@@ -578,6 +634,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * Gestiona el turno del personaje.
      *
      * @param enemigo personaje enemigo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void realizarTurno(Personaje enemigo, DWritersito dw) {
@@ -609,6 +666,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * Realiza un ataque con mensajes personalizados.
      *
      * @param enemigo personaje enemigo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void ataqueCoquetudo(Personaje enemigo, DWritersito dw) {
@@ -646,6 +704,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param mensaje  mensaje principal
      * @param opciones opciones disponibles
      * @param detail   nivel de detalle visual
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void menusito(String mensaje, String[] opciones, int detail, DWritersito dw) {
@@ -709,6 +768,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * Muestra un mensaje decorativo por consola.
      *
      * @param acc mensaje a mostrar
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     public void printPerezita(String acc, DWritersito dw) {
@@ -725,6 +785,13 @@ public abstract class Personaje implements Comparable<Personaje> {
     public String anderlain(String opcion) {
         return "\033[0;4m" + opcion + "\033[0;0m";
     }
+
+    /**
+     * Compara dos personajes por velocidad para ordenación.
+     *
+     * @param player personaje a comparar
+     * @return resultado de la comparación
+     */
 
     @Override
     public int compareTo(Personaje player) {

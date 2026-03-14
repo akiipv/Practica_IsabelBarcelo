@@ -40,6 +40,15 @@ public class Paladin extends Creyente {
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
     }
 
+    /**
+     * Constructor que inicializa el Paladín desde un archivo.
+     * Se asume que el archivo contiene los atributos en formato compatible
+     * con la superclase Creyente/Personaje.
+     *
+     * @param file archivo con los datos del personaje
+     * @throws IOException si ocurre un error leyendo el archivo
+     */
+
     public Paladin(File file) throws IOException {
         super(file);
     }
@@ -67,6 +76,7 @@ public class Paladin extends Creyente {
      * Los milagros disponibles son: Imbuir arma, Baluarte de fe, Fogonazo sagrado.
      *
      * @param enemigo personaje objetivo de la plegaria
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
@@ -110,6 +120,7 @@ public class Paladin extends Creyente {
      * Acción especial del Paladín. Por defecto ejecuta la plegaria.
      *
      * @param enemigo personaje objetivo
+     * @param dw instancia de DWritersito para salida en pantalla y fichero
      */
 
     @Override
