@@ -312,8 +312,8 @@ public class Cazador extends Personaje {
             if (raza.equalsIgnoreCase("canido") ||
                     raza.equalsIgnoreCase("felino") ||
                     raza.equalsIgnoreCase("rapaz"))
-                super.settearRaza(raza);
-            else super.settearRaza("");
+                super.setRaza(raza);
+            else super.setRaza("");
         }
 
         /**

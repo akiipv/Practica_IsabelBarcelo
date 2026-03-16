@@ -31,15 +31,13 @@ public class Main {
         Personaje p6 = new Monstruo(new File("fichitas/personajes/Kim Taehyung.txt"));
         Personaje p7 = new Paladin(new File("fichitas/personajes/Jeon Jungkook.txt"));*/
 
-        // funsiona Personaje p1 = new Cazador("Kim Namjoon", 23, 45, 67, 12, 23, 34, "rapaz", "Irina");
-        // funsiona Personaje p2 = new Clérigo("Kim Seokjin", 43, 6, 24, 87, 12, 45, 8);
-        // funsiona Personaje p3 = new Guerrero("Min Yoongi", 45, 27, 84, 24, 73, 24, true);
-        // funsiona Personaje p4 = new Ladrón("Jung Hoseok", 7, 32, 96, 74, 64, 74);
-        // funsiona Personaje p5 = new Mago("Park Jimin", 23, 54, 56, 12, 68, 45, 79);
-        // funsiona Personaje p6 = new Monstruo("Kim Taehyung", 93, 83, 56, 25, 78, 54, "bestia");
+        Personaje p1 = new Cazador("Kim Namjoon", 23, 45, 67, 12, 23, 34, "rapaz", "Irina");
+        Personaje p2 = new Clérigo("Kim Seokjin", 43, 6, 24, 87, 12, 45, 8);
+        Personaje p3 = new Guerrero("Min Yoongi", 45, 27, 84, 24, 73, 24, true);
+        Personaje p4 = new Ladrón("Jung Hoseok", 7, 32, 96, 74, 64, 74);
+        Personaje p5 = new Mago("Park Jimin", 23, 54, 56, 12, 68, 45, 79);
+        Personaje p6 = new Monstruo("Kim Taehyung", 93, 83, 56, 25, 78, 54, "bestia");
         Personaje p7 = new Paladin("Jeon Jungkook", 74, 53, 79, 23, 65 ,31 ,73);
 
-        p7.updtPJ(ficha7);
-        System.out.println(p7.cartita());
     }
 }

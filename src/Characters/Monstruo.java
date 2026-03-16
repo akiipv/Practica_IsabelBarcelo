@@ -61,8 +61,7 @@ public class Monstruo extends Personaje {
      */
 
     public Monstruo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String raza) {
-        super(nombre, pv, atq, arm, nivel, vel, res);
-        setRaza(raza);
+        super(nombre, pv, atq, arm, nivel, vel, res, raza);
     }
 
     /**
@@ -77,8 +76,8 @@ public class Monstruo extends Personaje {
         if (raza.equalsIgnoreCase("bestia") ||
                 raza.equalsIgnoreCase("no-muerto") ||
                 raza.equalsIgnoreCase("gigante"))
-            super.settearRaza(raza);
-        else super.settearRaza("");;
+            super.setRaza(raza);
+        else super.setRaza("");;
     }
 
     /**

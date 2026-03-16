@@ -19,7 +19,7 @@ public abstract class Personaje implements Comparable<Personaje> {
 
     /** Nombre, tipo de ataque y raza del personaje. */
     private String nombre, tipoAtaque, raza;
-    /** Vida, ataque, armadura, nivel, resistencia y velocidad del personaje. */
+    /** Vida, ataque, armadura, nivel, resistencia mágica y velocidad del personaje. */
     private int pv, atq, arm, nivel, res, vel;
     /** ¿Está defendiendo? */
     private boolean def;
@@ -48,6 +48,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param nivel  Nivel del personaje
      * @param vel    Velocidad del personaje
      * @param res    Resistencia mágica
+     * @param raza   Raza
      */
 
     public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
@@ -61,6 +62,19 @@ public abstract class Personaje implements Comparable<Personaje> {
         setTipoAtaque("fisico");
         setDef(false);
         setRaza("Humano");
+    }
+
+    public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String raza) {
+        setNombre(nombre);
+        setPv(pv);
+        setAtq(atq);
+        setArm(arm);
+        setNivel(nivel);
+        setVel(vel);
+        setRes(res);
+        setTipoAtaque("fisico");
+        setDef(false);
+        setRaza(raza);
     }
 
     /**
@@ -223,9 +237,18 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param raza nueva raza
      */
 
+    /*todo en algún momento reflexionaré para que quede coqueto y tenga funcionalidad pero ahora me da pereza
+
     public void setRaza(String raza) {
-        this.raza = raza;
+        if (raza.equalsIgnoreCase("humano") ||
+                raza.equalsIgnoreCase("elfo") ||
+                raza.equalsIgnoreCase("ninfa") ||
+                raza.equalsIgnoreCase("vampiro") ||
+                raza.equalsIgnoreCase("hada"))
+            this.raza = raza;
+        else this.raza = "";
     }
+    */
 
     /**
      * Establece la raza del personaje directamente.
@@ -233,7 +256,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param raza nueva raza
      */
 
-    protected void settearRaza(String raza) { this.raza = raza; }
+    public void setRaza(String raza) { this.raza = raza; }
 
     /**
      * Devuelve la raza del personaje.
