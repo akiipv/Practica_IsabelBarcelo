@@ -229,14 +229,8 @@ public class Guerrero extends Personaje {
     @Override
     public String toString() {
         String resultado = "Cargando datos del guerrero.. ૮ ․ ․ ྀིა " +
-                "\n\t· Nombre: " + getNombre() +
-                "\n\t· Vida: " + getPv() +
-                "\n\t· Ataque: " + getAtq() +
-                "\n\t· Armadura: " + getArm() +
-                "\n\t· Velocidad: " + getVel() +
-                "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Furia: " + isFuria() +
-                "\n\t· Nivel: " + getNivel();
+                super.toString() +
+                "\n\t· Furia: " + tradusirFuria(isFuria());
         return coquetudo() + "\n\n" + resultado;
     }
 

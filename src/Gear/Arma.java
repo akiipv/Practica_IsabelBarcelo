@@ -50,4 +50,21 @@ public class Arma extends Equipamiento{
             default -> {}
         }
     }
+
+    public String tradusirEmpeñadura(boolean emp){
+        return emp ? "Dos manos" : "Una mano";
+    }
+
+    @Override
+    public String toString() {
+        return "Cargando datos del armadura.. ૮ ․ ․ ྀིა " +
+                super.toString() +
+                "\n\t· Tipo:" + getTipo() +
+                "\n\t· Empeñadura:" + tradusirEmpeñadura(isEmpeñadura());
+    }
+
+    public boolean equals(Arma otro) { return(super.equals(otro) &&
+            this.getTipo().equals(otro.getTipo()) &&
+            this.isEmpeñadura() == otro.isEmpeñadura());
+    }
 }

@@ -138,14 +138,8 @@ public class Ladrón extends Personaje {
     @Override
     public String toString() {
         String resultado = "Cargando datos del ladrón.. ૮ ․ ․ ྀིა " +
-                "\n\t· Nombre: " + getNombre() +
-                "\n\t· Vida: " + getPv() +
-                "\n\t· Ataque: " + getAtq() +
-                "\n\t· Armadura: " + getArm() +
-                "\n\t· Velocidad: " + getVel() +
-                "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Cantidad de robos realizados: " + getOtro() +
-                "\n\t· Nivel: " + getNivel();
+                super.toString() +
+                "\n\t· Cantidad de robos realizados: " + getOtro();
         return coquetudo() + "\n\n" + resultado;
     }
 

@@ -36,4 +36,17 @@ public class Armadura extends Equipamiento{
     public String getTipo() {
         return tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Cargando datos de la armadura.. ૮ ․ ․ ྀིა " +
+                super.toString() +
+                "\n\t· Tipo:" + getTipo() +
+                "\n\t· Material:" + getMaterial();
+    }
+
+    public boolean equals(Armadura otro) { return(super.equals(otro) &&
+            this.getTipo().equals(otro.getTipo()) &&
+            this.getMaterial().equals(otro.getMaterial()));
+    }
 }

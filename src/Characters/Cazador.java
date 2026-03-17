@@ -145,13 +145,7 @@ public class Cazador extends Personaje {
     @Override
     public String toString() {
         String resultado = "Cargando datos del cazador.. ૮ ․ ․ ྀིა " +
-                "\n\t· Nombre: " + getNombre() +
-                "\n\t· Vida: " + getPv() +
-                "\n\t· Ataque: " + getAtq() +
-                "\n\t· Armardura: " + getArm() +
-                "\n\t· Velocidad: " + getVel() +
-                "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Nivel: " + getNivel() +
+                super.toString() +
                 "\n\t\t" + mascota.toString();
         return coquetudo() + "\n\n" + resultado;
     }
@@ -325,14 +319,7 @@ public class Cazador extends Personaje {
         @Override
         public String toString() {
             String resultado = "Cargando datos de la mascotita.." + details(3) +
-                    "\n\t· Nombre: " + getNombre() +
-                    "\n\t· Raza: " + getRaza() +
-                    "\n\t· Vida: " + getPv() +
-                    "\n\t· Ataque: " + getAtq() +
-                    "\n\t· Armardura: " + getArm() +
-                    "\n\t· Velocidad: " + getVel() +
-                    "\n\t· Resistencia mágica: " + getRes() +
-                    "\n\t· Nivel: " + getNivel();
+                    super.toString();
             return coquetudo() + "\n\n" + resultado;
         }
 

@@ -24,4 +24,15 @@ public class Artefacto extends Equipamiento{
     public String getTipo() {
         return tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Cargando datos del artefacto.. ૮ ․ ․ ྀིა " +
+                super.toString() +
+                "\n\t· Tipo:" + getTipo();
+    }
+
+    public boolean equals(Artefacto otro) { return(super.equals(otro) &&
+            this.getTipo().equals(otro.getTipo()));
+    }
 }

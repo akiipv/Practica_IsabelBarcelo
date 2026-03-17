@@ -510,15 +510,14 @@ public abstract class Personaje implements Comparable<Personaje> {
 
     @Override
     public String toString() {
-        String resultado = "Cargando datos del personaje.. ૮ ․ ․ ྀིა " +
-                "\n\t· Nombre: " + getNombre() +
+        return "\n\t· Nombre: " + getNombre() +
+                "\n\t· Raza: " + getRaza() +
                 "\n\t· Vida: " + getPv() +
                 "\n\t· Ataque: " + getAtq() +
                 "\n\t· Armadura: " + getArm() +
                 "\n\t· Velocidad: " + getVel() +
                 "\n\t· Resistencia mágica: " + getRes() +
                 "\n\t· Nivel: " + getNivel();
-        return coquetudo() + "\n\n" + resultado;
     }
 
     /**

@@ -139,14 +139,7 @@ public class Paladin extends Creyente {
     @Override
     public String toString() {
         String resultado = "Cargando datos del paladín.. ૮ ․ ․ ྀིა " +
-                "\n\t· Nombre: " + getNombre() +
-                "\n\t· Vida: " + getPv() +
-                "\n\t· Ataque: " + getAtq() +
-                "\n\t· Armadura: " + getArm() +
-                "\n\t· Velocidad: " + getVel() +
-                "\n\t· Resistencia mágica: " + getRes() +
-                "\n\t· Puntos de fe: " + getOtro() +
-                "\n\t· Nivel: " + getNivel();
+                super.toString();
         return coquetudo() + "\n\n" + resultado;
     }
 

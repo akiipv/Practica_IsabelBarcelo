@@ -57,11 +57,12 @@ public abstract class Equipamiento {
     }
 
     @Override
-    public String toString() { return "Cargando datos del equipamiento.. ૮ ․ ․ ྀིა " +
-            "\n\t·Rareza:" + getRareza() +
-            "\n\t·Nombre:" + getNombre() +
-            "\n\t·Valor:" + getValor() +
-            "\n\t·Estadísticas asociadas:" + getStats(); }
+    public String toString() {
+        return "\n\t· Rareza:" + getRareza() +
+            "\n\t· Nombre:" + getNombre() +
+            "\n\t· Valor:" + getValor() +
+            "\n\t· Estadísticas asociadas:" + getStats();
+    }
 
    // @Override
     public boolean equals(Equipamiento otro) { return(this.getNombre().equals(otro.getNombre()) &&
