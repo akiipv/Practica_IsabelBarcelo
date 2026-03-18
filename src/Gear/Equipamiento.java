@@ -41,7 +41,9 @@ public abstract class Equipamiento {
     }
 
     public void setStats(HashMap<String, Integer> stats) {
-        this.stats.putAll(stats);
+        if (stats.isEmpty())
+            this.stats = null;
+        else this.stats = new HashMap<>(stats);
     }
 
     public String getNombre() { return nombre; }

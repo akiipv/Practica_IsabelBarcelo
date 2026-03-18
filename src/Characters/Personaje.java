@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.*;
 
 import GameMap.Trampa;
+import Gear.Arma;
+import Gear.Armadura;
+import Gear.Artefacto;
 import Manolo.DWritersito;
 
 
@@ -23,6 +26,10 @@ public abstract class Personaje implements Comparable<Personaje> {
     private int pv, atq, arm, nivel, res, vel;
     /** ¿Está defendiendo? */
     private boolean def;
+    private HashMap<String, Armadura> armaduras;
+    private ArrayList<Artefacto> artefactos;
+    private Arma arma;
+
 
     /**
      * Constructor por defecto.
@@ -48,7 +55,6 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @param nivel  Nivel del personaje
      * @param vel    Velocidad del personaje
      * @param res    Resistencia mágica
-     * @param raza   Raza
      */
 
     public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
@@ -63,6 +69,19 @@ public abstract class Personaje implements Comparable<Personaje> {
         setDef(false);
         setRaza("Humano");
     }
+
+    /**
+     * Constructor por parámetros.
+     *
+     * @param nombre Nombre del personaje
+     * @param pv     Puntos de vida
+     * @param atq    Ataque
+     * @param arm    Armadura (defensa física)
+     * @param nivel  Nivel del personaje
+     * @param vel    Velocidad del personaje
+     * @param res    Resistencia mágica
+     * @param raza   Raza
+     */
 
     public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String raza) {
         setNombre(nombre);
@@ -142,37 +161,6 @@ public abstract class Personaje implements Comparable<Personaje> {
         this.setOtro(player.getOtro());
     }
 
-   /* public Personaje(String nombre) {
-        Personaje player = GameTest.randomizaPersonaje(nombre);
-
-        setNombre(nombre);
-        setNivel(player.getNivel());
-        setPv(player.getPv());
-        setAtq(player.getAtq());
-        setArm(player.getArm());
-        setVel(player.getVel());
-        setRes(player.getRes());
-
-    } */
-
-    /* public Personaje(String nombre, int nivelFinal) {
-        Personaje player = GameTest.randomizaPersonaje(nombre);
-        int nivel = player.getNivel();
-
-        setNombre(nombre);
-        setNivel(nivel);
-        setPv(player.getPv());
-        setAtq(player.getAtq());
-        setArm(player.getArm());
-
-        while (getNivel() < nivelFinal) {
-            setPv(getPv() + 1);
-            setAtq(getAtq() + 1);
-            setArm(getArm() + 1);
-            setNivel(getNivel() + 1);
-        }
-    } */
-
     /**
      * Constructor copia.
      *
@@ -189,6 +177,34 @@ public abstract class Personaje implements Comparable<Personaje> {
         setRes(copia.getRes());
         setTipoAtaque(copia.getTipoAtaque());
         setRaza(copia.getRaza());
+    }
+
+    public HashMap<String, Armadura> getArmaduras() {
+        return armaduras;
+    }
+
+    public void setArmaduras(HashMap<String, Armadura> armaduras) {
+        if (armaduras.isEmpty())
+            this.armaduras = null;
+        else this.armaduras = new HashMap<>(armaduras);
+    }
+
+    public ArrayList<Artefacto> getArtefactos() {
+        return artefactos;
+    }
+
+    public void setArtefactos(ArrayList<Artefacto> artefactos) {
+        if (artefactos.isEmpty())
+            this.artefactos = null;
+        else this.artefactos = new ArrayList<>(artefactos);
+    }
+
+    public Arma getArma() {
+        return arma;
+    }
+
+    public void setArma(Arma arma) {
+        this.arma = arma;
     }
 
     /**
@@ -478,12 +494,6 @@ public abstract class Personaje implements Comparable<Personaje> {
         return pv <= 0;
     }
 
-    /* public Personaje clone() {
-        Personaje clon = new Personaje(this.nombre, this.pv, this.atq, this.def, this.nivel);
-        return clon;
-    }
-    */
-
     /**
      * Compara dos personajes.
      *
@@ -740,6 +750,56 @@ public abstract class Personaje implements Comparable<Personaje> {
         }
 
         printDetallito();
+    }
+
+    public void menusito(String mensaje, String[] opciones, int detail) {
+        System.out.println(details(1) + "\n" + mensaje + details(detail));
+
+        for (int i = 0; i < opciones.length; i++) {
+            int index = i + 1;
+            System.out.println("\t" + index + ". " + opciones[i]);
+        }
+
+        printDetallito();
+    }
+
+    public void equipArmadura(Armadura armadura){
+        if (getArmaduras().containsKey(armadura.getTipo()))
+            replaceArmadura(armadura);
+        else getArmaduras().put(armadura.getTipo(), armadura);
+    }
+
+    public void unEquipArmadura(Armadura armadura){
+        if (!getArmaduras().containsValue(armadura))
+            return;
+        getArmaduras().remove(armadura.getTipo(), armadura);
+    }
+
+    // todo mirar en mi casita
+
+    public void replaceArmadura(Armadura armadura){
+        Scanner scan = new Scanner(System.in);
+        menusito("¿Desea reemplazar su " + armadura.getTipo() + " actual?", new String[]{"Sí", "No"}, 2);
+
+        int opcion = 0;
+
+        do {
+            opcion = scan.nextInt();
+            switch (opcion){
+                case 1 -> {
+                    System.out.println("Cambio realizado. " +
+                            "\n\t Ahora tienes equipado:\n" + armadura.toString());
+                    getArmaduras().put(armadura.getTipo(), armadura);
+                }
+                case 2 -> System.out.println("Cambio no realizado, te quedas con:" + getArmaduras().get(armadura.getTipo()).toString());
+                default -> {}
+            }
+        } while (opcion > 2 || opcion < 1);
+    }
+
+    public void equipArtefasto(Artefacto artefacto){
+        if (getArtefactos().size() < 3)
+            getArtefactos().add(artefacto);
     }
 
     // A partir de aquí, son solo métodos de decoración, am sori
