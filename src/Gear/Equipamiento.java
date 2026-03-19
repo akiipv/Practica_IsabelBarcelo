@@ -36,6 +36,7 @@ public abstract class Equipamiento {
             this.rareza = rareza;
         else this.rareza = "";
     }
+
     public void setValor(int valor) {
         this.valor = Math.max(valor, 1);
     }

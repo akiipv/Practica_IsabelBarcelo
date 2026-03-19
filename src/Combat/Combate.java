@@ -2,10 +2,11 @@ package Combat;
 
 import Characters.Personaje;
 import GameMap.*;
+import Gear.*;
 import Manolo.DWritersito;
 
-import java.io.PrintWriter;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 /**
  * Gestiona el sistema de combate por turnos entre dos personajes.
@@ -15,6 +16,8 @@ import java.util.Random;
  */
 
 public class Combate {
+
+    private static Collection<Equipamiento> tesoros;
 
     /**
      * Inicia y controla un combate completo entre dos personajes.
@@ -51,9 +54,7 @@ public class Combate {
 
             bucleCombate(primero, segundo, dw);
 
-            if (!segundo.estaMuerto()){
-                bucleCombate(segundo, primero, dw);
-            }
+            if (!segundo.estaMuerto())bucleCombate(segundo, primero, dw);
         }
         imprimirGanador(primero, segundo, dw);
     }
@@ -67,12 +68,9 @@ public class Combate {
      */
 
     public static void imprimirGanador(Personaje c1, Personaje c2, DWritersito dw) {
-
-        if (c1.estaMuerto() && c2.estaMuerto()) {
-            c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
-        } else if (c1.estaMuerto() && !c2.estaMuerto()) {
-            dw.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
-        } else dw.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
+        if (c1.estaMuerto() && c2.estaMuerto()) c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
+        else if (c1.estaMuerto() && !c2.estaMuerto()) dw.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
+        else dw.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
 
     /**
@@ -100,15 +98,9 @@ public class Combate {
                 player.caerTrampa(trampa, dw);
             else {
                 switch (trampa.getTipo()) {
-                    case "Brea":
-                        player.inspirar(trampa.getPerjuicio(), "defensa", dw);
-                        break;
-                    case "Pinchos":
-                        player.beberPocion(trampa.getPerjuicio(), dw);
-                        break;
-                    case "Serpientes":
-                        player.inspirar(trampa.getPerjuicio(), "ataque", dw);
-                        break;
+                    case "Brea" -> player.inspirar(trampa.getPerjuicio(), "defensa", dw);
+                    case "Pinchos" -> player.beberPocion(trampa.getPerjuicio(), dw);
+                    case "Serpientes" -> player.inspirar(trampa.getPerjuicio(), "ataque", dw);
                 }
             }
         }
@@ -124,7 +116,6 @@ public class Combate {
      */
 
     public static void bucleCombate(Personaje ataca, Personaje recibe, DWritersito pw){
-
         int ataques = 1;
 
         if (ataca.getVel() >= (recibe.getVel() * 2)){
@@ -137,7 +128,48 @@ public class Combate {
         }
 
         trampita(ataca, pw);
+    }
 
+    public static void premiesitos(String csv) throws IOException{
+        if (tesoros == null) tesoros = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(new File("./csv/tesoros/" + csv.toLowerCase() + ".csv")));
+
+        String linea;
+        String [] campos;
+
+        br.readLine();
+        while ((linea = br.readLine()) != null){
+            campos = linea.split(",");
+            switch (csv.toLowerCase()){
+                case "artefacto" -> {
+                    Artefacto artefacto = new Artefacto(campos[1], campos[2], camp);
+
+                    campos = campos[3].split("-");
+                    statsPonel(campos, new String[]{"Fu", "Ve", "Ma", "Fe", "Ar", "RM", "V"}, artefacto);
+                }
+            }
+        }
+        br.close();
+    }
+
+    private static HashMap<String, Integer> getStatsitas(String [] key, int [] valores){
+        HashMap<String, Integer> stats = new HashMap<>();
+
+        for (int i=0; i< key.length; i++){
+            stats.put(key[i], valores[i]);
+        }
+
+        return stats;
+    }
+
+    private static void statsPonel(String [] campos, String [] key, Equipamiento eq){
+        int [] valores = new int[campos.length];
+
+        for (int i = 0; i < campos.length; i++){
+            valores[i] = Integer.parseInt(campos[i]);
+        }
+
+        eq.setStats(getStatsitas(key, valores));
     }
 
     /**
