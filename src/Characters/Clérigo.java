@@ -1,5 +1,7 @@
 package Characters;
 
+import Gear.Arma;
+import Gear.Armadura;
 import Manolo.DWritersito;
 
 import java.io.File;
@@ -131,6 +133,20 @@ public class Clérigo extends Creyente {
     public void accEspesial(Personaje enemigo, DWritersito dw) {
         printPerezita("\uD835\uDC0F\uD835\uDC25\uD835\uDC1E\uD835\uDC20\uD835\uDC1A\uD835\uDC2B\uD835\uDC22\uD835\uDC1A..", dw);
         plegaria(enemigo, dw);
+    }
+
+    @Override
+    public void equipArma(Arma arma){
+        if (arma.getTipo().equals("baston"))
+            super.equipArma(arma);
+        else System.out.println("Este tipo de arma no se puede equipar.");
+    }
+
+    @Override
+    public void equipArmadura(Armadura armadura){
+        if (armadura.getMaterial().equals("tela"))
+            super.equipArmadura(armadura);
+        else System.out.println("No puedes equipar armadura de este material.");
     }
 
     /**

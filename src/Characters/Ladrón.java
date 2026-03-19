@@ -1,5 +1,7 @@
 package Characters;
 
+import Gear.Arma;
+import Gear.Armadura;
 import Manolo.DWritersito;
 
 import java.io.File;
@@ -126,6 +128,22 @@ public class Ladrón extends Personaje {
     public void accEspesial(Personaje enemigo, DWritersito dw) {
         printPerezita("\uD835\uDC79\uD835\uDC90\uD835\uDC83\uD835\uDC82\uD835\uDC93..", dw);
         this.robar(enemigo, dw);
+    }
+
+    @Override
+    public void equipArma(Arma arma){
+        switch (arma.getTipo()) {
+            case "espada", "daga" -> super.equipArma(arma);
+            default -> System.out.println("Este tipo de arma no se puede equipar.");
+        }
+    }
+
+    @Override
+    public void equipArmadura(Armadura armadura){
+        switch (armadura.getMaterial()) {
+            case "tela", "cuero" -> super.equipArmadura(armadura);
+            default -> System.out.println("No puedes equipar armadura de este material.");
+        }
     }
 
     /**

@@ -224,8 +224,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setRes(int res) {
-        if (res <= 0) this.res = 0;
-        else this.res = res;
+        this.res = Math.max(res, 0);
     }
 
     /**
@@ -301,8 +300,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setVel(int vel) {
-        if (vel <= 0) this.vel = 0;
-        else this.vel = vel;
+        this.vel = Math.max(vel, 0);
     }
 
     /**
@@ -312,7 +310,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setNombre(String nombre) {
-        if (nombre.isEmpty() || nombre.contains("GM") || nombre.length() < 2) System.err.println("Error. El nombre debe tener caracteres válidos.");
+        if (nombre.contains("GM") || nombre.length() < 2) System.err.println("Error. El nombre debe tener caracteres válidos.");
         else this.nombre = nombre;
     }
 
@@ -323,8 +321,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setPv(int pv) {
-        if (pv < 0) this.pv = 0;
-        else this.pv = pv;
+        this.pv = Math.max(0, pv);
     }
 
     /**
@@ -334,8 +331,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setAtq(int atq) {
-        if (atq < 0) this.atq = 0;
-        else this.atq = atq;
+        this.atq = Math.max(0, atq);
     }
 
     /**
@@ -345,8 +341,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void setArm(int arm) {
-        if (arm < 0) this.arm = 0;
-        else this.arm = arm;
+        this.arm = Math.max(0, arm);
     }
 
     /**
@@ -446,14 +441,14 @@ public abstract class Personaje implements Comparable<Personaje> {
         switch (tipo) {
             case "ataque":
                 setAtq(getAtq() + cantidad);
-                System.out.println("\n" + getNombre() + ", se ha inspirado.. su ataque sube ahora es " + getAtq() + details(2));
+                dw.println("\n" + getNombre() + ", se ha inspirado.. su ataque sube ahora es " + getAtq() + details(2));
                 break;
             case "defensa":
                 setArm(getArm() + cantidad);
-                System.out.println("\n" + getNombre() + ", se ha inspirado.. su armadura sube ahora es " + getArm() + details(2));
+                dw.println("\n" + getNombre() + ", se ha inspirado.. su armadura sube ahora es " + getArm() + details(2));
                 break;
             default:
-                System.err.println("Error. Introduzca ataque o defensa.");
+                dw.println("Error. Introduzca ataque o defensa.");
         }
     }
 
@@ -764,6 +759,9 @@ public abstract class Personaje implements Comparable<Personaje> {
     }
 
     public void equipArmadura(Armadura armadura){
+        if (getArmaduras().size() >= 6)
+            return;
+
         if (getArmaduras().containsKey(armadura.getTipo()))
             replaceArmadura(armadura);
         else getArmaduras().put(armadura.getTipo(), armadura);
@@ -781,8 +779,7 @@ public abstract class Personaje implements Comparable<Personaje> {
         Scanner scan = new Scanner(System.in);
         menusito("¿Desea reemplazar su " + armadura.getTipo() + " actual?", new String[]{"Sí", "No"}, 2);
 
-        int opcion = 0;
-
+        int opcion;
         do {
             opcion = scan.nextInt();
             switch (opcion){
@@ -798,8 +795,109 @@ public abstract class Personaje implements Comparable<Personaje> {
     }
 
     public void equipArtefasto(Artefacto artefacto){
-        if (getArtefactos().size() < 3)
-            getArtefactos().add(artefacto);
+
+        int anillo = 0, amuleto = 0;
+        for (Artefacto a : getArtefactos()){
+            if (a.getTipo().equals("anillo"))
+                anillo++;
+
+            if (a.getTipo().equals("amuleto"))
+                amuleto++;
+        }
+
+        switch (artefacto.getTipo()) {
+            case "anillo" -> {
+                if (anillo == 2){
+                    System.out.println("Ya tienes 2 anillos.");
+                    replaceArtefasto(artefacto);
+                } else getArtefactos().add(artefacto);
+            }
+            case "amuleto" -> {
+                if (amuleto == 1) {
+                    System.out.println("Ya tienes 1 amuleto.");
+                    replaceArtefasto(artefacto);
+                } else getArtefactos().add(artefacto);
+            }
+            default -> {}
+        }
+    }
+
+    public void replaceArtefasto(Artefacto artefacto){
+        Scanner scan = new Scanner(System.in);
+        if (artefacto.getTipo().equals("anillo"))
+            menusito("¿Desea reemplazar alguno de sus " + artefacto.getTipo() + "s actuales?", new String[]{"Sí", "No"}, 2);
+
+        if (artefacto.getTipo().equals("amuleto"))
+            menusito("¿Desea reemplazar su " + artefacto.getTipo() + " actual?", new String[]{"Sí", "No"}, 2);
+
+        int opcion;
+        do {
+            opcion = scan.nextInt();
+            switch (opcion){
+                case 1 -> {
+                    siReplace(artefacto);
+                }
+                case 2 -> System.out.println("Cambio no realizado.");
+                default -> {}
+            }
+        } while (opcion > 2 || opcion < 1);
+    }
+
+    protected void siReplace(Artefacto artefacto){
+        System.out.println("¿Cuál desea reemplazar?");
+        ArrayList<Integer> clave = new ArrayList<>();
+
+        for (int i = 0; i < getArtefactos().size(); i++) {
+            if (artefacto.getTipo().equals(getArtefactos().get(i).getTipo()))
+                System.out.println("\n\t" + (i + 1) + ". " + getArtefactos().get(i).toString());
+            Artefacto a = getArtefactos().get(i);
+            if (a.getTipo().equals(artefacto.getTipo()))
+                clave.add(i);
+        }
+
+        Scanner scan = new Scanner(System.in);
+        int opcion;
+        do {
+            opcion = scan.nextInt();
+            if (opcion > 0 && opcion <= clave.size()) {
+                System.out.println("Cambio realizado. " +
+                        "\n\t· Ahora tienes equipado:\n" + artefacto.toString());
+
+                int changesito = clave.get(opcion - 1);
+                getArtefactos().set(changesito, artefacto);
+            }
+        } while (!(opcion > 0 && opcion <= clave.size()));
+    }
+
+    public void unEquipArtefasto(Artefacto artefacto){
+        if (!getArtefactos().contains(artefacto))
+            return;
+        getArtefactos().remove(artefacto);
+    }
+
+    public void equipArma(Arma arma){
+        if (this.arma != null)
+            replaceArma(arma);
+        else setArma(arma);
+    }
+
+    public void replaceArma(Arma arma){
+        menusito("¿Desea reemplazar su " + this.arma.getTipo() + " por " + arma.getTipo() + "?", new String[]{"Sí", "No"}, 2);
+
+        Scanner scan = new Scanner(System.in);
+        int opcion;
+        do {
+            opcion = scan.nextInt();
+            switch (opcion){
+                case 1 -> {
+                    System.out.println("Cambio realizado. " +
+                            "\n\t· Ahora tienes equipado:\n" + arma.toString());
+                    setArma(arma);
+                }
+                case 2 -> System.out.println("Cambio no realizado.");
+                default -> {}
+            }
+        } while (opcion > 2 || opcion < 1);
     }
 
     // A partir de aquí, son solo métodos de decoración, am sori

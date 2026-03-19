@@ -17,7 +17,7 @@ public class Armadura extends Equipamiento{
 
     public void setTipo(String tipo) {
         switch (tipo.toLowerCase()){
-            case "yelmos", "pecheras", "hombreras", "guanteletes", "grebas", "botas" -> this.tipo = tipo;
+            case "yelmo", "pechera", "hombreras", "guanteletes", "grebas", "botas" -> this.tipo = tipo;
             default -> {this.tipo = "";}
         }
     }

@@ -1,5 +1,9 @@
 package Characters;
 
+import Gear.Arma;
+import Gear.Armadura;
+import Gear.Artefacto;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -142,6 +146,51 @@ public class Monstruo extends Personaje {
         }
 
         return cantidad;
+    }
+
+    @Override
+    public void equipArma(Arma arma){
+        switch (getRaza().toLowerCase()) {
+            case "bestia" -> System.out.println("Las bestias no pueden llevar armas.");
+            case "no-muerto" -> super.equipArma(arma);
+            case "gigante" -> System.out.println("Este arma es muy pequeña para que el gigante la lleve.");
+        }
+    }
+
+    @Override
+    public void equipArmadura(Armadura armadura){
+        switch (getRaza().toLowerCase()) {
+            case "bestia" -> System.out.println("Las bestias no pueden llevar armadura.");
+            case "no-muerto" -> System.out.println("Los no-muertos no pueden llevar armadura.");
+            case "gigante" -> {
+                if (armadura.getMaterial().equals("cuero"))
+                    super.equipArmadura(armadura);
+            }
+        }
+    }
+
+    @Override
+    public void equipArtefasto(Artefacto artefacto){
+        switch (getRaza().toLowerCase()) {
+            case "bestia" -> equipArtefastoB(artefacto);
+            case "no-muerto" -> super.equipArtefasto(artefacto); // cmo no dice nada voy a suponer que si puede
+            case "gigante" -> System.out.println("Este " + artefacto.getTipo() + "es muy pequeño para que el gigante la lleve.");
+        }
+    }
+
+    public void equipArtefastoB(Artefacto artefacto){
+        int amuleto = 0;
+        for (Artefacto a : getArtefactos()){
+            if (a.getTipo().equals("amuleto"))
+                amuleto++;
+        }
+
+        if (artefacto.getTipo().equals("amuleto")) {
+            if (amuleto == 1) {
+                System.out.println("Ya tienes 1 amuleto.");
+                replaceArtefasto(artefacto);
+            } else getArtefactos().add(artefacto);
+        } else System.out.println("Solo se pueden equipar amuletos en mascotas.");
     }
 
     /**

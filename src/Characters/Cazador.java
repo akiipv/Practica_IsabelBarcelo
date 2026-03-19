@@ -1,5 +1,8 @@
 package Characters;
 
+import Gear.Arma;
+import Gear.Armadura;
+import Gear.Artefacto;
 import Manolo.DWritersito;
 
 import java.io.*;
@@ -133,6 +136,21 @@ public class Cazador extends Personaje {
         setNivel(getNivel() + 1);
         mascota.subirNivel();
         System.out.println(getNombre() + ", ¡ha subido de nivel!\n\t" + toString());
+    }
+
+    @Override
+    public void equipArma(Arma arma){
+        switch (arma.getTipo()) {
+            case "hacha", "daga", "espada", "arco" -> super.equipArma(arma);
+            default -> System.out.println("Este tipo de arma no se puede equipar.");
+        }
+    }
+
+    @Override
+    public void equipArmadura(Armadura armadura){
+        if (armadura.getMaterial().equals("cuero"))
+            super.equipArmadura(armadura);
+        else System.out.println("No puedes equipar armadura de este material.");
     }
 
     /**
@@ -350,6 +368,32 @@ public class Cazador extends Personaje {
         @Override
         public void subirNivel() {
             setNivel(getNivel() + 1);
+        }
+
+        @Override
+        public void equipArma(Arma arma){
+            System.out.println("Las mascotan no pueden llevar armas.");
+        }
+
+        @Override
+        public void equipArmadura(Armadura armadura){
+            System.out.println("Las mascotan no pueden llevar armadura.");
+        }
+
+        @Override
+        public void equipArtefasto(Artefacto artefacto){
+            int amuleto = 0;
+            for (Artefacto a : getArtefactos()){
+                if (a.getTipo().equals("amuleto"))
+                    amuleto++;
+            }
+
+            if (artefacto.getTipo().equals("amuleto")) {
+                if (amuleto == 1) {
+                    System.out.println("Ya tienes 1 amuleto.");
+                    replaceArtefasto(artefacto);
+                } else getArtefactos().add(artefacto);
+            } else System.out.println("Solo se pueden equipar amuletos en mascotas.");
         }
     }
 

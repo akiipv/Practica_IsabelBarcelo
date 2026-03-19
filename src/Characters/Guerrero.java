@@ -1,5 +1,6 @@
 package Characters;
 
+import Gear.Arma;
 import Manolo.DWritersito;
 
 import java.io.BufferedReader;
@@ -217,6 +218,14 @@ public class Guerrero extends Personaje {
         }
 
         return dañoRecibido;
+    }
+
+    @Override
+    public void equipArma(Arma arma){
+        switch (arma.getTipo()) {
+            case "cetro", "baston", "arco" -> System.out.println("Este tipo de arma no se puede equipar");
+            default -> super.equipArma(arma);
+        }
     }
 
     /**

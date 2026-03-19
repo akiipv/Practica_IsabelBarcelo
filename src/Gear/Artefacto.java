@@ -16,7 +16,7 @@ public class Artefacto extends Equipamiento{
 
     public void setTipo(String tipo) {
         switch (tipo){
-            case "anillos", "amuletos" -> this.tipo = tipo;
+            case "anillo", "amuleto" -> this.tipo = tipo;
             default -> {this.tipo = "";}
         }
     }

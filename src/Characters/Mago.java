@@ -1,5 +1,7 @@
 package Characters;
 
+import Gear.Arma;
+import Gear.Armadura;
 import Manolo.DWritersito;
 
 import java.io.File;
@@ -172,6 +174,21 @@ public class Mago extends Personaje {
     public void accEspesial(Personaje enemigo, DWritersito dw) {
         printPerezita("\uD835\uDC73\uD835\uDC82\uD835\uDC8F\uD835\uDC9B\uD835\uDC82\uD835\uDC93 \uD835\uDC84\uD835\uDC90\uD835\uDC8F\uD835\uDC8B\uD835\uDC96\uD835\uDC93\uD835\uDC90..", dw);
         lanzarConjuro(enemigo, dw);
+    }
+
+    @Override
+    public void equipArma(Arma arma){
+        switch (arma.getTipo()) {
+            case "cetro", "baston" -> super.equipArma(arma);
+            default -> System.out.println("Este tipo de arma no se puede equipar.");
+        }
+    }
+
+    @Override
+    public void equipArmadura(Armadura armadura){
+        if (armadura.getMaterial().equals("tela"))
+            super.equipArmadura(armadura);
+        else System.out.println("No puedes equipar armadura de este material.");
     }
 
     /**
