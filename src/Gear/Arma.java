@@ -17,6 +17,11 @@ public class Arma extends Equipamiento{
         setTipo(tipo);
     }
 
+    public Arma(String nombre, String rareza, String tipo, int valor) {
+        super(nombre, rareza, valor);
+        setTipo(tipo);
+    }
+
     public boolean isEmpeñadura() {
         return empeñadura;
     }

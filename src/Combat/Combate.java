@@ -130,9 +130,9 @@ public class Combate {
         trampita(ataca, pw);
     }
 
-    public static void premiesitos(String csv) throws IOException{
+    public static void premiesitos(String csvName) throws IOException{
         if (tesoros == null) tesoros = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(new File("./csv/tesoros/" + csv.toLowerCase() + ".csv")));
+        BufferedReader br = new BufferedReader(new FileReader(new File("./csv/tesoros/" + csvName.toLowerCase() + ".csv")));
 
         String linea;
         String [] campos;
@@ -140,13 +140,23 @@ public class Combate {
         br.readLine();
         while ((linea = br.readLine()) != null){
             campos = linea.split(",");
-            switch (csv.toLowerCase()){
-                case "artefacto" -> {
-                    Artefacto artefacto = new Artefacto(campos[1], campos[2], camp);
-
+            switch (csvName.toLowerCase()){
+                case "artefactos" -> {
+                    Artefacto artefacto = new Artefacto(campos[0], campos[1], Integer.parseInt(campos[4]), campos[2]);
                     campos = campos[3].split("-");
                     statsPonel(campos, new String[]{"Fu", "Ve", "Ma", "Fe", "Ar", "RM", "V"}, artefacto);
                 }
+                case "armas" -> {
+                    Arma arma = new Arma(campos[0], campos[1], campos[2], Integer.parseInt(campos[4]));
+                    campos = campos[3].split("-");
+                    statsPonel(campos, new String[]{"Fu", "Ve", "Ma", "Fe"}, arma);
+                }
+                case "armadura" -> {
+                    Armadura armadura = new Armadura(campos[0], campos[1], campos[2], campos[3], Integer.parseInt(campos[5]));
+                    campos = campos[4].split("-");
+                    statsPonel(campos, new String[]{"Ar", "RM", "V"}, armadura);
+                }
+                default -> {}
             }
         }
         br.close();

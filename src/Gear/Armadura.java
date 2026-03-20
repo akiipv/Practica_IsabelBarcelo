@@ -9,8 +9,14 @@ public class Armadura extends Equipamiento{
         tipo = material = "";
     }
 
-    public Armadura(String nombre, String rareza, int valor, HashMap<String, Integer> stats, String tipo) {
+    public Armadura(String nombre, String rareza, int valor, HashMap<String, Integer> stats, String tipo, String material) {
         super(nombre, rareza, valor, stats);
+        setTipo(tipo);
+        setMaterial(material);
+    }
+
+    public Armadura(String nombre, String rareza, String tipo, String material, int valor) {
+        super(nombre, rareza, valor);
         setTipo(tipo);
         setMaterial(material);
     }

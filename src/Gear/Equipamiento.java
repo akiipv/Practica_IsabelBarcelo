@@ -22,6 +22,12 @@ public abstract class Equipamiento {
         setStats(stats);
     }
 
+    public Equipamiento(String nombre, String rareza, int valor) {
+        setNombre(nombre);
+        setRareza(rareza);
+        setValor(valor);
+    }
+
     public void setNombre(String nombre) {
         if (nombre.length() > 20 || (nombre.isEmpty()))
             this.nombre = "";

@@ -14,6 +14,11 @@ public class Artefacto extends Equipamiento{
         setTipo(tipo);
     }
 
+    public Artefacto(String nombre, String rareza, int valor, String tipo) {
+        super(nombre, rareza, valor);
+        setTipo(tipo);
+    }
+
     public void setTipo(String tipo) {
         switch (tipo){
             case "anillo", "amuleto" -> this.tipo = tipo;
