@@ -144,17 +144,17 @@ public class Combate {
                 case "artefactos" -> {
                     Artefacto artefacto = new Artefacto(campos[0], campos[1], Integer.parseInt(campos[4]), campos[2]);
                     campos = campos[3].split("-");
-                    statsPonel(campos, new String[]{"Fu", "Ve", "Ma", "Fe", "Ar", "RM", "V"}, artefacto);
+                    statsPonel(campos, new String[]{"Ataque", "Velocidad", "Magia", "Fe", "Armadura", "Resistencia Mágica", "Vida"}, artefacto);
                 }
                 case "armas" -> {
                     Arma arma = new Arma(campos[0], campos[1], campos[2], Integer.parseInt(campos[4]));
                     campos = campos[3].split("-");
-                    statsPonel(campos, new String[]{"Fu", "Ve", "Ma", "Fe"}, arma);
+                    statsPonel(campos, new String[]{"Ataque", "Velocidad", "Magia", "Fe"}, arma);
                 }
                 case "armadura" -> {
                     Armadura armadura = new Armadura(campos[0], campos[1], campos[2], campos[3], Integer.parseInt(campos[5]));
                     campos = campos[4].split("-");
-                    statsPonel(campos, new String[]{"Ar", "RM", "V"}, armadura);
+                    statsPonel(campos, new String[]{"Armadura", "Resistencia Mágica", "Vida"}, armadura);
                 }
                 default -> {}
             }
