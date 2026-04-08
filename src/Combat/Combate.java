@@ -130,6 +130,12 @@ public class Combate {
         trampita(ataca, pw);
     }
 
+    public static void cargarPremiesitos() throws IOException {
+        premiesitos("artefactos");
+        premiesitos("armas");
+        premiesitos("armadura");
+    }
+
     public static void premiesitos(String csvName) throws IOException{
         if (tesoros == null) tesoros = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(new File("./csv/tesoros/" + csvName.toLowerCase() + ".csv")));
@@ -145,16 +151,19 @@ public class Combate {
                     Artefacto artefacto = new Artefacto(campos[0], campos[1], Integer.parseInt(campos[4]), campos[2]);
                     campos = campos[3].split("-");
                     statsPonel(campos, new String[]{"Ataque", "Velocidad", "Magia", "Fe", "Armadura", "Resistencia Mágica", "Vida"}, artefacto);
+                    tesoros.add(artefacto);
                 }
                 case "armas" -> {
                     Arma arma = new Arma(campos[0], campos[1], campos[2], Integer.parseInt(campos[4]));
                     campos = campos[3].split("-");
                     statsPonel(campos, new String[]{"Ataque", "Velocidad", "Magia", "Fe"}, arma);
+                    tesoros.add(arma);
                 }
                 case "armadura" -> {
                     Armadura armadura = new Armadura(campos[0], campos[1], campos[2], campos[3], Integer.parseInt(campos[5]));
                     campos = campos[4].split("-");
                     statsPonel(campos, new String[]{"Armadura", "Resistencia Mágica", "Vida"}, armadura);
+                    tesoros.add(armadura);
                 }
                 default -> {}
             }
