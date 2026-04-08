@@ -57,6 +57,8 @@ public class Combate {
             if (!segundo.estaMuerto())bucleCombate(segundo, primero, dw);
         }
         imprimirGanador(primero, segundo, dw);
+
+        reclamarPremio(getPremiesito(tesoros), getGanador(primero, segundo));
     }
 
     /**
@@ -71,6 +73,12 @@ public class Combate {
         if (c1.estaMuerto() && c2.estaMuerto()) c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
         else if (c1.estaMuerto() && !c2.estaMuerto()) dw.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
         else dw.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
+    }
+
+    public static Personaje getGanador(Personaje c1, Personaje c2){
+        if (c1.estaMuerto() && c2.estaMuerto()) return null;
+        else if (c1.estaMuerto() && !c2.estaMuerto()) return c2;
+        else return c1;
     }
 
     /**
@@ -128,6 +136,22 @@ public class Combate {
         }
 
         trampita(ataca, pw);
+    }
+
+    public static Equipamiento getPremiesito(ArrayList<Equipamiento> tesoros){
+        Random r = new Random();
+        int limiste = r.nextInt(0, tesoros.size());
+
+        return tesoros.get(limiste);
+    }
+
+    public static void reclamarPremio(Equipamiento eq, Personaje player){
+        switch (eq.getClass().getSimpleName()){
+            case "Arma" -> player.equipArma((Arma) eq);
+            case "Armadura" -> player.equipArmadura((Armadura) eq);
+            case "Artefacto" -> player.equipArtefasto((Artefacto) eq);
+            default -> {}
+        }
     }
 
     public static void cargarPremiesitos() throws IOException {
