@@ -58,7 +58,7 @@ public class Combate {
         }
         imprimirGanador(primero, segundo, dw);
 
-        reclamarPremio(getPremiesito(tesoros), getGanador(primero, segundo));
+        reclamarPremio(getPremiesito((ArrayList<Equipamiento>) tesoros), getGanador(primero, segundo));
     }
 
     /**
@@ -70,9 +70,8 @@ public class Combate {
      */
 
     public static void imprimirGanador(Personaje c1, Personaje c2, DWritersito dw) {
-        if (c1.estaMuerto() && c2.estaMuerto()) c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
-        else if (c1.estaMuerto() && !c2.estaMuerto()) dw.println("\n\t" + c2.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c2.details(6));
-        else dw.println("\n\t" + c1.getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
+        if (getGanador(c1, c2) == null) c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
+        else dw.println("\n\t" + getGanador(c1, c2).getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
 
     public static Personaje getGanador(Personaje c1, Personaje c2){
@@ -146,12 +145,28 @@ public class Combate {
     }
 
     public static void reclamarPremio(Equipamiento eq, Personaje player){
-        switch (eq.getClass().getSimpleName()){
-            case "Arma" -> player.equipArma((Arma) eq);
-            case "Armadura" -> player.equipArmadura((Armadura) eq);
-            case "Artefacto" -> player.equipArtefasto((Artefacto) eq);
-            default -> {}
-        }
+        Scanner scan = new Scanner(System.in);
+
+        // todo cuando tenga internet lo pongo coquette ahora mismo no puedo, m kiero suisidar
+        System.out.println("felisidades, as gnado este premiesito: " +
+                "\n" + eq.toString());
+        player.menusito("¿Desea equiparlo", new String[]{"Sí", "No"}, 2);
+        int opcion = 0;
+
+        do {
+            opcion = scan.nextInt();
+
+            if (opcion == 1){
+                switch (eq.getClass().getSimpleName()){
+                    case "Arma" -> player.equipArma((Arma) eq);
+                    case "Armadura" -> player.equipArmadura((Armadura) eq);
+                    case "Artefacto" -> player.equipArtefasto((Artefacto) eq);
+                    default -> {}
+                }
+            } else System.out.println("El premio ha sido desechado, lol que mal");
+        } while (opcion != 1 || opcion != 2);
+
+        tesoros.remove(eq);
     }
 
     public static void cargarPremiesitos() throws IOException {

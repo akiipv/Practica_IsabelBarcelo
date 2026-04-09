@@ -9,6 +9,7 @@ public abstract class Equipamiento {
     private int valor;
     private HashMap<String, Integer> stats;
 
+    //todo rewrite el setter d stats before m de depreison
     public Equipamiento() {
         rareza = nombre = "";
         valor = 1;

@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Artefacto ar = new Artefacto();
-
-        System.out.println(ar.toString());
+        Personaje p = new Paladin("Iván", 99, 99, 99, 99, 99, 99, 99);
+        GameLogger.cardIB(p);
     }
 }

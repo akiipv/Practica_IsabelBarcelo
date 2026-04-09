@@ -7,6 +7,7 @@ import GameMap.Trampa;
 import Gear.Arma;
 import Gear.Armadura;
 import Gear.Artefacto;
+import Gear.Equipamiento;
 import Manolo.DWritersito;
 
 
