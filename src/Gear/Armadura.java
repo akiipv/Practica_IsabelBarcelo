@@ -44,6 +44,16 @@ public class Armadura extends Equipamiento{
     }
 
     @Override
+    public int recuperaEstadistica(String stat) {
+        switch (stat.toLowerCase()){
+            case "defensa", "resistencia mágica", "vida" -> {
+                return getStats().getOrDefault(stat, 0);
+            }
+            default -> {return 0;}
+        }
+    }
+
+    @Override
     public String toString() {
         return "Cargando datos de la armadura.. ૮ ․ ․ ྀིა " +
                 super.toString() +

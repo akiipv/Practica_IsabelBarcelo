@@ -187,8 +187,8 @@ public class Guerrero extends Personaje {
     @Override
     public int atacar() {
         if (isFuria()) {
-            return getAtq() * 2;
-        } else return getAtq();
+            return getAtck() * 2;
+        } else return getAtck();
     }
 
     /**
@@ -206,12 +206,12 @@ public class Guerrero extends Personaje {
 
         switch (tipoDaño) {
             case "fisico":
-                dañoRecibido = dañoHecho - getArm();
+                dañoRecibido = dañoHecho - getArmie();
                 if (dañoRecibido < 0) dañoRecibido = 0;
                 if (isFuria()) dañoRecibido *= 2;
                 break;
             case "magico":
-                dañoRecibido = dañoHecho - getRes();
+                dañoRecibido = dañoHecho - getResis();
                 if (dañoRecibido < 0) dañoRecibido = 0;
                 if (isFuria()) dañoRecibido *= 2;
                 break;

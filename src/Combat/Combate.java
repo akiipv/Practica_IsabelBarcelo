@@ -36,7 +36,7 @@ public class Combate {
         Personaje primero;
         Personaje segundo;
 
-        if (c1.getVel() >= c2.getVel()) {
+        if (c1.getVelos() >= c2.getVelos()) {
             primero = c1;
             segundo = c2;
         } else {
@@ -74,7 +74,7 @@ public class Combate {
         else dw.println("\n\t" + getGanador(c1, c2).getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
 
-    public static Personaje getGanador(Personaje c1, Personaje c2){
+    protected static Personaje getGanador(Personaje c1, Personaje c2){
         if (c1.estaMuerto() && c2.estaMuerto()) return null;
         else if (c1.estaMuerto() && !c2.estaMuerto()) return c2;
         else return c1;
@@ -164,7 +164,7 @@ public class Combate {
                     default -> {}
                 }
             } else System.out.println("El premio ha sido desechado, lol que mal");
-        } while (opcion != 1 || opcion != 2);
+        } while (opcion > 2 || opcion < 1);
 
         tesoros.remove(eq);
     }
@@ -189,19 +189,19 @@ public class Combate {
                 case "artefactos" -> {
                     Artefacto artefacto = new Artefacto(campos[0], campos[1], Integer.parseInt(campos[4]), campos[2]);
                     campos = campos[3].split("-");
-                    statsPonel(campos, new String[]{"Ataque", "Velocidad", "Magia", "Fe", "Armadura", "Resistencia Mágica", "Vida"}, artefacto);
+                    statsPonel(campos, new String[]{"fuerza", "velocidad", "magia", "fe", "defensa", "resistencia mágica", "vida"}, artefacto);
                     tesoros.add(artefacto);
                 }
                 case "armas" -> {
                     Arma arma = new Arma(campos[0], campos[1], campos[2], Integer.parseInt(campos[4]));
                     campos = campos[3].split("-");
-                    statsPonel(campos, new String[]{"Ataque", "Velocidad", "Magia", "Fe"}, arma);
+                    statsPonel(campos, new String[]{"fuerza", "velocidad", "magia", "fe"}, arma);
                     tesoros.add(arma);
                 }
                 case "armadura" -> {
                     Armadura armadura = new Armadura(campos[0], campos[1], campos[2], campos[3], Integer.parseInt(campos[5]));
                     campos = campos[4].split("-");
-                    statsPonel(campos, new String[]{"Armadura", "Resistencia Mágica", "Vida"}, armadura);
+                    statsPonel(campos, new String[]{"defensa", "resistencia mágica", "vida"}, armadura);
                     tesoros.add(armadura);
                 }
                 default -> {}

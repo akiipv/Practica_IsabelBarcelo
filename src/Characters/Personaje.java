@@ -7,7 +7,6 @@ import GameMap.Trampa;
 import Gear.Arma;
 import Gear.Armadura;
 import Gear.Artefacto;
-import Gear.Equipamiento;
 import Manolo.DWritersito;
 
 
@@ -532,7 +531,6 @@ public abstract class Personaje implements Comparable<Personaje> {
      * @return cadena con los atributos y estadísticas del personaje
      */
 
-
     public abstract String cartita();
 
     /**
@@ -574,7 +572,70 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public int atacar() {
-        return getAtq();
+        if (getArma() == null && getArmaduras().isEmpty() && getArtefactos().isEmpty()) return getAtq();
+        return getAtck();
+    }
+
+    protected int getAtck(){
+        int total = getArma().recuperaEstadistica("fuerza");
+
+        for (Artefacto art : this.getArtefactos()){
+            total += art.recuperaEstadistica("fuerza");
+        }
+
+        return this.getAtq() + total;
+    }
+
+    public int getVelos(){
+        int total = getArma().recuperaEstadistica("velocidad");
+
+        for (Artefacto art : this.getArtefactos()){
+            total += art.recuperaEstadistica("velocidad");
+        }
+
+        return this.getVel() + total;
+    }
+
+    public int getArmie(){
+        int total = 0;
+
+        for (Artefacto art : this.getArtefactos()){
+            total += art.recuperaEstadistica("defensa");
+        }
+
+        for (Armadura armadura : this.getArmaduras().values()){
+            total += armadura.recuperaEstadistica("defensa");
+        }
+
+        return this.getArm() + total;
+    }
+
+    public int getResis(){
+        int total = 0;
+
+        for (Artefacto art : this.getArtefactos()){
+            total += art.recuperaEstadistica("resistencia mágica");
+        }
+
+        for (Armadura armadura : this.getArmaduras().values()){
+            total += armadura.recuperaEstadistica("resistencia mágica");
+        }
+
+        return this.getRes() + total;
+    }
+
+    public int getHP(){
+        int total = 0;
+
+        for (Artefacto art : this.getArtefactos()){
+            total += art.recuperaEstadistica("vida");
+        }
+
+        for (Armadura armadura : this.getArmaduras().values()){
+            total += armadura.recuperaEstadistica("vida");
+        }
+
+        return this.getPv() + total;
     }
 
     /**
@@ -589,14 +650,14 @@ public abstract class Personaje implements Comparable<Personaje> {
         int dañoRecibido = 0;
 
         switch (tipoDaño) {
-            case "fisico":
-                dañoRecibido = dañoHecho - getArm();
+            case "fisico" -> {
+                dañoRecibido = dañoHecho - getArmie() ;
                 if (dañoRecibido < 0) dañoRecibido = 0;
-                break;
-            case "magico":
-                dañoRecibido = dañoHecho - getRes();
+            }
+            case "magico" -> {
+                dañoRecibido = dañoHecho - getResis();
                 if (dañoRecibido < 0) dañoRecibido = 0;
-                break;
+            }
         }
 
         return dañoRecibido;
@@ -621,7 +682,7 @@ public abstract class Personaje implements Comparable<Personaje> {
      */
 
     public void printPv(Personaje player, DWritersito dw) {
-        dw.println("\t· Su vida actual es de: " + player.getPv());
+        dw.println("\t· Su vida actual es de: " + player.getHP());
     }
 
     /**

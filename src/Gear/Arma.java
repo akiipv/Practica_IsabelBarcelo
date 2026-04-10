@@ -49,10 +49,12 @@ public class Arma extends Equipamiento{
     }
 
     @Override
-    public void recuperaEstadistica(String stat) {
+    public int recuperaEstadistica(String stat) {
         switch (stat.toLowerCase()){
-            case "fuerza", "magia", "fe", "velocidad" -> getStats().get(stat);
-            default -> {}
+            case "fuerza", "magia", "fe", "velocidad" -> {
+                return getStats().getOrDefault(stat, 0);
+            }
+            default -> {return 0;}
         }
     }
 

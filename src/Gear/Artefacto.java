@@ -31,6 +31,16 @@ public class Artefacto extends Equipamiento{
     }
 
     @Override
+    public int recuperaEstadistica(String stat) {
+        switch (stat.toLowerCase()){
+            case "fuerza", "magia", "fe", "velocidad", "defensa", "resistencia mágica", "vida" -> {
+                return getStats().getOrDefault(stat, 0);
+            }
+            default -> {return 0;}
+        }
+    }
+
+    @Override
     public String toString() {
         return "Cargando datos del artefacto.. ૮ ․ ․ ྀིა " +
                 super.toString() +

@@ -62,9 +62,7 @@ public abstract class Equipamiento {
         return stats;
     }
 
-    public void recuperaEstadistica(String stat) {
-        stats.getOrDefault(stat, -1);
-    }
+    public abstract int recuperaEstadistica(String stat);
 
     @Override
     public String toString() {
