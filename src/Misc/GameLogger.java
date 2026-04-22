@@ -180,6 +180,14 @@ public class GameLogger {
         return horita + "." + minuto + " ";
     }
 
+    public static LocalDate getFecha() {
+        return fecha;
+    }
+
+    public static String getDirectorio() {
+        return directorio;
+    }
+
     /**
      * Sube de nivel al ganador de un combate leyendo su ficha.
      *

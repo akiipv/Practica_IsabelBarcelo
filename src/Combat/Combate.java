@@ -4,6 +4,7 @@ import Characters.Personaje;
 import GameMap.*;
 import Gear.*;
 import Manolo.DWritersito;
+import Misc.GameLogger;
 
 import java.io.*;
 import java.util.*;
@@ -17,7 +18,7 @@ import java.util.*;
 
 public class Combate {
 
-    private static Collection<Equipamiento> tesoros;
+    private static ArrayList<Equipamiento> tesoros;
 
     /**
      * Inicia y controla un combate completo entre dos personajes.
@@ -58,7 +59,25 @@ public class Combate {
         }
         imprimirGanador(primero, segundo, dw);
 
-        reclamarPremio(getPremiesito((ArrayList<Equipamiento>) tesoros), getGanador(primero, segundo));
+        reclamarPremio(getPremiesito(tesoros), getGanador(primero, segundo));
+    }
+
+    public static void combateGrupo(ArrayList<Personaje> g1, ArrayList<Personaje> g2) throws IOException {
+        g1.sort(Personaje::compareTo);
+        g2.sort(Personaje::compareTo);
+
+        int i = 0, j = 0;
+        while (g1 != null || g2 != null) {
+            combatir(g1.get(++i), g2.get(++j),
+                    new DWritersito(
+                            new PrintWriter(System.out, true),
+                            new PrintWriter(
+                                    new FileWriter(
+                                    GameLogger.getDirectorio() + GameLogger.getFecha() + "_" + GameLogger.getHorita() + " — " + g1.get(0).getNombre() + "VS" + g2.get(0).getNombre() + ".txt")
+                            )
+                    )
+            );
+        }
     }
 
     /**
