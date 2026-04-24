@@ -1017,6 +1017,10 @@ public abstract class Personaje implements Comparable<Personaje> {
         dw.println("\t\t" + acc + "\n");
     }
 
+    public void printPerezita(String acc) {
+        System.out.println("\t\t" + acc + "\n");
+    }
+
     /**
      * Devuelve un texto subrayado para mostrar por consola.
      *

@@ -232,7 +232,7 @@ public class Mago extends Personaje {
      * @return cadena decorativa
      */
 
-    public String coquetoM() {
+    private String coquetoM() {
         return "⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⣸⠤⠖⠛⠉⠉⠉⠉⠉⠻⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⣠⠞⠋⡾⡀⠀⠀⠀⠀⠀⠀⠀⠀⢈⡧⢖⣒⣋⠙⢢⡀⠀⠀\n" +

@@ -169,7 +169,7 @@ public class Clérigo extends Creyente {
      * @return cadena decorativa
      */
 
-    public String coquetoC() {
+    private String coquetoC() {
         return "⠀⠀⠀⠀⢀⡠⣾⣳⡀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⡀⠀⠚⢿⣿⣿⡿⠙⠀⠀⠀⠀\n" +
                 "⠀⣘⣿⣇⡀⢘⣿⣿⠀⢀⣠⣶⡀⠀\n" +

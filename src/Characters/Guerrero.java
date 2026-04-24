@@ -281,7 +281,7 @@ public class Guerrero extends Personaje {
      * @return cadena decorativa
      */
 
-    public String coquetoG() {
+    private String coquetoG() {
         return "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡧⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀\n" +

@@ -404,7 +404,7 @@ public class Cazador extends Personaje {
      * @return cadena decorativa
      */
 
-    public String coquetoCM() {
+    private String coquetoCM() {
 
         return switch (mascota.getRaza()) {
 

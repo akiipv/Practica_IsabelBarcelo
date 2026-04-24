@@ -66,9 +66,11 @@ public class Combate {
         g1.sort(Personaje::compareTo);
         g2.sort(Personaje::compareTo);
 
-        int i = 0, j = 0;
-        while (g1 != null || g2 != null) {
-            combatir(g1.get(++i), g2.get(++j),
+        while (!g1.isEmpty() || !g2.isEmpty()) {
+            Personaje p1 = getAlfa(g1);
+            Personaje p2 = getAlfa(g2);
+
+            combatir(p1, p2,
                     new DWritersito(
                             new PrintWriter(System.out, true),
                             new PrintWriter(
@@ -77,7 +79,23 @@ public class Combate {
                             )
                     )
             );
+
+            if (p1.estaMuerto()) g1.remove(p1);
+            if (p2.estaMuerto()) g2.remove(p2);
         }
+
+        if (g1.isEmpty() && g2.isEmpty()) {}
+        else if (g1.isEmpty()) reclamarPremio(getPremiesitos(tesoros, g2), g1);
+        else reclamarPremio(getPremiesitos(tesoros, g1), g2);
+    }
+
+    private static Personaje getAlfa(ArrayList<Personaje> g){
+        Personaje alfa = g.getFirst();
+        for (Personaje p : g) {
+            if (p.getNivel() > alfa.getNivel())
+                alfa = p;
+        }
+        return alfa;
     }
 
     /**
@@ -93,7 +111,7 @@ public class Combate {
         else dw.println("\n\t" + getGanador(c1, c2).getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
 
-    protected static Personaje getGanador(Personaje c1, Personaje c2){
+    private static Personaje getGanador(Personaje c1, Personaje c2){
         if (c1.estaMuerto() && c2.estaMuerto()) return null;
         else if (c1.estaMuerto() && !c2.estaMuerto()) return c2;
         else return c1;
@@ -141,7 +159,7 @@ public class Combate {
      * @param recibe personaje que recibe la acción
      */
 
-    public static void bucleCombate(Personaje ataca, Personaje recibe, DWritersito pw){
+    private static void bucleCombate(Personaje ataca, Personaje recibe, DWritersito pw){
         int ataques = 1;
 
         if (ataca.getVel() >= (recibe.getVel() * 2)){
@@ -156,19 +174,64 @@ public class Combate {
         trampita(ataca, pw);
     }
 
-    public static Equipamiento getPremiesito(ArrayList<Equipamiento> tesoros){
+    private static Equipamiento getPremiesito(ArrayList<Equipamiento> tesoros){
         Random r = new Random();
         int limiste = r.nextInt(0, tesoros.size());
 
         return tesoros.get(limiste);
     }
 
+    private static ArrayList<Equipamiento> getPremiesitos(ArrayList<Equipamiento> tesoros, ArrayList<Personaje> g2){
+        Random r = new Random();
+        ArrayList<Equipamiento> premios = new ArrayList<>();
+
+        for (Personaje p : g2) {
+            int limiste = r.nextInt(0, tesoros.size());
+            premios.add(tesoros.get(limiste));
+        }
+
+        return premios;
+    }
+
+    public static void reclamarPremio(ArrayList<Equipamiento> eq, ArrayList<Personaje> g1){
+        Scanner scan = new Scanner(System.in);
+
+        g1.getFirst().printPerezita("\uD835\uDC6C\uD835\uDC94\uD835\uDC95\uD835\uDC86 \uD835\uDC86\uD835\uDC94 \uD835\uDC86\uD835\uDC8D \uD835\uDC91\uD835\uDC93\uD835\uDC86\uD835\uDC8E\uD835\uDC8A\uD835\uDC90 \uD835\uDC91\uD835\uDC90\uD835\uDC93 \uD835\uDC95\uD835\uDC96 \uD835\uDC88\uD835\uDC93\uD835\uDC82\uD835\uDC8F \uD835\uDC97\uD835\uDC8A\uD835\uDC84\uD835\uDC95\uD835\uDC90\uD835\uDC93\uD835\uDC8A\uD835\uDC82");
+        System.out.println(eq.toString());
+        int opcion = 0;
+
+        for (Equipamiento p : eq) {
+            System.out.println(p.toString());
+            darPremiesito(p, g1);
+        }
+
+        tesoros.removeAll(eq);
+    }
+
+    private static void darPremiesito(Equipamiento eq, ArrayList<Personaje> g1){
+        Scanner scan = new Scanner(System.in);
+
+        int opcion = 0;
+        do {
+            System.out.println("¿A quién quieres darle este premio?");
+            for (int i = 0; i < g1.size(); i++) {
+                System.out.println((i + 1) + ". " + g1.get(i).getNombre());
+            }
+            System.out.println((g1.size() + 1) + ". Desechar");
+            opcion = scan.nextInt();
+
+        } while (opcion > g1.size() + 1 || opcion <= 0);
+
+        if (opcion == g1.size() + 1) {
+            System.out.println("El premio ha sido desechado, lol que mal");
+        } else reclamarPremio(eq, g1.get(opcion - 1));
+    }
+
     public static void reclamarPremio(Equipamiento eq, Personaje player){
         Scanner scan = new Scanner(System.in);
 
-        // todo cuando tenga internet lo pongo coquette ahora mismo no puedo, m kiero suisidar
-        System.out.println("felisidades, as gnado este premiesito: " +
-                "\n" + eq.toString());
+        player.printPerezita("\uD835\uDC6C\uD835\uDC94\uD835\uDC95\uD835\uDC86 \uD835\uDC86\uD835\uDC94 \uD835\uDC86\uD835\uDC8D \uD835\uDC91\uD835\uDC93\uD835\uDC86\uD835\uDC8E\uD835\uDC8A\uD835\uDC90 \uD835\uDC91\uD835\uDC90\uD835\uDC93 \uD835\uDC95\uD835\uDC96 \uD835\uDC88\uD835\uDC93\uD835\uDC82\uD835\uDC8F \uD835\uDC97\uD835\uDC8A\uD835\uDC84\uD835\uDC95\uD835\uDC90\uD835\uDC93\uD835\uDC8A\uD835\uDC82");
+        System.out.println(eq.toString());
         player.menusito("¿Desea equiparlo", new String[]{"Sí", "No"}, 2);
         int opcion = 0;
 
@@ -194,7 +257,7 @@ public class Combate {
         premiesitos("armadura");
     }
 
-    public static void premiesitos(String csvName) throws IOException{
+    private static void premiesitos(String csvName) throws IOException{
         if (tesoros == null) tesoros = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(new File("./csv/tesoros/" + csvName.toLowerCase() + ".csv")));
 
@@ -256,7 +319,7 @@ public class Combate {
      * @return cadena de texto decorativa usada como separador
      */
 
-    public static String dividerC(){
+    private static String dividerC(){
         return "\n\t────•⋅⊰༻♥༺⊱⋅•────";
     }
 }
