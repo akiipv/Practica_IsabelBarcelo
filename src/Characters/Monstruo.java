@@ -174,7 +174,7 @@ public class Monstruo extends Personaje {
         switch (getRaza().toLowerCase()) {
             case "bestia" -> equipArtefastoB(artefacto);
             case "no-muerto" -> super.equipArtefasto(artefacto); // cmo no dice nada voy a suponer que si puede
-            case "gigante" -> System.out.println("Este " + artefacto.getTipo() + "es muy pequeño para que el gigante la lleve.");
+            case "gigante" -> System.out.println("Este " + artefacto.getTipo() + " es muy pequeño para que el gigante la lleve.");
         }
     }
 
