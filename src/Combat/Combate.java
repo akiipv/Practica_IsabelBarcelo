@@ -66,7 +66,7 @@ public class Combate {
         g1.sort(Personaje::compareTo);
         g2.sort(Personaje::compareTo);
 
-        while (!g1.isEmpty() || !g2.isEmpty()) {
+        while (!g1.isEmpty() && !g2.isEmpty()) {
             Personaje p1 = getAlfa(g1);
             Personaje p2 = getAlfa(g2);
 
@@ -85,7 +85,7 @@ public class Combate {
         }
 
         if (g1.isEmpty() && g2.isEmpty()) {}
-        else if (g1.isEmpty()) reclamarPremio(getPremiesitos(tesoros, g2), g1);
+        else if (g2.isEmpty()) reclamarPremio(getPremiesitos(tesoros, g2), g1);
         else reclamarPremio(getPremiesitos(tesoros, g1), g2);
     }
 
@@ -115,6 +115,18 @@ public class Combate {
         if (c1.estaMuerto() && c2.estaMuerto()) return null;
         else if (c1.estaMuerto() && !c2.estaMuerto()) return c2;
         else return c1;
+    }
+
+    private static ArrayList<Personaje> getGanador(ArrayList<Personaje> c1 , ArrayList<Personaje> c2){
+        if (c1.isEmpty() && c2.isEmpty()) return null;
+        else if (c1.isEmpty() && !c2.isEmpty()) {
+            System.out.println("\n\t" + c2 + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.getFirst().details(6));
+            return c2;
+        }
+        else{
+            System.out.println("\n\t" + c1 + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.getFirst().details(6));
+            return c1;
+        }
     }
 
     /**
@@ -228,6 +240,7 @@ public class Combate {
     }
 
     public static void reclamarPremio(Equipamiento eq, Personaje player){
+        if (player == null) return;
         Scanner scan = new Scanner(System.in);
 
         player.printPerezita("\uD835\uDC6C\uD835\uDC94\uD835\uDC95\uD835\uDC86 \uD835\uDC86\uD835\uDC94 \uD835\uDC86\uD835\uDC8D \uD835\uDC91\uD835\uDC93\uD835\uDC86\uD835\uDC8E\uD835\uDC8A\uD835\uDC90 \uD835\uDC91\uD835\uDC90\uD835\uDC93 \uD835\uDC95\uD835\uDC96 \uD835\uDC88\uD835\uDC93\uD835\uDC82\uD835\uDC8F \uD835\uDC97\uD835\uDC8A\uD835\uDC84\uD835\uDC95\uD835\uDC90\uD835\uDC93\uD835\uDC8A\uD835\uDC82");
@@ -319,7 +332,7 @@ public class Combate {
      * @return cadena de texto decorativa usada como separador
      */
 
-    private static String dividerC(){
+    protected static String dividerC(){
         return "\n\t────•⋅⊰༻♥༺⊱⋅•────";
     }
 }

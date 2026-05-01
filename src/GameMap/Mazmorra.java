@@ -22,6 +22,7 @@ public class Mazmorra {
     }
 
     public Mazmorra(File fichero) throws IOException {
+        if (!fichero.exists() && !fichero.canRead()) return;
         BufferedReader br = new BufferedReader(new FileReader(fichero));
 
         String linea = br.readLine();
