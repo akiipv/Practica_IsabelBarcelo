@@ -47,7 +47,7 @@ public class Aventura { // habria q hacer una clase que se llame romeo santos
     }
 
     public void tenerAventura() throws IOException {
-        for (int i = 0; i <= 10; i++) {
+        for (int i = 1; i <= 10; i++) {
             if (pari.isEmpty()) {
                 System.out.println("Ya no queda nadie en el equipo.." +
                         "\n\tLos monstruos ganan.." + Ozuna().getFirst().details(4));
@@ -57,7 +57,8 @@ public class Aventura { // habria q hacer una clase que se llame romeo santos
             System.out.println(Combate.dividerC() + "\n\t\t  Combate " + i + " ⟢");
 
             Combate.combateGrupo(pari, Ozuna());
-            pari.removeIf(Personaje::estaMuerto); //
+            pari.removeIf(Personaje::estaMuerto); // no sabia q existia esto pero me gusta es coquette
         }
+        System.out.println("\n\t \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + pari.getFirst().details(6));
     }
 }

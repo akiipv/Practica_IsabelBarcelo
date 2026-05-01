@@ -117,18 +117,6 @@ public class Combate {
         else return c1;
     }
 
-    private static ArrayList<Personaje> getGanador(ArrayList<Personaje> c1 , ArrayList<Personaje> c2){
-        if (c1.isEmpty() && c2.isEmpty()) return null;
-        else if (c1.isEmpty() && !c2.isEmpty()) {
-            System.out.println("\n\t" + c2 + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.getFirst().details(6));
-            return c2;
-        }
-        else{
-            System.out.println("\n\t" + c1 + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.getFirst().details(6));
-            return c1;
-        }
-    }
-
     /**
      * Gestiona la activación aleatoria de una trampa sobre un personaje.
      * La trampa puede causar un perjuicio o, en caso de fallo,
