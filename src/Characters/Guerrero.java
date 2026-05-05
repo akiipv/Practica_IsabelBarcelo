@@ -21,6 +21,8 @@ import java.io.IOException;
 
 public class Guerrero extends Personaje {
 
+    private Arma armaextra;
+
     /**
      * Furia del guerrero
      */

@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Combate {
 
-    private static ArrayList<Equipamiento> tesoros;
+    private static ArrayList<Equipamiento> tesoros = new ArrayList<>();
 
     /**
      * Inicia y controla un combate completo entre dos personajes.
@@ -62,20 +62,35 @@ public class Combate {
         reclamarPremio(getPremiesito(tesoros), getGanador(primero, segundo));
     }
 
+    /**
+     * Ejecuta el combate completo entre dos grupos de personajes.
+     * Cada enfrentamiento se resuelve de forma individual, eliminando
+     * a los personajes derrotados del grupo correspondiente hasta que
+     * uno de los dos bandos quede sin miembros.
+     *
+     * @param g1 primer grupo de combate
+     * @param g2 segundo grupo de combate
+     * @throws IOException si ocurre un error al crear o escribir el archivo de combate
+     */
+
     public static void combateGrupo(ArrayList<Personaje> g1, ArrayList<Personaje> g2) throws IOException {
-        g1.sort(Personaje::compareTo);
-        g2.sort(Personaje::compareTo);
+
+        ArrayList<Personaje> cant1 = new ArrayList<>(g1);
+        ArrayList<Personaje> cant2 = new ArrayList<>(g2);
 
         while (!g1.isEmpty() && !g2.isEmpty()) {
-            Personaje p1 = getAlfa(g1);
-            Personaje p2 = getAlfa(g2);
+            g1.sort(Personaje::compareTo);
+            g2.sort(Personaje::compareTo);
+
+            Personaje p1 = g1.getFirst();
+            Personaje p2 = g2.getFirst();
 
             combatir(p1, p2,
                     new DWritersito(
                             new PrintWriter(System.out, true),
                             new PrintWriter(
                                     new FileWriter(
-                                    GameLogger.getDirectorio() + GameLogger.getFecha() + "_" + GameLogger.getHorita() + " — " + g1.get(0).getNombre() + "VS" + g2.get(0).getNombre() + ".txt")
+                                    GameLogger.getDirectorio() + GameLogger.getFecha() + "_" + GameLogger.getHorita() + " — " + p1.getNombre() + "VS" + p2.getNombre() + ".txt")
                             )
                     )
             );
@@ -84,18 +99,11 @@ public class Combate {
             if (p2.estaMuerto()) g2.remove(p2);
         }
 
-        if (g1.isEmpty() && g2.isEmpty()) {}
-        else if (g2.isEmpty()) reclamarPremio(getPremiesitos(tesoros, g2), g1);
-        else reclamarPremio(getPremiesitos(tesoros, g1), g2);
-    }
-
-    private static Personaje getAlfa(ArrayList<Personaje> g){
-        Personaje alfa = g.getFirst();
-        for (Personaje p : g) {
-            if (p.getNivel() > alfa.getNivel())
-                alfa = p;
+        if (g1.isEmpty() && g2.isEmpty()) {
+            System.out.println("\tTodo el mundo ha muerto..");
         }
-        return alfa;
+        else if (g2.isEmpty() && !g1.isEmpty()) reclamarPremio(getPremiesitos(tesoros, cant2), g1);
+        else reclamarPremio(getPremiesitos(tesoros, cant1), g2);
     }
 
     /**
@@ -110,6 +118,15 @@ public class Combate {
         if (getGanador(c1, c2) == null) c1.printPerezita("\uD835\uDC6C\uD835\uDC8E\uD835\uDC91\uD835\uDC82\uD835\uDC95\uD835\uDC86..", dw);
         else dw.println("\n\t" + getGanador(c1, c2).getNombre() + " \uD835\uDC89\uD835\uDC82 \uD835\uDC88\uD835\uDC82\uD835\uDC8F\uD835\uDC82\uD835\uDC85\uD835\uDC90.." + c1.details(6));
     }
+
+    /**
+     * Devuelve al personaje ganador del combate o {@code null} si ambos
+     * combatientes han muerto.
+     *
+     * @param c1 primer personaje
+     * @param c2 segundo personaje
+     * @return el personaje ganador, o {@code null} si hay empate por muerte mutua
+     */
 
     private static Personaje getGanador(Personaje c1, Personaje c2){
         if (c1.estaMuerto() && c2.estaMuerto()) return null;
@@ -174,12 +191,28 @@ public class Combate {
         trampita(ataca, pw);
     }
 
+    /**
+     * Obtiene un equipamiento aleatorio de la lista de tesoros disponible.
+     *
+     * @param tesoros lista de equipamientos entre los que elegir
+     * @return un equipamiento aleatorio de la lista
+     */
+
     private static Equipamiento getPremiesito(ArrayList<Equipamiento> tesoros){
         Random r = new Random();
         int limiste = r.nextInt(0, tesoros.size());
 
         return tesoros.get(limiste);
     }
+
+    /**
+     * Obtiene un equipamiento aleatorio por cada personaje del grupo rival.
+     * Se usa como reparto de premios tras un combate grupal.
+     *
+     * @param tesoros lista de equipamientos disponibles
+     * @param g2 grupo de personajes derrotados o a recompensar
+     * @return lista de premios aleatorios, uno por cada personaje del grupo
+     */
 
     private static ArrayList<Equipamiento> getPremiesitos(ArrayList<Equipamiento> tesoros, ArrayList<Personaje> g2){
         Random r = new Random();
@@ -192,6 +225,15 @@ public class Combate {
 
         return premios;
     }
+
+    /**
+     * Reparte una lista de premios entre los personajes del grupo vencedor.
+     * Cada equipamiento se asigna mediante entrada por consola al personaje
+     * que corresponda, o se desecha si así se decide.
+     *
+     * @param eq lista de equipamientos obtenidos como premio
+     * @param g1 grupo ganador que puede recibir los premios
+     */
 
     public static void reclamarPremio(ArrayList<Equipamiento> eq, ArrayList<Personaje> g1){
         Scanner scan = new Scanner(System.in);
@@ -207,6 +249,14 @@ public class Combate {
 
         tesoros.removeAll(eq);
     }
+
+    /**
+     * Asigna un equipamiento concreto a uno de los personajes del grupo indicado.
+     * El usuario decide por consola qué miembro recibe el premio, o si se desecha.
+     *
+     * @param eq equipamiento que se va a repartir
+     * @param g1 grupo de personajes entre los que elegir el destinatario
+     */
 
     private static void darPremiesito(Equipamiento eq, ArrayList<Personaje> g1){
         Scanner scan = new Scanner(System.in);
@@ -226,6 +276,14 @@ public class Combate {
             System.out.println("El premio ha sido desechado, lol que mal");
         } else reclamarPremio(eq, g1.get(opcion - 1));
     }
+
+    /**
+     * Reclama un premio y permite equipárselo al personaje indicado, si procede.
+     * En caso afirmativo, el equipamiento se asigna según su tipo.
+     *
+     * @param eq equipamiento que se puede reclamar
+     * @param player personaje que recibe el premio
+     */
 
     public static void reclamarPremio(Equipamiento eq, Personaje player){
         if (player == null) return;
@@ -252,11 +310,24 @@ public class Combate {
         tesoros.remove(eq);
     }
 
+    /**
+     * Carga en memoria todos los tesoros disponibles desde los CSV indicados.
+     *
+     * @throws IOException si ocurre un error al leer alguno de los ficheros CSV
+     */
+
     public static void cargarPremiesitos() throws IOException {
         premiesitos("artefactos");
         premiesitos("armas");
         premiesitos("armadura");
     }
+
+    /**
+     * Lee un fichero CSV de tesoros y añade sus equipamientos a la lista interna.
+     *
+     * @param csvName nombre base del fichero CSV a cargar
+     * @throws IOException si ocurre un error al abrir o leer el archivo
+     */
 
     private static void premiesitos(String csvName) throws IOException{
         if (tesoros == null) tesoros = new ArrayList<>();
@@ -293,6 +364,14 @@ public class Combate {
         br.close();
     }
 
+    /**
+     * Construye un mapa de estadísticas a partir de un array de claves y otro de valores.
+     *
+     * @param key nombres de las estadísticas
+     * @param valores valores asociados a cada estadística
+     * @return mapa con cada estadística y su valor correspondiente
+     */
+
     private static HashMap<String, Integer> getStatsitas(String [] key, int [] valores){
         HashMap<String, Integer> stats = new HashMap<>();
 
@@ -302,6 +381,14 @@ public class Combate {
 
         return stats;
     }
+
+    /**
+     * Convierte una lista de valores en texto a enteros y los asigna al equipamiento.
+     *
+     * @param campos valores de estadísticas leídos del CSV
+     * @param key nombres de las estadísticas que se van a asociar
+     * @param eq equipamiento al que se le asignan las estadísticas
+     */
 
     private static void statsPonel(String [] campos, String [] key, Equipamiento eq){
         int [] valores = new int[campos.length];
